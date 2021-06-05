@@ -34,8 +34,24 @@
               <div class="mb-4">
               <h3>Sign In</h3>
               <p class="mb-4">Sign in to sales system application with your account.</p>
+              @if (session('error'))
+                  <div class="alert alert-danger">
+                      <ul>
+                              <li>{{ session('error') }}</li>
+                      </ul>
+                  </div>
+              @endif
+              @if (count($errors) > 0)
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+              @endif
             </div>
-            <form method="POST" action="{{url('auth_login')}}">
+            <form method="POST" action="{{url('login-page')}}">
             {{ csrf_field() }}
               <div class="form-group first">
                 <label for="email">Email</label>

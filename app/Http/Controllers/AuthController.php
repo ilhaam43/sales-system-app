@@ -3,41 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Services\AuthService;
 
 use App\Models\User;
 
 
 class AuthController extends Controller
 {
+    private $service;
+
+    public function __construct(AuthService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
-        return view('welcome');
+        return view('login');
     }
+
     public function login(Request $request)
     {
-        request()->validate([
-            'email' => 'required',
-            'password' => 'required',
+        $validator = Validator::make($request->all(), [
+            'email'     => 'required|email',
+            'password'  => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return redirect('/')->withErrors($validator)->withInput();
+        }
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-
-            if ($user->role_id == 1) {
-                return redirect()->intended('superadmin');
-            } elseif ($user->role_id == 2) {
-                return redirect()->intended('admin');
-            }
-            return redirect('/')->intended('/');
-        }
-        
-        return redirect('/')->withSuccess('Oppes! please check your input data');
+        return $this->service->login($credentials);
     }
-    public function logout(Request $request) {
+
+    public function logout(Request $request) 
+    {
         $request->session()->flush();
         Auth::logout();
         return Redirect('/');
