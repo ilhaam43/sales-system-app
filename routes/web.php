@@ -24,10 +24,11 @@ Route::post('login-page', 'App\Http\Controllers\AuthController@login')->name('lo
 Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::group(['middleware' => ['authorized:superadmin']], function () {
-        Route::get('add-product-category', [SuperAdminController::class, 'showAddProductCategoryForm'])->name('showAddProductCategory');
-        Route::resource('superadmin', SuperAdminController::class);
+    Route::group(['prefix' => 'superadmin', 'middleware' => ['authorized:superadmin']], function () {
+        Route::get('/', [SuperAdminController::class, 'index'])->name('superadmin-index');
+        Route::get('add-product-category', [SuperAdminController::class, 'showAddProductCategoryForm'])->name('add-product-category');
     });
+    
     Route::group(['middleware' => ['authorized:admin']], function () {
         Route::resource('admin', AdminController::class);
     });
