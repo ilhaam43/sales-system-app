@@ -15,9 +15,15 @@ class SuperAdminService
         try {
             $addData = ProductCategory::create($request->all());
         } catch(\Throwable $th) {
-            return redirect()->route('superadmin.index')->with('error', 'Product category added failed');
+            return back()->withError('Product categories failed to add because product categories cannot be duplicated');
         }
-        return redirect()->route('superadmin.index')->with('success', 'Product category added successfully');
+        
+        return redirect()->route('add-product-category')->with('success', 'Product category added successfully');
+    }
+
+    public function editProductCategory($request)
+    {
+
     }
 }
 

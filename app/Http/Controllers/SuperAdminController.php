@@ -20,6 +20,18 @@ class SuperAdminController extends Controller
         return view('/superadmin/index');
     }
 
+    public function showProductCategory()
+    {
+        $productCategory = ProductCategory::all();
+        return view('/superadmin/listProductCategory', compact('productCategory'))->with('i');
+    }
+
+    public function showDetailProductCategory($id)
+    {
+        $productCategory = ProductCategory::find($id);
+        return view('/superadmin/editProductCategory', compact('productCategory'));
+    }
+
     public function addProductCategory(Request $request)
     {
         $request->validate([
@@ -29,9 +41,13 @@ class SuperAdminController extends Controller
         return $this->service->addProductCategory($request);
     }
 
-    public function showAddProductCategoryForm()
+    public function editProductCategory(Request $request)
     {
-        return view('/superadmin/addProductCategory');
+        $request->validate([
+            'category_name' => 'required'
+        ]);
+
+        return $this->service->editProductCategory($request);
     }
 
     public function registerAdmin(Request $request)

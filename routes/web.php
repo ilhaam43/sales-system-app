@@ -26,7 +26,8 @@ Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'superadmin', 'middleware' => ['authorized:superadmin']], function () {
         Route::get('/', [SuperAdminController::class, 'index'])->name('superadmin-index');
-        Route::get('add-product-category', [SuperAdminController::class, 'showAddProductCategoryForm'])->name('add-product-category');
+        Route::get('product-category', [SuperAdminController::class, 'showProductCategory'])->name('product-category');
+        Route::post('product-category', [SuperAdminController::class, 'addProductCategory'])->name('add-product-category');
     });
     
     Route::group(['middleware' => ['authorized:admin']], function () {

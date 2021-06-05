@@ -17,6 +17,8 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('assets/admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
+  <!-- Custom styles for this page -->
+  <link href="{{ asset('assets/admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
 </head>
 
