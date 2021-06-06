@@ -18,7 +18,7 @@ class SuperAdminService
             return back()->withError('Product categories failed to add because product categories cannot be duplicated');
         }
         
-        return redirect()->route('add-product-category')->with('success', 'Product category added successfully');
+        return redirect()->route('product-category')->with('success', 'Product category added successfully');
     }
 
     public function editProductCategory($request)

@@ -32,6 +32,11 @@ class SuperAdminController extends Controller
         return view('/superadmin/editProductCategory', compact('productCategory'));
     }
 
+    public function deleteProductCategory($id){
+        $productCategory = ProductCategory::where('id',$id)->delete();
+        return response()->json(['success' => true, 'message' => "Product category data deleted successfully",]);
+    }
+
     public function addProductCategory(Request $request)
     {
         $request->validate([

@@ -27,7 +27,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'superadmin', 'middleware' => ['authorized:superadmin']], function () {
         Route::get('/', [SuperAdminController::class, 'index'])->name('superadmin-index');
         Route::get('product-category', [SuperAdminController::class, 'showProductCategory'])->name('product-category');
-        Route::post('product-category', [SuperAdminController::class, 'addProductCategory'])->name('add-product-category');
+        Route::post('product-category', [SuperAdminController::class, 'addProductCategory'])->name('product-category.add');
+        Route::delete('product-category/{id}', [SuperAdminController::class, 'deleteProductCategory'])->name('product-category.destroy');
     });
     
     Route::group(['middleware' => ['authorized:admin']], function () {

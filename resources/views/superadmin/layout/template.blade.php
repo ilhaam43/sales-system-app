@@ -20,6 +20,11 @@
   <!-- Custom styles for this page -->
   <link href="{{ asset('assets/admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body id="page-top">
@@ -256,7 +261,3 @@
         @yield('content')
 
         @include('superadmin.layout.footer')
-
-</body>
-
-</html>

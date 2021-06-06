@@ -48,11 +48,10 @@
                 <td>{{ ++$i }}</td>
                 <td>{{ $categories->category_name }}</td>
                 <td>
-                <form action="{{ route('index', $categories->id) }}" method="POST">
-                  <a class="btn btn-primary btn-sm" href="{{ route('index', $categories->id) }}">Edit</a>
-                  @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteCategoryModal">Delete</button>
+                    <a class="btn btn-primary btn-sm" href="{{ route('product-category', $categories->id) }}">Edit</a>
+
+                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $categories->id }}" data-action="{{ route('product-category.destroy',$categories->id) }}" onclick="deleteConfirmation({{$categories->id}})"> Delete</button>
+                  </form>
                 </td>
               </tr>
             </tbody>
@@ -94,5 +93,10 @@
     </div>
   </div>
 
+  
     <!-- End of Main Content -->
+    
 @endsection
+</body>
+<script src="{{ asset('assets/superadmin/js/ajax/deleteProductCategory.js') }}"></script>
+</html>
