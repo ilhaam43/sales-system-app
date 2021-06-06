@@ -33,7 +33,12 @@ class SuperAdminController extends Controller
     }
 
     public function deleteProductCategory($id){
-        $productCategory = ProductCategory::where('id',$id)->delete();
+        try{
+            $productCategory = ProductCategory::where('id',$id)->delete();
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Product category data failed to delete",]);
+        }
+        
         return response()->json(['success' => true, 'message' => "Product category data deleted successfully",]);
     }
 
