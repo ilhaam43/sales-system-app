@@ -1,11 +1,11 @@
 function deleteConfirmation(id) {
         swal({
-            title: "Delete?",
-            text: "Please ensure and then confirm!",
+            title: "Delete product category data",
+            text: "Are you sure to delete this data?",
             type: "warning",
             showCancelButton: !0,
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel!",
+            confirmButtonText: "Delete",
+            cancelButtonText: "Cancel",
             reverseButtons: !0
         }).then(function (e) {
             if (e.value === true) {
