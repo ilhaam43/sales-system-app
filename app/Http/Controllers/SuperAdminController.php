@@ -101,9 +101,10 @@ class SuperAdminController extends Controller
 
     public function showAdminList()
     {
-        $admin = User::where('role_id', 2)->get();
-
-        return view('/superadmin/admin/index', compact('admin'))->with('i');
+        $admin = User::where('role_id', 2)->with('ProductCategory', 'UsersStatus')->get();
+        $admins = json_decode($admin, true);
+        
+        return view('/superadmin/admin/index', compact('admins'))->with('i');
     }
 
     public function showAdminDetails($id)
@@ -160,7 +161,7 @@ class SuperAdminController extends Controller
     public function showWorkersList($workers)
     {
         $usersRole = UsersRole::where('role', $workers)->get();
-        
+
         if(count($usersRole) == 0){
             return redirect()->route('admins.index');
         }

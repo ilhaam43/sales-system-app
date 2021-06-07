@@ -16,7 +16,7 @@ class ProductCategory extends Model
     ];
 
     public function user(){
-        return $this->hasMany(User::class, 'product_category_id', 'id');
+        return $this->hasMany(User::class);
     }
 
     public function researchJobs(){

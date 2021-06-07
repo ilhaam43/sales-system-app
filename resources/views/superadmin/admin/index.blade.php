@@ -36,18 +36,26 @@
               <tr>
                 <th>No</th>
                 <th>Name</th>
+                <th>Email</th>
+                <th>Country</th>
+                <th>Category</th>
+                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($admin as $admins)
+              @foreach ($admins as $admin)
               <tr>
                 <td>{{ ++$i }}</td>
-                <td>{{ $admins->name }}</td>
+                <td>{{ $admin['name'] }}</td>
+                <td>{{ $admin['email'] }}</td>
+                <td>{{ $admin['country'] }}</td>
+                <td>{{ $admin['product_category']['category_name'] }}</td>
+                <td>{{ $admin['users_status']['status'] }}</td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('admins.show',$admins->id) }}">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('admins.show',$admin['id']) }}">Edit</a>
 
-                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $admins->id }}" data-action="{{ route('admins.destroy',$admins->id) }}" onclick="deleteConfirmation({{$admins->id}})"> Delete</button>
+                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $admin['id'] }}" data-action="{{ route('admins.destroy',$admin['id']) }}" onclick="deleteConfirmation({{$admin['id']}})"> Delete</button>
                   </form>
                 </td>
               </tr>

@@ -12,6 +12,6 @@ class UsersStatus extends Model
     protected $table = 'users_status';
 
     public function users(){
-        return $this->hasMany(User::class, 'id', 'status_id');
+        return $this->hasMany(User::class);
     }
 }

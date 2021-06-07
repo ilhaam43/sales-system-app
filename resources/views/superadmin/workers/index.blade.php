@@ -6,7 +6,7 @@
         <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">{{$workers}} List</h1>
+    <h1 class="h3 mb-2 text-gray-800">{{ucwords($workers)}} List</h1>
     
     </br>
     @if (session('error'))
@@ -27,7 +27,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">{{$workers}} List</h6>
+        <h6 class="m-0 font-weight-bold text-primary">{{ucwords($workers)}} list</h6>
       </div>
       <div class="card-body">
         <div class="table-responsive">
