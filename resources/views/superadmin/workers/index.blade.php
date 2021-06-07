@@ -27,7 +27,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">{{ucwords($workers)}} list</h6>
+        <h6 class="m-0 font-weight-bold text-primary">{{ucwords($workers)}} List</h6>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -36,18 +36,26 @@
               <tr>
                 <th>No</th>
                 <th>Name</th>
+                <th>Email</th>
+                <th>Country</th>
+                <th>Category</th>
+                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($workersList as $worker)
+              @foreach ($workersLists as $worker)
               <tr>
                 <td>{{ ++$i }}</td>
-                <td>{{ $worker->name }}</td>
+                <td>{{ $worker['name'] }}</td>
+                <td>{{ $worker['email'] }}</td>
+                <td>{{ $worker['country'] }}</td>
+                <td>{{ $worker['product_category']['category_name'] }}</td>
+                <td>{{ $worker['users_status']['status'] }}</td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('admins.show',$worker->id) }}">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('admins.show',$worker['id']) }}">Edit</a>
 
-                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $worker->id }}" data-action="{{ route('admins.destroy',$worker->id) }}" onclick="deleteConfirmation({{$worker->id}})"> Delete</button>
+                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $worker['id'] }}" data-action="{{ route('admins.destroy',$worker['id']) }}" onclick="deleteConfirmation({{$worker['id']}})"> Delete</button>
                   </form>
                 </td>
               </tr>

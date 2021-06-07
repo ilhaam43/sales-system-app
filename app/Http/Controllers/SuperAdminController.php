@@ -170,9 +170,10 @@ class SuperAdminController extends Controller
             $usersRole[$i] = $roles;
         }
 
-        $workersList = User::where('role_id', $roles->id)->get();
+        $workersList = User::where('role_id', $roles->id)->with('ProductCategory', 'UsersStatus')->get();
+        $workersLists = json_decode($workersList, true);
 
-        return view('/superadmin/workers/index', compact('workersList', 'workers'))->with('i');
+        return view('/superadmin/workers/index', compact('workersLists', 'workers'))->with('i');
     }
 
     public function showFormAddWorkers()
