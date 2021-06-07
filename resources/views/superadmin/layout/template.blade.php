@@ -93,14 +93,14 @@
         <div id="collapsePages4" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Categories menu :</h6>
-            <a class="collapse-item" href="/superadmin/product-category">All Categories</a>
+            <a class="collapse-item" href="{{ url('superadmin/product-category') }}">All Categories</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{ url('superadmin/photos') }}">
           <i class="fas fa-fw fa-images"></i>
           <span>Photos</span></a>
       </li>
@@ -178,7 +178,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                <img class="img-profile rounded-circle" src="{{ Auth::user()->profile_image ? Auth::user()->profile_image : 'https://source.unsplash.com/QAB-WJcbgJk/60x60'}}">
+                <img class="img-profile rounded-circle" src="{{ Auth::user()->profile_image ? asset(Auth::user()->profile_image) : 'https://source.unsplash.com/QAB-WJcbgJk/60x60'}}">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

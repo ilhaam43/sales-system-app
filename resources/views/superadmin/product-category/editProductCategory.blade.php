@@ -35,7 +35,7 @@
           <div class="form-row">
             <div class="col-sm-6">
               <label for="name"><b>Category Name :</label></b>
-              <input type="text" class="form-control" placeholder="Category Name" name="category_name" value="{{$productCategory->category_name}}">
+              <input type="text" class="form-control" placeholder="Category Name" name="category_name" value="{{$productCategory->category_name}}" required>
             </div>
           </div>
           </br>

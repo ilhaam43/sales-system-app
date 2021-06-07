@@ -25,13 +25,16 @@ Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'superadmin', 'middleware' => ['authorized:superadmin']], function () {
-        Route::get('/', [SuperAdminController::class, 'index'])->name('superadmin-index');
-
+        Route::get('/', [SuperAdminController::class, 'index'])->name('superadmin.index');
+        //product category route
         Route::get('product-category', [SuperAdminController::class, 'showProductCategory'])->name('product-category');
         Route::get('product-category/{id}', [SuperAdminController::class, 'showDetailProductCategory'])->name('product-category.detail');
-        Route::post('product-category', [SuperAdminController::class, 'addProductCategory'])->name('product-category.add');
+        Route::post('product-category', [SuperAdminController::class, 'addProductCategory'])->name('product-category.store');
         Route::put('product-category/{id}', [SuperAdminController::class, 'updateProductCategory'])->name('product-category.update');
         Route::delete('product-category/{id}', [SuperAdminController::class, 'deleteProductCategory'])->name('product-category.destroy');
+        //photos route
+        Route::get('photos', [SuperAdminController::class, 'showPhotoList'])->name('photos');
+        Route::post('photos', [SuperAdminController::class, 'addPhoto'])->name('photos.store');
     });
     
     Route::group(['middleware' => ['authorized:admin']], function () {

@@ -2,9 +2,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Redirect;
 use App\Services\SuperAdminService;
+
+use App\Models\ProductCategory;
+use App\Models\Photos;
 
 class SuperAdminController extends Controller
 {
@@ -20,6 +22,7 @@ class SuperAdminController extends Controller
         return view('/superadmin/index');
     }
 
+    //product category function
     public function showProductCategory()
     {
         $productCategory = ProductCategory::all();
@@ -58,6 +61,23 @@ class SuperAdminController extends Controller
         ]);
 
         return $this->service->editProductCategory($request, $id);
+    }
+
+    //photo function
+    public function showPhotoList()
+    {
+        $photos = Photos::all();
+        return view('/superadmin/photos/listPhotos', compact('photos'))->with('i');
+    }
+
+    public function addPhoto(Request $request)
+    {
+        $request->validate([
+            'photo_name' => 'required',
+            'photo_image' => 'required|mimes:jpeg,bmp,png'
+        ]);
+
+        return $this->service->addPhoto($request);
     }
 
     public function registerAdmin(Request $request)
