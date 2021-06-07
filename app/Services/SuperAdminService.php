@@ -25,7 +25,7 @@ class SuperAdminService
         return redirect()->route('product-category')->with('success', 'Product category added successfully');
     }
 
-    public function editProductCategory($request, $id)
+    public function updateProductCategory($request, $id)
     {
         try{
             $updateCategory = ProductCategory::find($id)->update($request->all());
@@ -90,12 +90,12 @@ class SuperAdminService
         try{
             $addUserAdmin = new User([
                 'role_id'   => $request['role_id'],
+                'status_id' => $request['status'],
                 'product_category_id' =>  $request['product_category_id'],
                 'name'      => $request['name'],
                 'email'     => $request['email'],
                 'password'  => Hash::make($request['password']),
                 'country'   => $request['country'],
-                'status'    => $request['status']
             ]);
 
             $addUserAdmin->save();
@@ -104,6 +104,22 @@ class SuperAdminService
         }
 
         return redirect()->route('admins.store.index')->with('success', 'Admin added successfully');
+    }
+
+    public function updateUserAdmin($request, $id)
+    {
+        if($request['password'] !== $request['confirm_password'])
+        {
+            return redirect()->route('admins.store.index')->with('error', 'Admin failed to update cause password and confirm password not same');
+        }
+
+        try{
+            $updateCategory = ProductCategory::find($id)->update($request->all());
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Admin data failed to update because email that want to update is already registered in this system"]);
+        }
+
+        return response()->json(['success' => true, 'message' => "Admin data updated successfully",]);
     }
 
     public function deleteUserAdmin($id)

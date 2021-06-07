@@ -6,7 +6,7 @@
         <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Add Admin User</h1>
+    <h1 class="h3 mb-2 text-gray-800">Edit Admin User</h1>
     
     </br>
     @if (session('error'))
@@ -26,13 +26,13 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Add Admin User</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Edit Admin User</h6>
         </div>
         <div class="card-body">
         <form method="POST" action="{{ route('admins.store') }}">
             @csrf
             <input type="hidden" name="role_id" value="2">
-            <input type="hidden" name="status_id" value="1">
+            <input type="hidden" name="status" value="Actived">
             <div class="form-row">
                 <div class="col-sm-6">
                 <label for="name"><b>Name :</label></b>
@@ -69,6 +69,25 @@
                 <select class="form-control" name="product_category_id">
                     @foreach($productCategory as $categories)
                     <option value="{{$categories->id}}">{{$categories->category_name}}</option>
+                    @endforeach
+                </select>
+                </div>
+            </div>
+            </br>
+            <div class="form-row">
+            <div class="col-sm-6">
+                <label for="name"><b>User Role :</label></b>
+                <select class="form-control" name="country">
+                    @foreach($usersRole as $roles)
+                    <option value="{{$roles->id}}">{{$roles->role}}</option>
+                    @endforeach
+                </select>
+                </div>
+            <div class="col-sm-6">
+                <label for="name"><b>Status :</label></b>
+                <select class="form-control" name="product_category_id">
+                    @foreach($usersStatus as $status)
+                    <option value="{{$status->id}}">{{$status->status}}</option>
                     @endforeach
                 </select>
                 </div>

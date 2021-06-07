@@ -45,7 +45,7 @@
                 <td>{{ ++$i }}</td>
                 <td>{{ $admins->name }}</td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('admins.index',$admins->id) }}">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('admins.show',$admins->id) }}">Edit</a>
 
                     <button class="btn btn-danger btn-sm remove-user" data-id="{{ $admins->id }}" data-action="{{ route('admins.destroy',$admins->id) }}" onclick="deleteConfirmation({{$admins->id}})"> Delete</button>
                   </form>

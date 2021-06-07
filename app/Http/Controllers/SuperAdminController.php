@@ -7,6 +7,8 @@ use App\Services\SuperAdminService;
 
 use App\Models\ProductCategory;
 use App\Models\User;
+use App\Models\UsersRole;
+use App\Models\UsersStatus;
 use App\Models\Photos;
 use App\Models\Countries;
 
@@ -59,7 +61,7 @@ class SuperAdminController extends Controller
             'category_name' => 'required'
         ]);
 
-        return $this->service->editProductCategory($request, $id);
+        return $this->service->updateProductCategory($request, $id);
     }
 
     //photo function
@@ -100,10 +102,37 @@ class SuperAdminController extends Controller
         return view('/superadmin/admin/index', compact('admin'))->with('i');
     }
 
+    public function showAdminDetails($id)
+    {
+        $admin = User::where('id', $id)->get();
+        $usersRole = UsersRole::all();
+        $usersStatus = UsersStatus::all();
+        $listCountries = Countries::pluck('country_name');
+        $productCategory = ProductCategory::all();
+
+        return view('/superadmin/admin/updateAdmin', compact('admin', 'usersRole', 'usersStatus','listCountries', 'productCategory'))->with('i');
+    }
+
     public function addUserAdmin(Request $request)
     {
         $request->validate([
             'role_id'   => 'required',
+            'status_id' => 'required',
+            'product_category_id' => 'required',
+            'name'      => 'required',
+            'email'     => 'required|email',
+            'password'  => 'required',
+            'country'   => 'required',
+        ]);
+
+        return $this->service->addUserAdmin($request);
+    }
+
+    public function updateUserAdmin(Request $request, $id)
+    {
+        $request->validate([
+            'role_id'   => 'required',
+            'status_id' => 'required',
             'product_category_id' => 'required',
             'name'      => 'required',
             'email'     => 'required|email',
@@ -112,7 +141,7 @@ class SuperAdminController extends Controller
             'status'    => 'required'
         ]);
 
-        return $this->service->addUserAdmin($request);
+        return $this->service->updateUserAdmin($request, $id);
     }
 
     public function deleteUserAdmin($id)

@@ -18,11 +18,11 @@ class SuperAdminSeeder extends Seeder
     {
         DB::table('users')->insert([
             'role_id' => 1,
+            'status_id' => 1,
             'name' => "SuperAdmin",
             'email' => "superadmintest@yopmail.com",
             'password' => Hash::make('superadmintest'),
-            'country' => "indonesia",
-            'status' => 1,
+            'country' => "Indonesia",
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);

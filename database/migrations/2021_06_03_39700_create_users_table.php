@@ -17,12 +17,12 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->foreignId('role_id')->constrained('users_role')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('product_category_id')->nullable()->constrained('product_category');
+            $table->foreignId('status_id')->constrained('users_status');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('country');
             $table->string('profile_image')->nullable();
-            $table->enum('status', ['Actived', 'Deactived']);
             $table->integer('quantity_jobs_paid')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->timestamp('email_verified_at')->nullable();
