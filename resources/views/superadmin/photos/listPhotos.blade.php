@@ -50,11 +50,9 @@
                 <td>{{ ++$i }}</td>
                 <td>{{ $photo->photo_name }}</td>
                 <td>{{ $photo->photo_url }}</td>
-                <td>{{ $photo->photo_url }}</td>
+                <td><img src="{{asset($photo->photo_url)}}" width="120" height="120"></img></td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('product-category.detail',$photo->id) }}">Edit</a>
-
-                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $photo->id }}" data-action="{{ route('product-category.destroy',$photo->id) }}" onclick="deleteConfirmation({{$photo->id}})"> Delete</button>
+                <button class="btn btn-danger btn-sm remove-user" data-id="{{$photo->id}}" data-action="{{ route('photos.destroy',$photo->id) }}" onclick="deleteConfirmation({{$photo->id}})"> Delete</button>
                   </form>
                 </td>
               </tr>
@@ -104,5 +102,5 @@
     
 @endsection
 </body>
-<script src="{{ asset('assets/superadmin/js/ajax/deleteProductCategory.js') }}"></script>
+<script src="{{ asset('assets/superadmin/js/ajax/deletePhoto.js') }}"></script>
 </html>

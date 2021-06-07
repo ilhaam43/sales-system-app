@@ -33,12 +33,23 @@ class SuperAdminService
         return redirect()->route('product-category')->with('success', 'Product category updated successfully');
     }
 
+    public function deleteProductCategory($id)
+    {
+        try{
+            $productCategory = ProductCategory::where('id',$id)->delete();
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Product category data failed to delete",]);
+        }
+        
+        return response()->json(['success' => true, 'message' => "Product category data deleted successfully",]);
+    }
+
     public function addPhoto($request)
     {
         $name = $request->file('photo_image')->getClientOriginalName();
         
         try{
-        $uploadPhoto = $request->photo_image->move(public_path('superadmin/img/photos'), $name);
+        $uploadPhoto = $request->photo_image->move(public_path('superadmins/img/photos'), $name);
 
         $addPhotos = new Photos([
             "photo_name" => $request['photo_name'],
@@ -51,6 +62,17 @@ class SuperAdminService
         }
 
         return redirect()->route('photos')->with('success', 'Photo added successfully');
+    }
+
+    public function deletePhoto($id)
+    {
+        try{
+            $productCategory = Photos::where('id',$id)->delete();
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Photo data failed to delete",]);
+        }
+        
+        return response()->json(['success' => true, 'message' => "Photo data deleted successfully",]);
     }
 
 }

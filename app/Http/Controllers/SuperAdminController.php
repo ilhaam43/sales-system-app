@@ -35,14 +35,9 @@ class SuperAdminController extends Controller
         return view('/superadmin/product-category/editProductCategory', compact('productCategory'));
     }
 
-    public function deleteProductCategory($id){
-        try{
-            $productCategory = ProductCategory::where('id',$id)->delete();
-        }catch(\Throwable $th){
-            return response()->json(['success' => false, 'message' => "Product category data failed to delete",]);
-        }
-        
-        return response()->json(['success' => true, 'message' => "Product category data deleted successfully",]);
+    public function deleteProductCategory($id)
+    {
+        return $this->service->deleteProductCategory($id);
     }
 
     public function addProductCategory(Request $request)
@@ -78,6 +73,11 @@ class SuperAdminController extends Controller
         ]);
 
         return $this->service->addPhoto($request);
+    }
+
+    public function deletePhoto($id)
+    {
+        return $this->service->deletePhoto($id);
     }
 
     public function registerAdmin(Request $request)
