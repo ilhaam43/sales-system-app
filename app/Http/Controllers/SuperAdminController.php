@@ -38,7 +38,7 @@ class SuperAdminController extends Controller
     {
         $productCategory = ProductCategory::find($id);
 
-        return view('/superadmin/product-category/editProductCategory', compact('productCategory'));
+        return view('/superadmin/product-category/updateProductCategory', compact('productCategory'));
     }
 
     public function deleteProductCategory($id)
@@ -104,7 +104,7 @@ class SuperAdminController extends Controller
 
     public function showAdminDetails($id)
     {
-        $admin = User::where('id', $id)->get();
+        $admin = User::where('id', $id)->first();
         $usersRole = UsersRole::all();
         $usersStatus = UsersStatus::all();
         $listCountries = Countries::pluck('country_name');
@@ -136,7 +136,6 @@ class SuperAdminController extends Controller
             'product_category_id' => 'required',
             'name'      => 'required',
             'email'     => 'required|email',
-            'password'  => 'required',
             'country'      => 'required',
             'status'    => 'required'
         ]);
