@@ -115,6 +115,7 @@ class SuperAdminService
                 if($request['password'] !== $request['confirm_password']){
                     return redirect()->route('admins.show', $id)->with('error', 'Admin failed to update cause password and confirm password not same');
                 }
+                $request['password'] = Hash::make($request['password']);
 
                 $updateUserAdmin = User::find($id)->update($request->all());
             }elseif($check == 1){
@@ -136,6 +137,33 @@ class SuperAdminService
         }
         
         return response()->json(['success' => true, 'message' => "Admin data deleted successfully",]);
+    }
+
+    //workers function logic
+    public function addUserWorkers($request)
+    {
+        if($request['password'] !== $request['confirm_password'])
+        {
+            return redirect()->route('workers.store.index')->with('error', 'Workers failed to add cause password and confirm password not same');
+        }
+
+        try{
+            $addUserWorkers = new User([
+                'role_id'   => $request['role_id'],
+                'status_id' => $request['status_id'],
+                'product_category_id' =>  $request['product_category_id'],
+                'name'      => $request['name'],
+                'email'     => $request['email'],
+                'password'  => Hash::make($request['password']),
+                'country'   => $request['country'],
+            ]);
+
+            $addUserWorkers->save();
+        }catch(\Throable $th){
+            return redirect()->route('workers.store.index')->with('error', 'Admin failed to add because email already registered in this system');
+        }
+
+        return redirect()->route('workers.store.index')->with('success', 'Workers added successfully');
     }
 
 }

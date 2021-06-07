@@ -43,6 +43,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/{id}', [SuperAdminController::class, 'showAdminDetails'])->name('admins.show');
         Route::put('admin/{id}', [SuperAdminController::class, 'updateUserAdmin'])->name('admins.update');
         Route::delete('admin/{id}', [SuperAdminController::class, 'deleteUserAdmin'])->name('admins.destroy');
+        //workers user route
+        Route::get('workers/create', [SuperAdminController::class, 'showFormAddWorkers'])->name('workers.store.index');
+        Route::post('workers/create', [SuperAdminController::class, 'addUserWorkers'])->name('workers.store');
     });
     
     Route::group(['middleware' => ['authorized:admin']], function () {

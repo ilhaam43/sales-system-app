@@ -146,4 +146,29 @@ class SuperAdminController extends Controller
     {
         return $this->service->deleteUserAdmin($id);
     }
+
+    //workers function
+    public function showFormAddWorkers()
+    {
+        $listCountries = Countries::pluck('country_name');
+        $productCategory = ProductCategory::all();
+        $usersRole = UsersRole::whereNotIn('id', array(1,2))->get();
+
+        return view('/superadmin/workers/addWorkers', compact('listCountries', 'productCategory','usersRole'))->with('i');
+    }
+
+    public function addUserWorkers(Request $request)
+    {
+        $request->validate([
+            'role_id'   => 'required',
+            'status_id' => 'required',
+            'product_category_id' => 'required',
+            'name'      => 'required',
+            'email'     => 'required|email',
+            'password'  => 'required',
+            'country'   => 'required',
+        ]);
+
+        return $this->service->addUserWorkers($request);
+    }
 }
