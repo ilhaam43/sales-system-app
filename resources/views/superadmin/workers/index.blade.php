@@ -50,12 +50,12 @@
                 <td>{{ $worker['name'] }}</td>
                 <td>{{ $worker['email'] }}</td>
                 <td>{{ $worker['country'] }}</td>
-                <td>{{ $worker['product_category']['category_name'] }}</td>
+                <td>{{ $worker['product_category']['category_name'] ?? "" }}</td>
                 <td>{{ $worker['users_status']['status'] }}</td>
                 <td>
                     <a class="btn btn-primary btn-sm" href="{{ route('admins.show',$worker['id']) }}">Edit</a>
 
-                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $worker['id'] }}" data-action="{{ route('admins.destroy',$worker['id']) }}" onclick="deleteConfirmation({{$worker['id']}})"> Delete</button>
+                    <button class="btn btn-danger btn-sm remove-user" data-id="{{$worker['id']}}" data-action="{{ route('workers.destroy',['workers' => $workers, 'id' => $worker['id']]) }}" onclick="deleteConfirmation({{$worker['id']}}, '{{$workers}}')">Delete</button>
                   </form>
                 </td>
               </tr>
@@ -75,5 +75,5 @@
     
 @endsection
 </body>
-<script src="{{ asset('assets/superadmin/js/ajax/deleteAdmin.js') }}"></script>
+<script src="{{ asset('assets/superadmin/js/ajax/deleteWorkers.js') }}"></script>
 </html>

@@ -166,5 +166,16 @@ class SuperAdminService
         return redirect()->route('workers.store.index')->with('success', 'Workers added successfully');
     }
 
+    public function deleteUserWorkers($workers, $id)
+    {
+        try{
+            $deleteWorkers = User::where('id',$id)->delete();
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "{$workers} data failed to delete",]);
+        }
+        
+        return response()->json(['success' => true, 'message' => "{$workers} data deleted successfully",]);
+    }
+
 }
 ?>

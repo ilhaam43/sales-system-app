@@ -27,26 +27,36 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'superadmin', 'middleware' => ['authorized:superadmin']], function () {
         Route::get('/', [SuperAdminController::class, 'index'])->name('superadmin.index');
         //product category route
-        Route::get('product-category', [SuperAdminController::class, 'showProductCategory'])->name('product-category');
-        Route::get('product-category/{id}', [SuperAdminController::class, 'showDetailProductCategory'])->name('product-category.detail');
-        Route::post('product-category', [SuperAdminController::class, 'addProductCategory'])->name('product-category.store');
-        Route::put('product-category/{id}', [SuperAdminController::class, 'updateProductCategory'])->name('product-category.update');
-        Route::delete('product-category/{id}', [SuperAdminController::class, 'deleteProductCategory'])->name('product-category.destroy');
+        Route::group(['prefix' => 'product-category'], function () {
+            Route::get('/', [SuperAdminController::class, 'showProductCategory'])->name('product-category');
+            Route::get('/{id}', [SuperAdminController::class, 'showDetailProductCategory'])->name('product-category.detail');
+            Route::post('/', [SuperAdminController::class, 'addProductCategory'])->name('product-category.store');
+            Route::put('/{id}', [SuperAdminController::class, 'updateProductCategory'])->name('product-category.update');
+            Route::delete('/{id}', [SuperAdminController::class, 'deleteProductCategory'])->name('product-category.destroy');
+        });
         //photos route
-        Route::get('photos', [SuperAdminController::class, 'showPhotoList'])->name('photos');
-        Route::post('photos', [SuperAdminController::class, 'addPhoto'])->name('photos.store');
-        Route::delete('photos/{id}', [SuperAdminController::class, 'deletePhoto'])->name('photos.destroy');
+        Route::group(['prefix' => 'photos'], function () {
+            Route::get('/', [SuperAdminController::class, 'showPhotoList'])->name('photos');
+            Route::post('/', [SuperAdminController::class, 'addPhoto'])->name('photos.store');
+            Route::delete('/{id}', [SuperAdminController::class, 'deletePhoto'])->name('photos.destroy');
+        });
         //admin user route
-        Route::get('admin', [SuperAdminController::class, 'showAdminList'])->name('admins.index');
-        Route::get('admin/create', [SuperAdminController::class, 'showFormAddAdmin'])->name('admins.store.index');
-        Route::post('admin/create', [SuperAdminController::class, 'addUserAdmin'])->name('admins.store');
-        Route::get('admin/{id}', [SuperAdminController::class, 'showAdminDetails'])->name('admins.show');
-        Route::put('admin/{id}', [SuperAdminController::class, 'updateUserAdmin'])->name('admins.update');
-        Route::delete('admin/{id}', [SuperAdminController::class, 'deleteUserAdmin'])->name('admins.destroy');
+        Route::group(['prefix' => 'admin'], function () {
+            Route::get('/', [SuperAdminController::class, 'showAdminList'])->name('admins.index');
+            Route::get('/create', [SuperAdminController::class, 'showFormAddAdmin'])->name('admins.store.index');
+            Route::post('/create', [SuperAdminController::class, 'addUserAdmin'])->name('admins.store');
+            Route::get('/{id}', [SuperAdminController::class, 'showAdminDetails'])->name('admins.show');
+            Route::put('/{id}', [SuperAdminController::class, 'updateUserAdmin'])->name('admins.update');
+            Route::delete('/{id}', [SuperAdminController::class, 'deleteUserAdmin'])->name('admins.destroy');
+        });
         //workers user route
-        Route::get('workers/create', [SuperAdminController::class, 'showFormAddWorkers'])->name('workers.store.index');
-        Route::post('workers/create', [SuperAdminController::class, 'addUserWorkers'])->name('workers.store');
-        Route::get('workers/{workers}', [SuperAdminController::class, 'showWorkersList'])->name('workers.index');
+        Route::group(['prefix' => 'workers'], function () {
+            Route::get('/create', [SuperAdminController::class, 'showFormAddWorkers'])->name('workers.store.index');
+            Route::post('/create', [SuperAdminController::class, 'addUserWorkers'])->name('workers.store');
+            Route::get('/{workers}', [SuperAdminController::class, 'showWorkersList'])->name('workers.index');
+            Route::put('/{workers}/{id}', [SuperAdminController::class, 'updateUserWorkers'])->name('workers.update');
+            Route::delete('/{workers}/{id}', [SuperAdminController::class, 'deleteUserWorkers'])->name('workers.destroy');
+        });
     });
     
     Route::group(['middleware' => ['authorized:admin']], function () {

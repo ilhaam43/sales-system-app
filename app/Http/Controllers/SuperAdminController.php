@@ -170,7 +170,7 @@ class SuperAdminController extends Controller
             $usersRole[$i] = $roles;
         }
 
-        $workersList = User::where('role_id', $roles->id)->with('ProductCategory', 'UsersStatus')->get();
+        $workersList = User::where('role_id', $roles->id)->with('ProductCategory', 'UsersStatus', 'UsersRole')->get();
         $workersLists = json_decode($workersList, true);
 
         return view('/superadmin/workers/index', compact('workersLists', 'workers'))->with('i');
@@ -198,5 +198,10 @@ class SuperAdminController extends Controller
         ]);
 
         return $this->service->addUserWorkers($request);
+    }
+
+    public function deleteUserWorkers($workers, $id)
+    {
+        return $this->service->deleteUserWorkers($workers, $id);
     }
 }
