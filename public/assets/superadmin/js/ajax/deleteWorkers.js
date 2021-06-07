@@ -19,7 +19,7 @@ function deleteConfirmation(id, workers) {
                     if (results.success === true) {
                         swal("Done!", results.message, "success");
                         window.setTimeout(function(){ 
-                            window.location.replace('/superadmin/admin');
+                            window.location.replace('/superadmin/workers/' + workers);
                         } ,2000);
                     } else {
                         swal("Error!", results.message, "error");

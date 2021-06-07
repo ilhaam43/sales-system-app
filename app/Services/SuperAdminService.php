@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\ProductCategory;
 use App\Models\Photos;
 use App\Models\User;
+use App\Models\UsersRole;
 
 class SuperAdminService
 {
@@ -147,6 +148,8 @@ class SuperAdminService
             return redirect()->route('workers.store.index')->with('error', 'Workers failed to add cause password and confirm password not same');
         }
 
+        $usersRole = UsersRole::find($request['role_id']);
+
         try{
             $addUserWorkers = new User([
                 'role_id'   => $request['role_id'],
@@ -159,11 +162,12 @@ class SuperAdminService
             ]);
 
             $addUserWorkers->save();
-        }catch(\Throable $th){
-            return redirect()->route('workers.store.index')->with('error', 'Admin failed to add because email already registered in this system');
+        }catch(\Throwable $th){
+            return redirect()->route('workers.store.index',$usersRole->role)->with('error', $usersRole->role .' failed to add because email already registered in this system');
         }
+        
 
-        return redirect()->route('workers.store.index')->with('success', 'Workers added successfully');
+        return redirect()->route('workers.index',$usersRole->role)->with('success', $usersRole->role .' added successfully');
     }
 
     public function deleteUserWorkers($workers, $id)
