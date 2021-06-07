@@ -23,13 +23,13 @@ class SuperAdminController extends Controller
     public function showProductCategory()
     {
         $productCategory = ProductCategory::all();
-        return view('/superadmin/listProductCategory', compact('productCategory'))->with('i');
+        return view('/superadmin/product-category/listProductCategory', compact('productCategory'))->with('i');
     }
 
     public function showDetailProductCategory($id)
     {
         $productCategory = ProductCategory::find($id);
-        return view('/superadmin/editProductCategory', compact('productCategory'));
+        return view('/superadmin/product-category/editProductCategory', compact('productCategory'));
     }
 
     public function deleteProductCategory($id){
@@ -51,13 +51,13 @@ class SuperAdminController extends Controller
         return $this->service->addProductCategory($request);
     }
 
-    public function editProductCategory(Request $request)
+    public function updateProductCategory(Request $request, $id)
     {
         $request->validate([
             'category_name' => 'required'
         ]);
 
-        return $this->service->editProductCategory($request);
+        return $this->service->editProductCategory($request, $id);
     }
 
     public function registerAdmin(Request $request)

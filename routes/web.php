@@ -26,8 +26,11 @@ Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'superadmin', 'middleware' => ['authorized:superadmin']], function () {
         Route::get('/', [SuperAdminController::class, 'index'])->name('superadmin-index');
+
         Route::get('product-category', [SuperAdminController::class, 'showProductCategory'])->name('product-category');
+        Route::get('product-category/{id}', [SuperAdminController::class, 'showDetailProductCategory'])->name('product-category.detail');
         Route::post('product-category', [SuperAdminController::class, 'addProductCategory'])->name('product-category.add');
+        Route::put('product-category/{id}', [SuperAdminController::class, 'updateProductCategory'])->name('product-category.update');
         Route::delete('product-category/{id}', [SuperAdminController::class, 'deleteProductCategory'])->name('product-category.destroy');
     });
     

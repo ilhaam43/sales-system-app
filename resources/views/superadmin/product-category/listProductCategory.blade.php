@@ -48,7 +48,7 @@
                 <td>{{ ++$i }}</td>
                 <td>{{ $categories->category_name }}</td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('product-category', $categories->id) }}">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('product-category.detail',$categories->id) }}">Edit</a>
 
                     <button class="btn btn-danger btn-sm remove-user" data-id="{{ $categories->id }}" data-action="{{ route('product-category.destroy',$categories->id) }}" onclick="deleteConfirmation({{$categories->id}})"> Delete</button>
                   </form>

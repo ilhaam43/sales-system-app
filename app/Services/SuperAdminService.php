@@ -21,9 +21,15 @@ class SuperAdminService
         return redirect()->route('product-category')->with('success', 'Product category added successfully');
     }
 
-    public function editProductCategory($request)
+    public function editProductCategory($request, $id)
     {
+        try{
+            $updateCategory = ProductCategory::find($id)->update($request->all());
+        }catch(\Throwable $th) {
+            return back()->withError('Product categories failed to update because product categories cannot be duplicated');
+        }
 
+        return redirect()->route('product-category')->with('success', 'Product category updated successfully');
     }
 }
 
