@@ -13,6 +13,7 @@ use App\Models\User;
 
 class SuperAdminService
 {
+    //product category function logic
     public function addProductCategory($request)
     {
         try {
@@ -46,6 +47,7 @@ class SuperAdminService
         return response()->json(['success' => true, 'message' => "Product category data deleted successfully",]);
     }
 
+    //photo function logic
     public function addPhoto($request)
     {
         $name = $request->file('photo_image')->getClientOriginalName();
@@ -69,7 +71,7 @@ class SuperAdminService
     public function deletePhoto($id)
     {
         try{
-            $productCategory = Photos::where('id',$id)->delete();
+            $deletePhoto = Photos::where('id',$id)->delete();
         }catch(\Throwable $th){
             return response()->json(['success' => false, 'message' => "Photo data failed to delete",]);
         }
@@ -77,6 +79,7 @@ class SuperAdminService
         return response()->json(['success' => true, 'message' => "Photo data deleted successfully",]);
     }
 
+    //admin function logic
     public function addUserAdmin($request)
     {
         if($request['password'] !== $request['confirm_password'])
@@ -101,6 +104,17 @@ class SuperAdminService
         }
 
         return redirect()->route('admins.store.index')->with('success', 'Admin added successfully');
+    }
+
+    public function deleteUserAdmin($id)
+    {
+        try{
+            $deleteAdmin = User::where('id',$id)->delete();
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Admin data failed to delete",]);
+        }
+        
+        return response()->json(['success' => true, 'message' => "Admin data deleted successfully",]);
     }
 
 }

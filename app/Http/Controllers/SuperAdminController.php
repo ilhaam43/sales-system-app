@@ -28,12 +28,14 @@ class SuperAdminController extends Controller
     public function showProductCategory()
     {
         $productCategory = ProductCategory::all();
+
         return view('/superadmin/product-category/listProductCategory', compact('productCategory'))->with('i');
     }
 
     public function showDetailProductCategory($id)
     {
         $productCategory = ProductCategory::find($id);
+
         return view('/superadmin/product-category/editProductCategory', compact('productCategory'));
     }
 
@@ -82,12 +84,20 @@ class SuperAdminController extends Controller
         return $this->service->deletePhoto($id);
     }
 
+    //admin function
     public function showFormAddAdmin()
     {
         $listCountries = Countries::pluck('country_name');
         $productCategory = ProductCategory::all();
 
         return view('/superadmin/admin/addAdmin', compact('listCountries', 'productCategory'))->with('i');
+    }
+
+    public function showAdminList()
+    {
+        $admin = User::where('role_id', 2)->get();
+
+        return view('/superadmin/admin/index', compact('admin'))->with('i');
     }
 
     public function addUserAdmin(Request $request)
@@ -103,5 +113,10 @@ class SuperAdminController extends Controller
         ]);
 
         return $this->service->addUserAdmin($request);
+    }
+
+    public function deleteUserAdmin($id)
+    {
+        return $this->service->deleteUserAdmin($id);
     }
 }

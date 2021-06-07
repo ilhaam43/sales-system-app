@@ -37,6 +37,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('photos', [SuperAdminController::class, 'addPhoto'])->name('photos.store');
         Route::delete('photos/{id}', [SuperAdminController::class, 'deletePhoto'])->name('photos.destroy');
         //admin user route
+        Route::get('admin', [SuperAdminController::class, 'showAdminList'])->name('admins.index');
+        Route::delete('admin/{id}', [SuperAdminController::class, 'deleteUserAdmin'])->name('admins.destroy');
         Route::get('admin/create', [SuperAdminController::class, 'showFormAddAdmin'])->name('admins.store.index');
         Route::post('admin/create', [SuperAdminController::class, 'addUserAdmin'])->name('admins.store');
     });

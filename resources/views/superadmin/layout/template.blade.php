@@ -73,8 +73,8 @@
             <a class="collapse-item" href="login.html">All Users</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">Admin Menu :</h6>
-            <a class="collapse-item" href="blank.html">Create New Admins</a>
-            <a class="collapse-item" href="404.html">Admin List</a>
+            <a class="collapse-item" href="/superadmin/admin/create">Create New Admin</a>
+            <a class="collapse-item" href="/superadmin/admin">Admin List</a>
             <h6 class="collapse-header">Workers Menu :</h6>
             <a class="collapse-item" href="blank.html">Create New Workers</a>
             <a class="collapse-item" href="404.html">Researcher List</a>
