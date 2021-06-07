@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
         //workers user route
         Route::get('workers/create', [SuperAdminController::class, 'showFormAddWorkers'])->name('workers.store.index');
         Route::post('workers/create', [SuperAdminController::class, 'addUserWorkers'])->name('workers.store');
+        Route::get('workers/{workers}', [SuperAdminController::class, 'showWorkersList'])->name('workers.index');
     });
     
     Route::group(['middleware' => ['authorized:admin']], function () {

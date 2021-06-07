@@ -37,6 +37,10 @@ class SuperAdminController extends Controller
     public function showDetailProductCategory($id)
     {
         $productCategory = ProductCategory::find($id);
+        
+        if(!$productCategory){
+            return redirect()->route('product-category');
+        }
 
         return view('/superadmin/product-category/updateProductCategory', compact('productCategory'));
     }
@@ -148,6 +152,19 @@ class SuperAdminController extends Controller
     }
 
     //workers function
+    public function showWorkersList($workers)
+    {
+        $usersRole = UsersRole::where('role', $workers)->get();
+        
+        foreach($usersRole as $i => $roles){
+            $usersRole[$i] = $roles;
+        }
+
+        $workersList = User::where('role_id', $roles->id)->get();
+
+        return view('/superadmin/workers/index', compact('workersList', 'workers'))->with('i');
+    }
+
     public function showFormAddWorkers()
     {
         $listCountries = Countries::pluck('country_name');

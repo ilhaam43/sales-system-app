@@ -76,10 +76,10 @@
             <a class="collapse-item" href="/superadmin/admin/create">Create New Admin</a>
             <a class="collapse-item" href="/superadmin/admin">Admin List</a>
             <h6 class="collapse-header">Workers Menu :</h6>
-            <a class="collapse-item" href="blank.html">Create New Workers</a>
-            <a class="collapse-item" href="404.html">Researcher List</a>
-            <a class="collapse-item" href="blank.html">Inquirier List</a>
-            <a class="collapse-item" href="blank.html">Auditor List</a>
+            <a class="collapse-item" href="/superadmin/workers/create">Create New Workers</a>
+            <a class="collapse-item" href="/superadmin/workers/researcher">Researcher List</a>
+            <a class="collapse-item" href="/superadmin/workers/inqurier">Inqurier List</a>
+            <a class="collapse-item" href="/superadmin/workers/auditor">Auditor List</a>
           </div>
         </div>
       </li>
