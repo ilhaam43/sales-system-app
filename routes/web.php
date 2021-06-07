@@ -38,11 +38,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('photos/{id}', [SuperAdminController::class, 'deletePhoto'])->name('photos.destroy');
         //admin user route
         Route::get('admin', [SuperAdminController::class, 'showAdminList'])->name('admins.index');
+        Route::get('admin/create', [SuperAdminController::class, 'showFormAddAdmin'])->name('admins.store.index');
+        Route::post('admin/create', [SuperAdminController::class, 'addUserAdmin'])->name('admins.store');
         Route::get('admin/{id}', [SuperAdminController::class, 'showAdminDetails'])->name('admins.show');
         Route::put('admin/{id}', [SuperAdminController::class, 'updateUserAdmin'])->name('admins.update');
         Route::delete('admin/{id}', [SuperAdminController::class, 'deleteUserAdmin'])->name('admins.destroy');
-        Route::get('admin/create', [SuperAdminController::class, 'showFormAddAdmin'])->name('admins.store.index');
-        Route::post('admin/create', [SuperAdminController::class, 'addUserAdmin'])->name('admins.store');
     });
     
     Route::group(['middleware' => ['authorized:admin']], function () {

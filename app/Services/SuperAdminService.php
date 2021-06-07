@@ -90,7 +90,7 @@ class SuperAdminService
         try{
             $addUserAdmin = new User([
                 'role_id'   => $request['role_id'],
-                'status_id' => $request['status'],
+                'status_id' => $request['status_id'],
                 'product_category_id' =>  $request['product_category_id'],
                 'name'      => $request['name'],
                 'email'     => $request['email'],
@@ -99,7 +99,7 @@ class SuperAdminService
             ]);
 
             $addUserAdmin->save();
-        }catch(\Throwable $th){
+        }catch(\Throable $th){
             return redirect()->route('admins.store.index')->with('error', 'Admin failed to add because email already registered in this system');
         }
 
@@ -110,16 +110,17 @@ class SuperAdminService
     {
         $check = empty($request['password']);
 
-        if($check == 0){
-            if($request['password'] !== $request['confirm_password'])
-            {
-                return redirect()->route('admins.show', $id)->with('error', 'Admin failed to update cause password and confirm password not same');
-            }
-        }
-
         try{
-            $updateCategory = ProductCategory::find($id)->update($request->all());
-        }catch(\Throable $th){
+            if($check == 0){
+                if($request['password'] !== $request['confirm_password']){
+                    return redirect()->route('admins.show', $id)->with('error', 'Admin failed to update cause password and confirm password not same');
+                }
+
+                $updateUserAdmin = User::find($id)->update($request->all());
+            }elseif($check == 1){
+                $updateUserAdmin = User::find($id)->update($request->except(['password', 'confirm_password']));
+            }
+        }catch(\Throwable $th){
             return redirect()->route('admins.show', $id)->with('error', 'Admin data failed to update because email that want to update is already registered in this system');
         }
 

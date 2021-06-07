@@ -104,7 +104,7 @@ class SuperAdminController extends Controller
 
     public function showAdminDetails($id)
     {
-        $admin = User::where('id', $id)->first();
+        $admin = User::find($id);
         $usersRole = UsersRole::all();
         $usersStatus = UsersStatus::all();
         $listCountries = Countries::pluck('country_name');
@@ -137,7 +137,6 @@ class SuperAdminController extends Controller
             'name'      => 'required',
             'email'     => 'required|email',
             'country'      => 'required',
-            'status'    => 'required'
         ]);
 
         return $this->service->updateUserAdmin($request, $id);
