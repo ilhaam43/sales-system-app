@@ -109,6 +109,11 @@ class SuperAdminController extends Controller
     public function showAdminDetails($id)
     {
         $admin = User::find($id);
+
+        if(!$admin){
+            return redirect()->route('admins.index');
+        }
+
         $usersRole = UsersRole::all();
         $usersStatus = UsersStatus::all();
         $listCountries = Countries::pluck('country_name');
@@ -155,6 +160,10 @@ class SuperAdminController extends Controller
     public function showWorkersList($workers)
     {
         $usersRole = UsersRole::where('role', $workers)->get();
+        
+        if(count($usersRole) == 0){
+            return redirect()->route('admins.index');
+        }
         
         foreach($usersRole as $i => $roles){
             $usersRole[$i] = $roles;
