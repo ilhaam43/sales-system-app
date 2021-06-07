@@ -6,7 +6,7 @@
         <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Product Category List</h1>
+    <h1 class="h3 mb-2 text-gray-800">Edit Product Category</h1>
     
     </br>
     @if (session('error'))
@@ -26,7 +26,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Product Category Detail</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Edit Product Category</h6>
       </div>
       <div class="card-body">
       <form method="POST" action="{{ route('product-category.update',$productCategory->id) }}">

@@ -5,9 +5,11 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\ProductCategory;
 use App\Models\Photos;
+use App\Models\User;
 
 class SuperAdminService
 {
@@ -73,6 +75,32 @@ class SuperAdminService
         }
         
         return response()->json(['success' => true, 'message' => "Photo data deleted successfully",]);
+    }
+
+    public function addUserAdmin($request)
+    {
+        if($request['password'] !== $request['confirm_password'])
+        {
+            return redirect()->route('admins.store.index')->with('error', 'Admin failed to add cause password and confirm password not same');
+        }
+
+        try{
+            $addUserAdmin = new User([
+                'role_id'   => $request['role_id'],
+                'product_category_id' =>  $request['product_category_id'],
+                'name'      => $request['name'],
+                'email'     => $request['email'],
+                'password'  => Hash::make($request['password']),
+                'country'   => $request['country'],
+                'status'    => $request['status']
+            ]);
+
+            $addUserAdmin->save();
+        }catch(\Throwable $th){
+            return redirect()->route('admins.store.index')->with('error', 'Admin failed to add because email already registered in this system');
+        }
+
+        return redirect()->route('admins.store.index')->with('success', 'Admin added successfully');
     }
 
 }

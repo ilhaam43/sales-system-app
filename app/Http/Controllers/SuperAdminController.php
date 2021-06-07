@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Redirect;
 use App\Services\SuperAdminService;
 
 use App\Models\ProductCategory;
+use App\Models\User;
 use App\Models\Photos;
+use App\Models\Countries;
 
 class SuperAdminController extends Controller
 {
@@ -80,11 +82,26 @@ class SuperAdminController extends Controller
         return $this->service->deletePhoto($id);
     }
 
-    public function registerAdmin(Request $request)
+    public function showFormAddAdmin()
+    {
+        $listCountries = Countries::pluck('country_name');
+        $productCategory = ProductCategory::all();
+
+        return view('/superadmin/admin/addAdmin', compact('listCountries', 'productCategory'))->with('i');
+    }
+
+    public function addUserAdmin(Request $request)
     {
         $request->validate([
+            'role_id'   => 'required',
+            'product_category_id' => 'required',
+            'name'      => 'required',
             'email'     => 'required|email',
             'password'  => 'required',
+            'country'      => 'required',
+            'status'    => 'required'
         ]);
+
+        return $this->service->addUserAdmin($request);
     }
 }
