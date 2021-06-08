@@ -52,7 +52,7 @@
                 <td>{{ $user['email'] }}</td>
                 <td>{{ $user['users_role']['role'] }}</td>
                 <td>{{ $user['country'] }}</td>
-                <td>{{ $user['product_category']['category_name'] }}</td>
+                <td>{{ $user['product_category']['category_name'] ?? "" }}</td>
                 <td>{{ $user['users_status']['status'] }}</td>
                 <td>
                     <a class="btn btn-primary btn-sm" href="{{ route('users.show',$user['id']) }}">Edit</a>

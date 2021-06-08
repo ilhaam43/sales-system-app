@@ -23,7 +23,12 @@ class SuperAdminController extends Controller
 
     public function index()
     {
-        return view('/superadmin/index');
+        $totalProductCategory = count(ProductCategory::all()); 
+        $totalUsers = count(User::whereNotIn('id', array(1))->get());
+        $totalAdmins = count(User::where('role_id', 2)->get());
+        $totalWorkers = count(User::whereNotIn('id', array(1,2))->get());
+
+        return view('/superadmin/index', compact('totalProductCategory','totalUsers','totalAdmins','totalWorkers'));
     }
 
     //product category function
