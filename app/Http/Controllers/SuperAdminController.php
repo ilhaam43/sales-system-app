@@ -115,6 +115,25 @@ class SuperAdminController extends Controller
         return view('/superadmin/users/updateUsers', compact('users', 'usersRole', 'usersStatus','listCountries', 'productCategory'))->with('i');
     }
 
+    public function updateUsers(Request $request, $id)
+    {
+        $request->validate([
+            'role_id'   => 'required',
+            'status_id' => 'required',
+            'product_category_id' => 'required',
+            'name'      => 'required',
+            'email'     => 'required|email',
+            'country'      => 'required',
+        ]);
+
+        return $this->service->updateUsers($request, $id);
+    }
+
+    public function deleteUsers($id)
+    {
+        return $this->service->deleteUsers($id);
+    }
+
     //admin function
     public function showFormAddAdmin()
     {

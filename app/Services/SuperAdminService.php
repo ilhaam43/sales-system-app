@@ -80,6 +80,40 @@ class SuperAdminService
         return response()->json(['success' => true, 'message' => "Photo data deleted successfully",]);
     }
 
+    //all users logic
+    public function deleteUsers($id)
+    {
+        try{
+            $deleteUsers = User::where('id',$id)->delete();
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "User data failed to delete",]);
+        }
+        
+        return response()->json(['success' => true, 'message' => "User data deleted successfully",]);
+    }
+
+    public function updateUsers($request, $id)
+    {
+        $check = empty($request['password']);
+
+        try{
+            if($check == 0){
+                if($request['password'] !== $request['confirm_password']){
+                    return redirect()->route('users.show', $id)->with('error', 'User failed to update cause password and confirm password not same');
+                }
+                $request['password'] = Hash::make($request['password']);
+
+                $updateUsers = User::find($id)->update($request->all());
+            }elseif($check == 1){
+                $updateUsers = User::find($id)->update($request->except(['password', 'confirm_password']));
+            }
+        }catch(\Throwable $th){
+            return redirect()->route('users.show', $id)->with('error', 'User data failed to update because email that want to update is already registered in this system');
+        }
+
+        return redirect()->route('users.index')->with('success', 'User data updated successfully');
+    }
+
     //admin function logic
     public function addUserAdmin($request)
     {
@@ -100,7 +134,7 @@ class SuperAdminService
             ]);
 
             $addUserAdmin->save();
-        }catch(\Throable $th){
+        }catch(\Throwable $th){
             return redirect()->route('admins.store.index')->with('error', 'Admin failed to add because email already registered in this system');
         }
 
