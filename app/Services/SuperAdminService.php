@@ -11,6 +11,7 @@ use App\Models\ProductCategory;
 use App\Models\Photos;
 use App\Models\User;
 use App\Models\UsersRole;
+use App\Models\Settings;
 
 class SuperAdminService
 {
@@ -237,6 +238,40 @@ class SuperAdminService
         }
         
         return response()->json(['success' => true, 'message' => "{$workers} data deleted successfully",]);
+    }
+
+    //general settings logic
+    public function addGeneralSetting($request)
+    {
+        try {
+            $addSetting = Settings::create($request->all());
+        } catch(\Throwable $th) {
+            return back()->withError('Setting data failed to add because product categories cannot be duplicated');
+        }
+        
+        return redirect()->route('settings.index')->with('success', 'Setting data added successfully');
+    }
+
+    public function updateGeneralSetting($request, $id)
+    {
+        try{
+            $updateSetting = Settings::find($id)->update($request->all());
+        }catch(\Throwable $th) {
+            return back()->withError('Setting data failed to update because product categories cannot be duplicated');
+        }
+
+        return redirect()->route('settings.index')->with('success', 'Setting data updated successfully');
+    }
+
+    public function deleteGeneralSetting($request, $id)
+    {
+        try{
+            $deleteSetting = Settings::where('id',$id)->delete();
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Setting data failed to delete",]);
+        }
+        
+        return response()->json(['success' => true, 'message' => "Setting data deleted successfully",]);
     }
 
 }

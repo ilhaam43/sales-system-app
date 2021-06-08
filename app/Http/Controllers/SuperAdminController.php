@@ -11,6 +11,7 @@ use App\Models\UsersRole;
 use App\Models\UsersStatus;
 use App\Models\Photos;
 use App\Models\Countries;
+use App\Models\Settings;
 
 class SuperAdminController extends Controller
 {
@@ -282,5 +283,44 @@ class SuperAdminController extends Controller
     public function deleteUserWorkers($workers, $id)
     {
         return $this->service->deleteUserWorkers($workers, $id);
+    }
+
+    public function showGeneralSetting()
+    {
+        $settings = Settings::all();
+
+        return view('/superadmin/setting/listGeneralSetting', compact('settings'))->with('i');
+    }
+
+    public function showDetailGeneralSetting($id)
+    {
+        $settings = Settings::find($id);
+
+        return view('/superadmin/setting/updateGeneralSettings', compact('settings'));
+    }
+
+    public function addGeneralSetting(Request $request)
+    {
+        $request->validate([
+            'setting_name' => 'required',
+            'setting_description' => 'required'
+        ]);
+
+        return $this->service->addGeneralSetting($request);
+    }
+
+    public function updateGeneralSetting(Request $request, $id)
+    {
+        $request->validate([
+            'setting_name' => 'required',
+            'setting_description' => 'required'
+        ]);
+
+        return $this->service->updateGeneralSetting($request, $id);
+    }
+
+    public function deleteGeneralSetting($id)
+    {
+        return $this->service->deleteGeneralSetting($id);
     }
 }

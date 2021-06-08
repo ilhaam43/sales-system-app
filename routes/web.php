@@ -65,6 +65,14 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('/{workers}/{id}', [SuperAdminController::class, 'updateUserWorkers'])->name('workers.update');
             Route::delete('/{workers}/{id}', [SuperAdminController::class, 'deleteUserWorkers'])->name('workers.destroy');
         });
+        //settings general route
+        Route::group(['prefix' => 'setting'], function () {
+            Route::get('/', [SuperAdminController::class, 'showGeneralSetting'])->name('settings.index');
+            Route::get('/{id}', [SuperAdminController::class, 'showDetailGeneralSetting'])->name('settings.detail');
+            Route::post('/', [SuperAdminController::class, 'addGeneralSetting'])->name('settings.store');
+            Route::put('/{id}', [SuperAdminController::class, 'updateGeneralSetting'])->name('settings.update');
+            Route::delete('/{id}', [SuperAdminController::class, 'deleteGeneralSetting'])->name('settings.destroy');
+        });
     });
     
     Route::group(['middleware' => ['authorized:admin']], function () {
