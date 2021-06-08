@@ -285,6 +285,12 @@ class SuperAdminController extends Controller
         return $this->service->deleteUserWorkers($workers, $id);
     }
 
+    //general setting function
+    public function showFormAddGeneralSetting()
+    {
+        return view('/superadmin/setting/addGeneralSetting');
+    }
+
     public function showGeneralSetting()
     {
         $settings = Settings::all();

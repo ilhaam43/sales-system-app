@@ -68,8 +68,9 @@ Route::group(['middleware' => ['auth']], function () {
         //settings general route
         Route::group(['prefix' => 'setting'], function () {
             Route::get('/', [SuperAdminController::class, 'showGeneralSetting'])->name('settings.index');
+            Route::get('/create', [SuperAdminController::class, 'showFormAddGeneralSetting'])->name('settings.store.index');
+            Route::post('/create', [SuperAdminController::class, 'addGeneralSetting'])->name('settings.store');
             Route::get('/{id}', [SuperAdminController::class, 'showDetailGeneralSetting'])->name('settings.detail');
-            Route::post('/', [SuperAdminController::class, 'addGeneralSetting'])->name('settings.store');
             Route::put('/{id}', [SuperAdminController::class, 'updateGeneralSetting'])->name('settings.update');
             Route::delete('/{id}', [SuperAdminController::class, 'deleteGeneralSetting'])->name('settings.destroy');
         });

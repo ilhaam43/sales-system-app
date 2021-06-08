@@ -8,7 +8,7 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">List Settings</h1>
     
-    <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addSettingModal">
+    <a href="/superadmin/setting/create" class="btn btn-success btn-icon-split">
         <span class="text">Add New Setting</span>
     </a>
     </br></br>
@@ -48,8 +48,8 @@
               <tr>
                 <td>{{ ++$i }}</td>
                 <td>{{ $setting->setting_name }}</td>
-                <td>{{ $setting->setting_description }}</td>
-                <td>
+                <td>{{ "$setting->setting_description" }}</td>
+                <td width="15%">
                     <a class="btn btn-primary btn-sm" href="{{ route('settings.detail',$setting->id) }}">Edit</a>
 
                     <button class="btn btn-danger btn-sm remove-user" data-id="{{ $setting->id }}" data-action="{{ route('settings.destroy',$setting->id) }}" onclick="deleteConfirmation({{$setting->id}})"> Delete</button>
@@ -67,35 +67,6 @@
     <!-- /.container-fluid -->
 
     </div>
-
-    <!-- Add Product Modal-->
-    <div class="modal fade" id="addSettingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add New Setting</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-        <form method="POST" action="{{url('superadmin/setting')}}">
-        {{ csrf_field() }}
-        <div class="form-group">
-          <label for="name"><b>Name Setting :</label></b>
-          <input type="text" name="setting_name" class="form-control" id="setting_name" required>
-        </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
     <!-- End of Main Content -->
     
 @endsection
