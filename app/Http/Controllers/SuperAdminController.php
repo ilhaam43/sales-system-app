@@ -176,6 +176,22 @@ class SuperAdminController extends Controller
         return view('/superadmin/workers/index', compact('workersLists', 'workers'))->with('i');
     }
 
+    public function showWorkersDetails($workers, $id)
+    {
+        $worker = User::find($id);
+
+        if(!$worker){
+            return redirect()->route('workers.index',$workers);
+        }
+
+        $usersRole = UsersRole::all();
+        $usersStatus = UsersStatus::all();
+        $listCountries = Countries::pluck('country_name');
+        $productCategory = ProductCategory::all();
+
+        return view('/superadmin/workers/updateWorkers', compact('worker', 'workers', 'usersRole', 'usersStatus','listCountries', 'productCategory'))->with('i');
+    }
+
     public function showFormAddWorkers()
     {
         $listCountries = Countries::pluck('country_name');
@@ -198,6 +214,20 @@ class SuperAdminController extends Controller
         ]);
 
         return $this->service->addUserWorkers($request);
+    }
+
+    public function updateUserWorkers(Request $request, $workers, $id)
+    {
+        $request->validate([
+            'role_id'   => 'required',
+            'status_id' => 'required',
+            'product_category_id' => 'required',
+            'name'      => 'required',
+            'email'     => 'required|email',
+            'country'      => 'required',
+        ]);
+
+        return $this->service->updateUserWorkers($request, $workers, $id);
     }
 
     public function deleteUserWorkers($workers, $id)

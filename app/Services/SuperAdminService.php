@@ -170,6 +170,28 @@ class SuperAdminService
         return redirect()->route('workers.index',$usersRole->role)->with('success', $usersRole->role .' added successfully');
     }
 
+    public function updateUserWorkers($request, $workers, $id)
+    {
+        $check = empty($request['password']);
+
+        try{
+            if($check == 0){
+                if($request['password'] !== $request['confirm_password']){
+                    return redirect()->route('workers.show', ['workers' => $workers, 'id' => $id])->with('error', $workers . ' failed to update cause password and confirm password not same');
+                }
+                $request['password'] = Hash::make($request['password']);
+
+                $updateUserWorkers = User::find($id)->update($request->all());
+            }elseif($check == 1){
+                $updateUserWorkers = User::find($id)->update($request->except(['password', 'confirm_password']));
+            }
+        }catch(\Throwable $th){
+            return redirect()->route('workers.show', ['workers' => $workers, 'id' => $id])->with('error', $workers .' data failed to update because email that want to update is already registered in this system');
+        }
+
+        return redirect()->route('workers.index', $workers)->with('success', $workers . ' data updated successfully');
+    }
+
     public function deleteUserWorkers($workers, $id)
     {
         try{
