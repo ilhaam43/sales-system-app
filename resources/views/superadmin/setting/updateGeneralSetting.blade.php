@@ -6,7 +6,7 @@
         <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Edit Product Category</h1>
+    <h1 class="h3 mb-2 text-gray-800">Edit Setting Data</h1>
     
     </br>
     @if (session('error'))
@@ -26,20 +26,25 @@
 
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Edit Product Category</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Edit Setting Data</h6>
       </div>
       <div class="card-body">
-      <form method="POST" action="{{ route('product-category.update',$productCategory->id) }}">
+      <form method="POST" action="{{ route('settings.update',$setting->id) }}">
           @csrf
           @method('PUT')
           <div class="form-row">
-            <div class="col-sm-6">
-              <label for="name"><b>Category Name :</label></b>
-              <input type="text" class="form-control" placeholder="Category Name" name="category_name" value="{{$productCategory->category_name}}" required>
+            <div class="col-sm-12">
+              <label for="name"><b>Setting Name :</label></b>
+              <input type="text" class="form-control" placeholder="Setting Name" name="setting_name" value="{{$setting->setting_name}}" required>
+            </div>
+            <div class="col-sm-12">
+              </br>
+              <label for="name"><b>Setting Description :</label></b>
+              <textarea class="ckeditor form-control" name="setting_description" value="setting_description" required>{{$setting->setting_description}}</textarea>
             </div>
           </div>
           </br>
-          <a href="{{url('superadmin/product-category')}}" class="btn btn-danger">Cancel</a>
+          <a href="{{url('superadmin/setting')}}" class="btn btn-danger">Cancel</a>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
@@ -55,5 +60,10 @@
     
 @endsection
 </body>
-
+<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+    });
+</script>
 </html>

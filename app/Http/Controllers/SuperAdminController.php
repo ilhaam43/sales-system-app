@@ -300,9 +300,9 @@ class SuperAdminController extends Controller
 
     public function showDetailGeneralSetting($id)
     {
-        $settings = Settings::find($id);
+        $setting = Settings::find($id);
 
-        return view('/superadmin/setting/updateGeneralSettings', compact('settings'));
+        return view('/superadmin/setting/updateGeneralSetting', compact('setting'));
     }
 
     public function addGeneralSetting(Request $request)
