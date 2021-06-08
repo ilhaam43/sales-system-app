@@ -72,7 +72,9 @@ class SuperAdminService
     public function deletePhoto($id)
     {
         try{
-            $deletePhoto = Photos::where('id',$id)->delete();
+            $photo = Photos::find($id);
+            $deletePhotoFile = unlink($photo->photo_url);
+            $deletePhotoData = Photos::where('id',$id)->delete();
         }catch(\Throwable $th){
             return response()->json(['success' => false, 'message' => "Photo data failed to delete",]);
         }
