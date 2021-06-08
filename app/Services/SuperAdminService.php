@@ -263,7 +263,7 @@ class SuperAdminService
         return redirect()->route('settings.index')->with('success', 'Setting data updated successfully');
     }
 
-    public function deleteGeneralSetting($request, $id)
+    public function deleteGeneralSetting($id)
     {
         try{
             $deleteSetting = Settings::where('id',$id)->delete();

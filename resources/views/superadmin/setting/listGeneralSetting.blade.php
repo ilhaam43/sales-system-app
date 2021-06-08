@@ -71,5 +71,5 @@
     
 @endsection
 </body>
-<script src="{{ asset('assets/superadmin/js/ajax/deleteProductCategory.js') }}"></script>
+<script src="{{ asset('assets/superadmin/js/ajax/deleteGeneralSetting.js') }}"></script>
 </html>
