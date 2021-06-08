@@ -90,6 +90,31 @@ class SuperAdminController extends Controller
         return $this->service->deletePhoto($id);
     }
 
+    //all users function
+    public function showUsersList()
+    {
+        $user = User::whereNotIn('id', [1])->with('ProductCategory', 'UsersStatus', 'UsersRole')->get();
+        $users = json_decode($user, true);
+        
+        return view('/superadmin/users/index', compact('users'))->with('i');
+    }
+
+    public function showUsersDetails($id)
+    {
+        $users = User::find($id);
+
+        if(!$users){
+            return redirect()->route('users.index');
+        }
+
+        $usersRole = UsersRole::all();
+        $usersStatus = UsersStatus::all();
+        $listCountries = Countries::pluck('country_name');
+        $productCategory = ProductCategory::all();
+
+        return view('/superadmin/users/updateUsers', compact('users', 'usersRole', 'usersStatus','listCountries', 'productCategory'))->with('i');
+    }
+
     //admin function
     public function showFormAddAdmin()
     {

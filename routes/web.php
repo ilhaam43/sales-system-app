@@ -40,6 +40,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/', [SuperAdminController::class, 'addPhoto'])->name('photos.store');
             Route::delete('/{id}', [SuperAdminController::class, 'deletePhoto'])->name('photos.destroy');
         });
+        //all users route
+        Route::group(['prefix' => 'users'], function () {
+            Route::get('/', [SuperAdminController::class, 'showUsersList'])->name('users.index');
+            Route::get('/{id}', [SuperAdminController::class, 'showUsersDetails'])->name('users.show');
+            Route::put('/{id}', [SuperAdminController::class, 'updateUsers'])->name('users.update');
+            Route::delete('/{id}', [SuperAdminController::class, 'deleteUsers'])->name('users.destroy');
+        });
         //admin user route
         Route::group(['prefix' => 'admin'], function () {
             Route::get('/', [SuperAdminController::class, 'showAdminList'])->name('admins.index');
