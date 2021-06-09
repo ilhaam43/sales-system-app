@@ -19,6 +19,12 @@ class AuthService
                 return redirect()->intended('superadmin');
             } elseif ($user->role_id == 2) {
                 return redirect()->intended('admin');
+            } elseif ($user->role_id == 3) {
+                return redirect()->intended('researcher');
+            } elseif ($user->role_id == 4) {
+                return redirect()->intended('inqurier');
+            } elseif ($user->role_id == 5) {
+                return redirect()->intended('auditor');
             }
             return back()->withError('Email or password invalid');
         }

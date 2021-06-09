@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ResearcherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,5 +79,11 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::group(['middleware' => ['authorized:admin']], function () {
         Route::resource('admin', AdminController::class);
+    });
+
+    Route::group(['prefix' => 'researcher', 'middleware' => ['authorized:researcher']], function () {
+        Route::get('/', [ResearcherController::class, 'index'])->name('researcher.index');
+
+        Route::get('/researches', [ResearcherController::class, 'showResearches'])->name('researches.index');
     });
 });

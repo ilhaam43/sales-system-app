@@ -56,7 +56,6 @@
                     <a class="btn btn-primary btn-sm" href="{{ route('workers.show',['workers' => $workers, 'id' => $worker['id']]) }}">Edit</a>
 
                     <button class="btn btn-danger btn-sm remove-user" data-id="{{$worker['id']}}" data-action="{{ route('workers.destroy',['workers' => $workers, 'id' => $worker['id']]) }}" onclick="deleteConfirmation({{$worker['id']}}, '{{$workers}}')">Delete</button>
-                  </form>
                 </td>
               </tr>
             </tbody>
