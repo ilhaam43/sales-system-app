@@ -51,7 +51,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html">Sales<span>APP</span></a></h1>
+      <h1 class="logo mr-auto"><a href="{{ url('researcher') }}">Sales<span>APP</span></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt=""></a>-->
 
@@ -59,13 +59,13 @@
         <ul>
           <li class="{{ request()->is('researcher') ? 'active' : ''}}"><a href="{{ url('researcher') }}">How We Work</a></li>
           <li class="{{ request()->is('researcher/researches') ? 'active' : ''}}"><a href="{{ url('researcher/researches') }}">Researches</a></li>
-          <li><a href="#portfolio">FAQ</a></li>
-          <li><a href="#team">Notice</a></li>
-          <li><a href="#team">My Work</a></li>
-          <li><a href="#team">Payments</a></li>
-          <li class="drop-down"><i class="fa fa-user p-r-5"></i> Account
+          <li class="{{ request()->is('researcher/faq') ? 'active' : ''}}"><a href="{{ url('researcher/faq') }}">FAQ</a></li>
+          <li class="{{ request()->is('researcher/notice') ? 'active' : ''}}"><a href="{{ url('researcher/notice') }}">Notice</a></li>
+          <li class="{{ request()->is('researcher/my-work') ? 'active' : ''}}"><a href="{{ url('researcher/my-work') }}">My Work</a></li>
+          <li class="{{ request()->is('researcher/payments') ? 'active' : ''}}"><a href="{{ url('researcher/payments') }}">Payments</a></li>
+          <li class="drop-down"><a href="">Account</a>
             <ul>
-              <li><a href="#">Profile</a></li>             
+              <li><a href="#">Profile</a></li>
               <li><a href="#">Logout</a></li>
             </ul>
           </li>
