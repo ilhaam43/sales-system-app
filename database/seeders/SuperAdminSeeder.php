@@ -22,7 +22,7 @@ class SuperAdminSeeder extends Seeder
             'name' => "SuperAdmin",
             'email' => "superadmintest@yopmail.com",
             'password' => Hash::make('superadmintest'),
-            'country' => "Indonesia",
+            'country_id' => 10,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);

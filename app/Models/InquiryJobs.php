@@ -31,4 +31,8 @@ class InquiryJobs extends Model
         return $this->hasOne(AuditorInquiryJobs::class);
     }
 
+    public function jobsStatus(){
+        return $this->belongsTo(JobsStatus::class, 'job_status_id', 'id');
+    }
+
 }

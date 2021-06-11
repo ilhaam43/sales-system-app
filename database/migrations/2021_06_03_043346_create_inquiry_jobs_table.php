@@ -18,7 +18,7 @@ class CreateInquiryJobsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreignId('research_jobs_id')->constrained('research_jobs');
             $table->foreignId('product_category_id')->constrained('product_category')->onUpdate('cascade')->onDelete('cascade');
-            $table->enum('status',['Admin Approved', 'Auditor Approved', 'Admin Reject', 'Auditor Reject', 'Pending']);
+            $table->foreignId('job_status_id')->constrained('jobs_status');
             $table->string('screenshot_url');
             $table->timestamps();
             $table->softDeletes();

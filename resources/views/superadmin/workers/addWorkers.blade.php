@@ -58,9 +58,9 @@
             <div class="form-row">
             <div class="col-sm-4">
                 <label for="country"><b>Country :</label></b>
-                <select class="form-control" name="country">
+                <select class="form-control" name="country_id">
                     @foreach($listCountries as $countries)
-                    <option value="{{$countries}}">{{$countries}}</option>
+                    <option value="{{$countries->id}}">{{$countries->country_name}}</option>
                     @endforeach
                 </select>
                 </div>

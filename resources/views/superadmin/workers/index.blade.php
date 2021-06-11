@@ -49,7 +49,7 @@
                 <td>{{ ++$i }}</td>
                 <td>{{ $worker['name'] }}</td>
                 <td>{{ $worker['email'] }}</td>
-                <td>{{ $worker['country'] }}</td>
+                <td>{{ $worker['country']['country_name'] }}</td>
                 <td>{{ $worker['product_category']['category_name'] ?? "" }}</td>
                 <td>{{ $worker['users_status']['status'] }}</td>
                 <td>

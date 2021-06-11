@@ -99,7 +99,7 @@ class SuperAdminController extends Controller
     //all users function
     public function showUsersList()
     {
-        $user = User::whereNotIn('id', [1])->with('ProductCategory', 'UsersStatus', 'UsersRole')->get();
+        $user = User::whereNotIn('id', [1])->with('ProductCategory', 'UsersStatus', 'UsersRole', 'Country')->get();
         $users = json_decode($user, true);
         
         return view('/superadmin/users/index', compact('users'))->with('i');
@@ -115,7 +115,7 @@ class SuperAdminController extends Controller
 
         $usersRole = UsersRole::all();
         $usersStatus = UsersStatus::all();
-        $listCountries = Countries::pluck('country_name');
+        $listCountries = Countries::all();
         $productCategory = ProductCategory::all();
 
         return view('/superadmin/users/updateUsers', compact('users', 'usersRole', 'usersStatus','listCountries', 'productCategory'))->with('i');
@@ -126,10 +126,10 @@ class SuperAdminController extends Controller
         $request->validate([
             'role_id'   => 'required',
             'status_id' => 'required',
+            'country_id'      => 'required',
             'product_category_id' => 'required',
             'name'      => 'required',
             'email'     => 'required|email',
-            'country'      => 'required',
         ]);
 
         return $this->service->updateUsers($request, $id);
@@ -143,7 +143,7 @@ class SuperAdminController extends Controller
     //admin function
     public function showFormAddAdmin()
     {
-        $listCountries = Countries::pluck('country_name');
+        $listCountries = Countries::all();
         $productCategory = ProductCategory::all();
 
         return view('/superadmin/admin/addAdmin', compact('listCountries', 'productCategory'))->with('i');
@@ -167,7 +167,7 @@ class SuperAdminController extends Controller
 
         $usersRole = UsersRole::all();
         $usersStatus = UsersStatus::all();
-        $listCountries = Countries::pluck('country_name');
+        $listCountries = Countries::all();
         $productCategory = ProductCategory::all();
 
         return view('/superadmin/admin/updateAdmin', compact('admin', 'usersRole', 'usersStatus','listCountries', 'productCategory'))->with('i');
@@ -179,10 +179,10 @@ class SuperAdminController extends Controller
             'role_id'   => 'required',
             'status_id' => 'required',
             'product_category_id' => 'required',
+            'country_id'      => 'required',
             'name'      => 'required',
             'email'     => 'required|email',
             'password'  => 'required',
-            'country'   => 'required',
         ]);
 
         return $this->service->addUserAdmin($request);
@@ -193,10 +193,10 @@ class SuperAdminController extends Controller
         $request->validate([
             'role_id'   => 'required',
             'status_id' => 'required',
+            'country_id'      => 'required',
             'product_category_id' => 'required',
             'name'      => 'required',
             'email'     => 'required|email',
-            'country'      => 'required',
         ]);
 
         return $this->service->updateUserAdmin($request, $id);
@@ -220,7 +220,7 @@ class SuperAdminController extends Controller
             $usersRole[$i] = $roles;
         }
 
-        $workersList = User::where('role_id', $roles->id)->with('ProductCategory', 'UsersStatus', 'UsersRole')->get();
+        $workersList = User::where('role_id', $roles->id)->with('ProductCategory', 'UsersStatus', 'UsersRole', 'Country')->get();
         $workersLists = json_decode($workersList, true);
 
         return view('/superadmin/workers/index', compact('workersLists', 'workers'))->with('i');
@@ -236,7 +236,7 @@ class SuperAdminController extends Controller
 
         $usersRole = UsersRole::all();
         $usersStatus = UsersStatus::all();
-        $listCountries = Countries::pluck('country_name');
+        $listCountries = Countries::all();
         $productCategory = ProductCategory::all();
 
         return view('/superadmin/workers/updateWorkers', compact('worker', 'workers', 'usersRole', 'usersStatus','listCountries', 'productCategory'))->with('i');
@@ -244,7 +244,7 @@ class SuperAdminController extends Controller
 
     public function showFormAddWorkers()
     {
-        $listCountries = Countries::pluck('country_name');
+        $listCountries = Countries::all();
         $productCategory = ProductCategory::all();
         $usersRole = UsersRole::whereNotIn('id', array(1,2))->get();
 
@@ -257,10 +257,10 @@ class SuperAdminController extends Controller
             'role_id'   => 'required',
             'status_id' => 'required',
             'product_category_id' => 'required',
+            'country_id'      => 'required',
             'name'      => 'required',
             'email'     => 'required|email',
             'password'  => 'required',
-            'country'   => 'required',
         ]);
 
         return $this->service->addUserWorkers($request);
@@ -271,10 +271,10 @@ class SuperAdminController extends Controller
         $request->validate([
             'role_id'   => 'required',
             'status_id' => 'required',
+            'country_id'      => 'required',
             'product_category_id' => 'required',
             'name'      => 'required',
             'email'     => 'required|email',
-            'country'      => 'required',
         ]);
 
         return $this->service->updateUserWorkers($request, $workers, $id);

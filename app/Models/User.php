@@ -69,4 +69,8 @@ class User extends Authenticatable
     public function AuditorResearchJobs(){
         return $this->hasMany(AuditorResearchJobs::class, 'user_id', 'id');
     }
+
+    public function country(){
+        return $this->belongsTo(Countries::class, 'country_id', 'id');
+    }
 }

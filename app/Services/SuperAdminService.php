@@ -133,7 +133,7 @@ class SuperAdminService
                 'name'      => $request['name'],
                 'email'     => $request['email'],
                 'password'  => Hash::make($request['password']),
-                'country'   => $request['country'],
+                'country_id'   => $request['country_id'],
             ]);
 
             $addUserAdmin->save();
@@ -195,7 +195,7 @@ class SuperAdminService
                 'name'      => $request['name'],
                 'email'     => $request['email'],
                 'password'  => Hash::make($request['password']),
-                'country'   => $request['country'],
+                'country_id'   => $request['country_id'],
             ]);
 
             $addUserWorkers->save();

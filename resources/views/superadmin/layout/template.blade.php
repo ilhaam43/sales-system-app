@@ -98,19 +98,6 @@
         </div>
       </li>
 
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('superadmin/photos') }}">
-          <i class="fas fa-fw fa-images"></i>
-          <span>Photos</span></a>
-      </li>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="/superadmin/setting">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>General</span></a>
-      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">

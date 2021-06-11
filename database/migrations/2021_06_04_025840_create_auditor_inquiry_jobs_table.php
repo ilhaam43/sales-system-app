@@ -17,7 +17,7 @@ class CreateAuditorInquiryJobsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreignId('inquiry_job_id')->constrained('inquiry_jobs');
-            $table->foreignId('product_category_id')->constrained('product_category')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('product_category_id')->constrained('product_category');
             $table->timestamps();
             $table->softDeletes();
         });

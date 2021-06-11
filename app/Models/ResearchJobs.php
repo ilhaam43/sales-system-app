@@ -30,4 +30,12 @@ class ResearchJobs extends Model
     public function auditorResearchJobs(){
         return $this->hasOne(AuditorResearchJobs::class);
     }
+
+    public function country(){
+        return $this->belongsTo(Countries::class, 'country_id', 'id');
+    }
+
+    public function jobsStatus(){
+        return $this->belongsTo(JobsStatus::class, 'job_status_id', 'id');
+    }
 }

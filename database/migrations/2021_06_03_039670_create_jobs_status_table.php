@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAuditorJobsTable extends Migration
+class CreateJobsStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateAuditorJobsTable extends Migration
      */
     public function up()
     {
-        Schema::create('auditor_research_jobs', function (Blueprint $table) {
+        Schema::create('jobs_status', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreignId('researcher_job_id')->constrained('research_jobs');
-            $table->foreignId('product_category_id')->constrained('product_category');
+            $table->string('status');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +27,6 @@ class CreateAuditorJobsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('auditor_jobs');
+        Schema::dropIfExists('jobs_status');
     }
 }

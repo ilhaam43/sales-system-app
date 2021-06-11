@@ -22,7 +22,7 @@ class AdminSeeder extends Seeder
             'name' => "Admin",
             'email' => "admintest@yopmail.com",
             'password' => Hash::make('admintest'),
-            'country' => "Indonesia",
+            'country_id' => 10,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);

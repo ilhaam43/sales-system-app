@@ -17,14 +17,14 @@ class CreateResearchJobsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreignId('product_category_id')->constrained('product_category')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('country_id')->constrained('country');
+            $table->foreignId('job_status_id')->constrained('jobs_status');
             $table->string('company_name');
             $table->string('company_website');
             $table->string('company_email')->unique();
             $table->string('company_phone');
             $table->string('company_product_url');
-            $table->string('country');
             $table->enum('is_form',['Yes', 'No']);
-            $table->enum('status',['Admin Approved', 'Auditor Approved', 'Admin Reject', 'Auditor Reject', 'Pending']);
             $table->integer('count_inquiry')->nullable();
             $table->timestamps();
             $table->softDeletes();

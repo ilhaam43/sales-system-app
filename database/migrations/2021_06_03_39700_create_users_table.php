@@ -18,12 +18,15 @@ class CreateUsersTable extends Migration
             $table->foreignId('role_id')->constrained('users_role')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('product_category_id')->nullable()->constrained('product_category');
             $table->foreignId('status_id')->constrained('users_status');
+            $table->foreignId('country_id')->constrained('country');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('country');
             $table->string('profile_image')->nullable();
-            $table->integer('quantity_jobs_paid')->nullable();
+            $table->integer('quantity_research_paid')->nullable();
+            $table->integer('quantity_inquire_paid')->nullable();
+            $table->integer('quantity_reply_paid')->nullable();
+            $table->double('amount_paid')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
