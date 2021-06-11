@@ -9,8 +9,8 @@
         <div class="d-flex justify-content-between align-items-center">
           <h3></h3>
           <ol>
-            <li><a href="#">Payments</a></li>
-            <li>How We Work</li>
+            <li><a href="#">Researcher</a></li>
+            <li>Payments</li>
           </ol>
         </div>
 

@@ -38,6 +38,6 @@ class ResearcherController extends Controller
 
     public function showProfile()
     {
-        return view();
+        return view('workers/researcher/profile');
     }
 }

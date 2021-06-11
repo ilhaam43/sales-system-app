@@ -5,16 +5,13 @@
 
     <!-- ======= Breadcrumbs ======= -->
     <section class="breadcrumbs">
-      <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <h3></h3>
           <ol>
-            <li><a href="#">Researcher</a></li>
-            <li>FAQ (Frequently Asked Questions)</li>
+            <li style="margin-left:20px;"><a href="#">Researcher</a></li>
+            <li style="margin-right:20px;">FAQ</li>
           </ol>
         </div>
-
-      </div>
     </section><!-- End Breadcrumbs -->
 
     <div class="card shadow mb-4">

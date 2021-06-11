@@ -65,8 +65,8 @@
           <li class="{{ request()->is('researcher/payments') ? 'active' : ''}}"><a href="{{ url('researcher/payments') }}">Payments</a></li>
           <li class="drop-down"><a href="">Account</a>
             <ul>
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Logout</a></li>
+              <li><a href="{{ url('researcher/profile') }}">Profile</a></li>
+              <li><a href="{{ url('logout') }}">Logout</a></li>
             </ul>
           </li>
 
