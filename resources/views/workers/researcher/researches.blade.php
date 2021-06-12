@@ -25,7 +25,7 @@
         <span class="text">Repeat Check</span>
       </a>
 
-      <a href="#" class="btn btn-outline-info btn-icon-split" style="float: left; margin-left: 10px;"><i class="fa fa-info-circle p-r-5"></i>
+      <a href="{{ url('researcher/country-records') }}" class="btn btn-outline-info btn-icon-split" style="float: left; margin-left: 10px;"><i class="fa fa-info-circle p-r-5"></i>
         <span class="text">Current Countries Records</span>
       </a>
     
