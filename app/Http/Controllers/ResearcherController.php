@@ -52,11 +52,24 @@ class ResearcherController extends Controller
 
     public function showCountryRecords()
     {
-        $listCountries = Countries::all();
-        $researchJobsList = ResearchJobs::all();
-        return $researchJobsList;
+        $researchJobsList = ResearchJobs::with('Country')->distinct()->get('country_id');
+        $researchJobsLists = json_decode($researchJobsList, true);
 
-        return view('workers/researcher/country-records');
+        $countriesRecords = [];
+
+        foreach($researchJobsLists as $researchesList){
+            $searchResearch = ResearchJobs::whereIn('country_id', array($researchesList['country']['id']))->count();
+        
+                if($searchResearch > 0){
+                    array_push($countriesRecords, [
+                        'country_id' => $researchesList['country']['id'],
+                        'country_name' => $researchesList['country']['country_name'],
+                        'count' => $searchResearch,
+                    ]);
+                }
+            }
+
+        return view('workers/researcher/country-records', compact('countriesRecords'))->with('i');
     }
 
     public function showProfile()

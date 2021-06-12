@@ -17,7 +17,6 @@
         <div class="card shadow mb-4">
         <div class="card-body">
         <h4 style="margin-left:10px;">Country Records List</h4>
-
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     </br>
                     <thead>
@@ -28,12 +27,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach ($countriesRecords as $records)
                         <tr>
-                        <td>1</td>
-                        <td>Ilhaam</td>
-                        <td>Akmale</td>
+                        <td>{{ ++$i }}</td>
+                        <td>{{ $records['country_name'] }}</td>
+                        <td>{{ $records['count'] }}</td>
                         </tr>
                     </tbody>
+                    @endforeach
                     </table>
                 </div>
                 </div>
