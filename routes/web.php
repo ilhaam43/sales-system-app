@@ -88,6 +88,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/notice', [ResearcherController::class, 'showNotice'])->name('researcher.notice');
         Route::get('/my-work', [ResearcherController::class, 'showMyWork'])->name('researcher.mywork');
         Route::get('/payments', [ResearcherController::class, 'showPayments'])->name('researcher.payments');
+        Route::get('/country-records', [ResearcherController::class, 'showCountryRecords'])->name('researcher.countyrecords');
         Route::get('/profile', [ResearcherController::class, 'showProfile'])->name('researcher.profile');
         Route::put('/profile', [ResearcherController::class, 'updateProfile'])->name('researcher.update');
     });

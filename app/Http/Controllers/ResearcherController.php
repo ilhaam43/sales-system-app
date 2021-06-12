@@ -9,6 +9,7 @@ use App\Services\ResearcherService;
 
 use App\Models\User;
 use App\Models\Countries;
+use App\Models\ResearchJobs;
 
 class ResearcherController extends Controller
 {
@@ -47,6 +48,15 @@ class ResearcherController extends Controller
     public function showMyWork()
     {
         return view('workers/researcher/my-work');
+    }
+
+    public function showCountryRecords()
+    {
+        $listCountries = Countries::all();
+        $researchJobsList = ResearchJobs::all();
+        return $researchJobsList;
+
+        return view('workers/researcher/country-records');
     }
 
     public function showProfile()
