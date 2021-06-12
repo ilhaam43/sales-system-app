@@ -21,7 +21,7 @@
       <a href="#" class="btn btn-outline-primary btn-icon-split" data-toggle="modal" data-target="#addCompanyModal" style="float: left; margin-left:10px;"><i class="fa fa-building p-r-5"></i>
         <span class="text">Add New Company</span>
         
-      <a href="#" class="btn btn-outline-danger btn-icon-split" style="float: left; margin-left:10px;"><i class="fa fa-search p-r-5"></i>
+      <a href="#" class="btn btn-outline-danger btn-icon-split" data-toggle="modal" data-target="#checkCompanyModal" style="float: left; margin-left:10px;"><i class="fa fa-search p-r-5"></i>
         <span class="text">Repeat Check</span>
       </a>
 
@@ -146,6 +146,44 @@
                     <option value="{{$category['product_category']['id']}}">{{$category['product_category']['category_name']}}</option>
                 @endforeach
         </select>
+        </div>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Check Company Modal-->
+  <div class="modal fade" id="checkCompanyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Repeat Check Company Data</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <form method="POST" action="{{url('researcher/check-company')}}">
+        {{ csrf_field() }}
+        <div class="form-group">
+          <label for="name">Check data :</label>
+          <input type="text" name="input_data" class="form-control" id="input_data" required>
+        </div>
+        <div class="form-group">
+          <label>Type search :</label>
+                  <select type="text" class="form-control" name="type_search">
+                      <option value="name">Company Name</option>
+                      <option value="website">Company Website</option>
+                      <option value="email">Company Email</option>
+                      <option value="phone">Company Phone</option>
+                      <option value="product_url">Company Product Url</option>
+                  </select>
         </div>
 
         </div>

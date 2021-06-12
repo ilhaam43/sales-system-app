@@ -97,7 +97,7 @@ class ResearcherService
 
             if(count($checkUrl) > 0){
                 return back()->withError('Company data failed to add because company website data already exists');
-            }else if(count($checkEmail) > 0){
+            }elseif(count($checkEmail) > 0){
                 return back()->withError('Company data failed to add because company email data already exists');
             }
 
@@ -110,7 +110,48 @@ class ResearcherService
         return redirect()->route('researcher.researches')->with('success', 'Company data added successfully');
     }
 
-    
+    public function checkCompanyData($request)
+    {
+        try{
+            if($request['type_search'] == "name"){
+                $checkName = ResearchJobs::where('company_name','LIKE','%' . $request['input_data'] . '%')->get();
+                
+                if(count($checkName) > 0){
+                    return back()->withError('Company name data already exists');
+                }
+            }elseif($request['type_search'] == "website"){
+                $urlFilter = preg_replace('/\b(?:(?:https?|ftp):\/\/|www\.)/', '', $request['input_data']); //regex for filter url
+
+                $checkWebsite = ResearchJobs::where('company_website','LIKE','%' . $urlFilter . '%')->get();
+                if(count($checkWebsite) > 0){
+                    return back()->withError('Company website data already exists');
+                }
+            }elseif($request['type_search'] == "email"){
+                $emailFilter = preg_replace('^[A-z0-9.]+@^', '', $request['input_data']); //regex for filter email
+
+                $checkEmail = ResearchJobs::where('company_website','LIKE','%' . $emailFilter . '%')->get();
+                if(count($checkEmail) > 0){
+                    return back()->withError('Company email data already exists');
+                }
+            }elseif($request['type_search'] == "phone"){
+                $checkPhone = ResearchJobs::where('company_name','LIKE','%' . $request['input_data'] . '%')->get();
+
+                if(count($checkPhone) > 0){
+                    return back()->withError('Company phone data already exists');
+                }
+            }elseif($request['type_search'] == "product_url"){
+                $checkProductUrl = ResearchJobs::where('company_name','LIKE','%' . $request['input_data'] . '%')->get();
+
+                if(count($checkProductUrl) > 0){
+                    return back()->withError('Company phone data already exists');
+                }
+            }
+
+        }catch(\Throwable $th){
+            return back()->withError('Company data already exists');
+        }
+        return redirect()->route('researcher.researches')->with('success', 'Company data not exists');
+    }
 
 }
 ?>

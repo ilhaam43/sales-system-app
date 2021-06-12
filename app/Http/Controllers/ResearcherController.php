@@ -117,7 +117,12 @@ class ResearcherController extends Controller
 
     public function checkCompanyData(Request $request)
     {
+        $request->validate([
+            'input_data'            => 'required',
+            'type_search'           => 'required',
+        ]);
 
+        return $this->service->checkCompanyData($request);
     }
 
     public function updateProfile(Request $request)
