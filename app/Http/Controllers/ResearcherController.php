@@ -3,9 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+use App\Services\ResearcherService;
+
+use App\Models\User;
+use App\Models\Countries;
 
 class ResearcherController extends Controller
 {
+    private $service;
+
+    public function __construct(ResearcherService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
         return view('workers/researcher/index');
@@ -38,6 +51,22 @@ class ResearcherController extends Controller
 
     public function showProfile()
     {
-        return view('workers/researcher/profile');
+        $listCountries = Countries::all();
+
+        $userId = Auth::user()->id;
+        $dataUser = User::where('id', $userId)->with('Country')->get();
+        $userData = json_decode($dataUser, true);
+
+        foreach($userData as $user){
+            $userData = $user;
+        }
+
+        return view('workers/researcher/profile', compact('userData','listCountries'))->with('i');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $id = Auth::user()->id;
+        return $this->service->updateProfile($request, $id);
     }
 }

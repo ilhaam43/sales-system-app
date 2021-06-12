@@ -51,7 +51,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="{{ url('researcher') }}">Sales<span>APP</span></a></h1>
+      <h1 class="logo mr-auto"><a href="{{ url('researcher') }}">GoSearch<span>Clients</span></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt=""></a>-->
 

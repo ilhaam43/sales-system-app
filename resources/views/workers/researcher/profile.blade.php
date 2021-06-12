@@ -26,6 +26,20 @@
     <div class="card mb-3">
     <div class="card-header bg-primary text-white"><i class="fa fa-users"></i> My Profile </div>
     <div class="card-body shadow b-b-5">
+        @if (session('error'))
+        <div class="alert alert-danger">
+            <ul>
+                <li>{{ session('error') }}</li>
+            </ul>
+        </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success">
+            <ul>
+                <li>{{ session('success') }}</li>
+            </ul>
+        </div>
+    @endif
     
         <div class="row">
         <div class="col-md-2 text-center">
@@ -35,29 +49,32 @@
             </div>
         </div>
 
-        <form action="" method="POST" enctype="multipart/form-data">
-
+        <form method="POST" action="{{ route('researcher.update') }}" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
         <div class="row">
         <div class="form-group col-md-6">
                 <label>Name :</label>
-                <input type="text" class="form-control" name="name" placeholder="Enter your name" value="">
+                <input type="text" class="form-control" name="name" placeholder="Enter your name" value="{{$userData['name']}}">
             </div>
         <div class="form-group col-md-6">
                 <label> Email :</label>
-                <input type="text" class="form-control" name="email" value="" disabled> 
+                <input type="text" class="form-control" name="email" value="{{$userData['email']}}" disabled> 
             </div>
         </div>
 
         <div class="row">
         <div class="form-group col-md-6">
                 <label>Country :</label>
-                <select type="text" class="form-control" name="name">
-                    <option value=""></option>
+                <select type="text" class="form-control" name="country_id">
+                    @foreach($listCountries as $countries)
+                    <option value="{{$countries->id}}" {{ ( $countries->id == $userData['country']['id']) ? 'selected' : '' }}>{{$countries->country_name}}</option>
+                    @endforeach
                 </select>
             </div>
         <div class="form-group col-md-6">
                 <label>Profile Image :</label>
-                <input type="file" class="form-control" name="profile_image"> 
+                <input type="file" name="profile_image" class="form-control" id="profile_image">
             </div>
         </div>
 
@@ -71,9 +88,8 @@
                 <input type="text" class="form-control" name="confirm_password" placeholder="Enter your confirmation password">
             </div>
         </div>
-
         <button type="submit" class="btn btn-primary">Submit</button>
-
+        </form>
             </div>
 
         </div>
