@@ -34,22 +34,36 @@
       </br>
       </br>
 
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <table class="table table-responsive table-bordered" id="dataTable" width="100%" cellspacing="0">
                   </br>
                   <thead>
                     <tr>
-                      <th>No</th>
-                      <th>Name</th>
+                      <th width="5%">No</th>
+                      <th>Company Name</th>
+                      <th>Website</th>
                       <th>Email</th>
+                      <th>Phone</th>
+                      <th>Product Page</th>
+                      <th>Country</th>
+                      <th>Status</th>
+                      <th>Edit</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>1</td>
-                      <td>Ilhaam</td>
-                      <td>Akmale</td>
+                      @foreach($researchJobsLists as $researchLists)
+                      <td>{{ ++$i }}</td>
+                      <td>{{ $researchLists['company_name'] }}</td>
+                      <td>{{ $researchLists['company_website'] }}</td>
+                      <td>{{ $researchLists['company_email'] }}</td>
+                      <td>{{ $researchLists['company_phone'] }}</td>
+                      <td>{{ $researchLists['company_product_url'] }}</td>
+                      <td>{{ $researchLists['country']['country_name'] }}</td>
+                      <td>{{ $researchLists['jobs_status']['status']}}</td>
+                      <td><a class="btn btn-primary btn-sm" href="{{ route('users.show',$researchLists['id']) }}">Edit</a></td>
                     </tr>
                   </tbody>
+                  @endforeach
                 </table>
               </div>
             </div>

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class JobsStatus extends Model
 {
     use HasFactory;
+
+    protected $table = 'jobs_status';
     
     public function researchJobs(){
         return $this->hasMany(ResearchJobs::class, 'id', 'job_status_id');

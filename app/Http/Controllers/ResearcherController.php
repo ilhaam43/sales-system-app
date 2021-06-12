@@ -27,7 +27,11 @@ class ResearcherController extends Controller
 
     public function showResearches()
     {
-        return view('workers/researcher/researches');
+        $userId = Auth::user()->id;
+        $listResearchJobs = ResearchJobs::where('user_id', $userId)->with('Country', 'JobsStatus')->get();
+        $researchJobsLists = json_decode($listResearchJobs, true);
+        
+        return view('workers/researcher/researches', compact('researchJobsLists'))->with('i');
     }
 
     public function showFAQ()
@@ -85,6 +89,16 @@ class ResearcherController extends Controller
         }
 
         return view('workers/researcher/profile', compact('userData','listCountries'))->with('i');
+    }
+
+    public function addCompanyData(Request $request)
+    {
+
+    }
+
+    public function checkCompanyData(Request $request)
+    {
+
     }
 
     public function updateProfile(Request $request)
