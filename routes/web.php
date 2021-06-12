@@ -83,7 +83,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['prefix' => 'researcher', 'middleware' => ['authorized:researcher']], function () {
         Route::get('/', [ResearcherController::class, 'index'])->name('researcher.index');
-        Route::get('/researches', [ResearcherController::class, 'showResearches'])->name('researches.index');
+        Route::get('/researches', [ResearcherController::class, 'showResearches'])->name('researcher.researches');
         Route::get('/faq', [ResearcherController::class, 'showFAQ'])->name('researcher.faq');
         Route::get('/notice', [ResearcherController::class, 'showNotice'])->name('researcher.notice');
         Route::get('/my-work', [ResearcherController::class, 'showMyWork'])->name('researcher.mywork');

@@ -19,11 +19,11 @@ class CreateResearchJobsTable extends Migration
             $table->foreignId('product_category_id')->constrained('product_category')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('country_id')->constrained('country');
             $table->foreignId('job_status_id')->constrained('jobs_status');
-            $table->string('company_name');
-            $table->string('company_website');
+            $table->string('company_name')->unique();
+            $table->string('company_website')->unique();
             $table->string('company_email')->unique();
-            $table->string('company_phone');
-            $table->string('company_product_url');
+            $table->string('company_phone')->unique();
+            $table->string('company_product_url')->unique();
             $table->enum('is_form',['Yes', 'No']);
             $table->integer('count_inquiry')->nullable();
             $table->timestamps();

@@ -10,6 +10,7 @@ use App\Services\ResearcherService;
 use App\Models\User;
 use App\Models\Countries;
 use App\Models\ResearchJobs;
+use App\Models\ProductCategory;
 
 class ResearcherController extends Controller
 {
@@ -27,11 +28,16 @@ class ResearcherController extends Controller
 
     public function showResearches()
     {
-        $userId = Auth::user()->id;
-        $listResearchJobs = ResearchJobs::where('user_id', $userId)->with('Country', 'JobsStatus')->get();
+        $user = Auth::user();
+        $listCountries = Countries::all();
+
+        $productCategory = User::where('product_category_id', $user->product_category_id)->with('ProductCategory')->get();
+        $productCategories = json_decode($productCategory, true);
+
+        $listResearchJobs = ResearchJobs::where('user_id', $user->id)->with('Country', 'JobsStatus')->get();
         $researchJobsLists = json_decode($listResearchJobs, true);
         
-        return view('workers/researcher/researches', compact('researchJobsLists'))->with('i');
+        return view('workers/researcher/researches', compact('researchJobsLists','listCountries','productCategories', 'user'))->with('i');
     }
 
     public function showFAQ()
@@ -93,7 +99,20 @@ class ResearcherController extends Controller
 
     public function addCompanyData(Request $request)
     {
+        $request->validate([
+            'user_id'               => 'required',
+            'job_status_id'         => 'required',
+            'product_category_id'   => 'required',
+            'country_id'            => 'required',
+            'company_name'          => 'required',
+            'company_website'       => 'required',
+            'company_email'         => 'required|email',
+            'company_phone'         => 'required',
+            'company_product_url'   => 'required',
+            'is_form'               => 'required',
+        ]);
 
+        return $this->service->addCompanyData($request);
     }
 
     public function checkCompanyData(Request $request)

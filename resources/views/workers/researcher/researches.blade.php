@@ -18,7 +18,7 @@
       <div class="card-body">
       <h4 style="margin-left:10px;">Researches List</h4>
 
-      <a href="#" class="btn btn-outline-primary btn-icon-split" style="float: left; margin-left:10px;"><i class="fa fa-building p-r-5"></i>
+      <a href="#" class="btn btn-outline-primary btn-icon-split" data-toggle="modal" data-target="#addCompanyModal" style="float: left; margin-left:10px;"><i class="fa fa-building p-r-5"></i>
         <span class="text">Add New Company</span>
         
       <a href="#" class="btn btn-outline-danger btn-icon-split" style="float: left; margin-left:10px;"><i class="fa fa-search p-r-5"></i>
@@ -33,6 +33,23 @@
       </br>
       </br>
       </br>
+
+      @if (session('error'))
+      </br>
+        <div class="alert alert-danger">
+            <ul>
+                <li>{{ session('error') }}</li>
+            </ul>
+        </div>
+    @endif
+    @if (session('success'))
+      </br>
+        <div class="alert alert-success">
+            <ul>
+                <li>{{ session('success') }}</li>
+            </ul>
+        </div>
+    @endif
 
               <table class="table table-responsive table-bordered" id="dataTable" width="100%" cellspacing="0">
                   </br>
@@ -71,6 +88,75 @@
     </div>  
   
   </main><!-- End #main -->
+
+  <!-- Add Company Modal-->
+  <div class="modal fade" id="addCompanyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Company</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <form method="POST" action="{{url('researcher/add-company')}}">
+        {{ csrf_field() }}
+        <input type="hidden" name="user_id" value="{{$user->id}}">
+        <input type="hidden" name="job_status_id" value="3">
+        <div class="form-group">
+          <label for="name">Company Name :</label>
+          <input type="text" name="company_name" class="form-control" id="company_name" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Company Website :</label>
+          <input type="text" name="company_website" class="form-control" id="company_website" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Company Email :</label>
+          <input type="text" name="company_email" class="form-control" id="company_email" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Company Phone :</label>
+          <input type="text" name="company_phone" class="form-control" id="company_phone" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Company Product Page :</label>
+          <input type="text" name="company_product_url" class="form-control" id="company_product_url" required>
+        </div>
+        <div class="form-group">
+        <label>Country :</label>
+                <select type="text" class="form-control" name="country_id">
+                @foreach($listCountries as $countries)
+                    <option value="{{$countries->id}}">{{$countries->country_name}}</option>
+                @endforeach
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Form :</label>
+                <select type="text" class="form-control" name="is_form">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Select Category :</label>
+                <select type="text" class="form-control" name="product_category_id">
+                @foreach($productCategories as $category)
+                    <option value="{{$category['product_category']['id']}}">{{$category['product_category']['category_name']}}</option>
+                @endforeach
+        </select>
+        </div>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ======= Footer ======= -->
   
