@@ -32,7 +32,7 @@
       <div class="shadow card text-center p-30 white text-white" style="background:#5cb85c">
         </br>
         <span><i class="fa fa-users fa-3x"></i>
-        <span style="font-size:3em; font-family:Open Sans, sans-serif;"> {{$companiesApproved}}</span> 
+        <span style="font-size:3em; font-family:Open Sans, sans-serif;"> {{$inquiriesApproved}}</span> 
         </span>
         <h3 style="font-size:1em font-family:Open Sans, sans-serif;"> Inquiries Approved </h3>
       </div>
@@ -41,7 +41,7 @@
       <div class="bg-dot bg-light shadow card text-center p-30">
       </br>
         <span><i class="fa fa-sync fa-spin fa-3x"> </i> 
-        <span style="font-size:3em; font-family:Open Sans, sans-serif;"> {{$companiesPending}}</span> 
+        <span style="font-size:3em; font-family:Open Sans, sans-serif;"> {{$inquiriesPending}}</span> 
         </span>
         <h3 style="font-size:1em font-family:Open Sans, sans-serif;"> Inquiries Pending </h3>
       </div>
@@ -51,7 +51,7 @@
       </br>
         <span style="font-size:3em; font-family:Open Sans, sans-serif;"><i class="fa fa-times fa-1x"> </i> 
         <span> 
-          {{$companiesDisapproved}}
+          {{$inquiriesDisapproved}}
         </span>
         </span>
         <h3 style="font-size:1em font-family:Open Sans, sans-serif;"> Inquiries Not Approved </h3>

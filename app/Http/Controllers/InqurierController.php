@@ -41,7 +41,7 @@ class InqurierController extends Controller
     {
         $user = Auth::user();
 
-        $listCompanies = ResearchJobs::where('job_status_id', 1)->with('Country')->inRandomOrder()->limit(10)->get();
+        $listCompanies = ResearchJobs::where('job_status_id', 1)->where('is_blacklist', 'No')->with('Country')->inRandomOrder()->limit(10)->get();
         $companiesList = json_decode($listCompanies, true);
 
         return view('workers/inqurier/companies', compact('companiesList'))->with('i');
@@ -62,22 +62,22 @@ class InqurierController extends Controller
         $userId = Auth::user()->id;
         $user = User::where('id', $userId)->first();
 
-        $researchQuantity = count(ResearchJobs::where('user_id', $userId)->get());
-        $researchPaid = $user->quantity_research_paid;
+        $inquiryQuantity = count(InquiryJobs::where('user_id', $userId)->where('is_form', 'Yes')->get());
+        $inquiryPaid = $user->quantity_inquire_paid;
         $amountPaid = $user->amount_paid;
 
-        return view('workers/inqurier/payments', compact('researchQuantity', 'researchPaid', 'amountPaid'));
+        return view('workers/inqurier/payments', compact('inquiryQuantity', 'inquiryPaid', 'amountPaid'));
     }
 
     public function showMyWork()
     {
         $userId = Auth::user()->id;
         
-        $companiesApproved = count(ResearchJobs::where('user_id', $userId)->where('job_status_id', 1)->get());
-        $companiesPending = count(ResearchJobs::where('user_id', $userId)->where('job_status_id', 3)->get());
-        $companiesDisapproved = count(ResearchJobs::where('user_id', $userId)->whereIn('job_status_id', array(2,4))->get());
+        $inquiriesApproved = count(InquiryJobs::where('user_id', $userId)->where('job_status_id', 1)->where('is_form', 'Yes')->get());
+        $inquiriesPending = count(InquiryJobs::where('user_id', $userId)->where('job_status_id', 3)->where('is_form', 'Yes')->get());
+        $inquiriesDisapproved = count(InquiryJobs::where('user_id', $userId)->whereIn('job_status_id', array(2,4))->get());
 
-        return view('workers/inqurier/my-work', compact('companiesApproved', 'companiesPending', 'companiesDisapproved'));
+        return view('workers/inqurier/my-work', compact('inquiriesApproved', 'inquiriesPending', 'inquiriesDisapproved'));
     }
 
     public function showProfile()
