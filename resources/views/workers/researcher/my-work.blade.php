@@ -32,7 +32,7 @@
       <div class="shadow card text-center p-30 white text-white" style="background:#5cb85c">
         </br>
         <span><i class="fa fa-users fa-3x"></i>
-        <span style="font-size:3em; font-family:Open Sans, sans-serif;"> 0</span> 
+        <span style="font-size:3em; font-family:Open Sans, sans-serif;"> {{$companiesApproved}}</span> 
         </span>
         <h3 style="font-size:1em font-family:Open Sans, sans-serif;"> Companies Approved </h3>
       </div>
@@ -41,7 +41,7 @@
       <div class="bg-dot bg-light shadow card text-center p-30">
       </br>
         <span><i class="fa fa-sync fa-spin fa-3x"> </i> 
-        <span style="font-size:3em; font-family:Open Sans, sans-serif;"> 0</span> 
+        <span style="font-size:3em; font-family:Open Sans, sans-serif;"> {{$companiesPending}}</span> 
         </span>
         <h3 style="font-size:1em font-family:Open Sans, sans-serif;"> Companies Pending </h3>
       </div>
@@ -51,7 +51,7 @@
       </br>
         <span style="font-size:3em; font-family:Open Sans, sans-serif;"><i class="fa fa-times fa-1x"> </i> 
         <span> 
-          0
+          {{$companiesDisapproved}}
         </span>
         </span>
         <h3 style="font-size:1em font-family:Open Sans, sans-serif;"> Companies Not Approved </h3>

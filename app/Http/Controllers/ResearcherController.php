@@ -70,7 +70,13 @@ class ResearcherController extends Controller
 
     public function showMyWork()
     {
-        return view('workers/researcher/my-work');
+        $userId = Auth::user()->id;
+        
+        $companiesApproved = count(ResearchJobs::where('user_id', $userId)->where('job_status_id', 1)->get());
+        $companiesPending = count(ResearchJobs::where('user_id', $userId)->where('job_status_id', 3)->get());
+        $companiesDisapproved = count(ResearchJobs::where('user_id', $userId)->whereIn('job_status_id', array(2,4))->get());
+
+        return view('workers/researcher/my-work', compact('companiesApproved', 'companiesPending', 'companiesDisapproved'));
     }
 
     public function showCountryRecords()
