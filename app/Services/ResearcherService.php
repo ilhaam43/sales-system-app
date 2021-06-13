@@ -91,6 +91,12 @@ class ResearcherService
 
             $emailFilter = preg_replace('^[A-z0-9.]+@^', '', $request['company_email']); //regex for filter email
 
+            $domainMailAllowed = array("gmail.com", "yahoo.com", "ymail.com", "rocketmail.com", "hotmail.com", "qq.com", "outlook.com", "live.com", "aol.com");
+
+            if(in_array($emailFilter, $domainMailAllowed)){
+                $emailFilter = $request['company_email'];
+            }
+
         try {
             $checkUrl = ResearchJobs::where('company_website','LIKE','%' . $urlFilter . '%')->get();
             $checkEmail = ResearchJobs::where('company_email','LIKE','%' . $emailFilter . '%')->get();
@@ -128,6 +134,12 @@ class ResearcherService
                 }
             }elseif($request['type_search'] == "email"){
                 $emailFilter = preg_replace('^[A-z0-9.]+@^', '', $request['input_data']); //regex for filter email
+
+                $domainMailAllowed = array("gmail.com", "yahoo.com", "ymail.com", "rocketmail.com", "hotmail.com", "qq.com", "outlook.com", "live.com", "aol.com");
+
+                if(in_array($emailFilter, $domainMailAllowed)){
+                    $emailFilter = $request['input_data'];
+                }
 
                 $checkEmail = ResearchJobs::where('company_website','LIKE','%' . $emailFilter . '%')->get();
                 if(count($checkEmail) > 0){
