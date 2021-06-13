@@ -44,7 +44,7 @@
         <div class="row">
         <div class="col-md-2 text-center">
             <div class="form-group">
-            <img src="https://searchclientnow.com/images/avatar.jpg" width="150" height="150">
+            <img src="{{asset($userData['profile_image']) ?? "https://searchclientnow.com/images/avatar.jpg"}}" width="150" height="150">
             </div>
             </div>
         </div>
@@ -81,11 +81,11 @@
         <div class="row">
         <div class="form-group col-md-6">
                 <label>Password :</label>
-                <input type="text" class="form-control" name="password" placeholder="Enter password you want to change">
+                <input type="password" class="form-control" name="password" placeholder="Enter password you want to change">
             </div>
         <div class="form-group col-md-6">
                 <label>Confirm Password :</label>
-                <input type="text" class="form-control" name="confirm_password" placeholder="Enter your confirmation password">
+                <input type="password" class="form-control" name="confirm_password" placeholder="Enter your confirmation password">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

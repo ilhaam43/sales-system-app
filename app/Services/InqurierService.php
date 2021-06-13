@@ -22,14 +22,14 @@ class InqurierService
         try{
             if($check == 0){
                 if($request['password'] !== $request['confirm_password']){
-                    return redirect()->route('researcher.profile')->with('error', 'User failed to update cause password and confirm password not same');
+                    return redirect()->route('inqurier.profile')->with('error', 'User failed to update cause password and confirm password not same');
                 }
 
                 if($_FILES['profile_image']['size'] == 0){
                     $request['password'] = Hash::make($request['password']);
                     $updateUsers = User::find($id)->update($request->except(['profile_image']));
 
-                    return redirect()->route('researcher.profile')->with('success', 'User data updated successfully');
+                    return redirect()->route('inqurier.profile')->with('success', 'User data updated successfully');
                 }
 
                 $image = User::find($id);
@@ -58,7 +58,7 @@ class InqurierService
                 if($_FILES['profile_image']['size'] == 0){
                     $updateUsers = User::find($id)->update($request->except(['password', 'confirm_password', 'profile_image']));
 
-                    return redirect()->route('researcher.profile')->with('success', 'User data updated successfully');
+                    return redirect()->route('inqurier.profile')->with('success', 'User data updated successfully');
                 }
 
                 $image = User::find($id);
@@ -69,9 +69,9 @@ class InqurierService
 
                 $name = date('YmdHis') . $request->file('profile_image')->getClientOriginalName();
 
-                $uploadImage = $request['profile_image']->move(public_path('researches/img/photos'), $name);
+                $uploadImage = $request['profile_image']->move(public_path('inquriers/img/photos'), $name);
 
-                $input['profile_image'] = 'researches/img/photos/' . $name;
+                $input['profile_image'] = 'inquriers/img/photos/' . $name;
 
                 $updateUsers = User::find($id)->update([
                     'name' => $request['name'],
@@ -80,10 +80,10 @@ class InqurierService
                 ]);
             }
         }catch(\Throwable $th){
-            return redirect()->route('researcher.profile')->with('error', 'User data failed to update cause your input data is invalid');
+            return redirect()->route('inqurier.profile')->with('error', 'User data failed to update cause your input data is invalid');
         }
 
-        return redirect()->route('researcher.profile')->with('success', 'User data updated successfully');
+        return redirect()->route('inqurier.profile')->with('success', 'User data updated successfully');
     }
 
     public function addInquiryData($request)
