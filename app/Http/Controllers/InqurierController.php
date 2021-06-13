@@ -10,6 +10,7 @@ use App\Services\InqurierService;
 use App\Models\User;
 use App\Models\Countries;
 use App\Models\ResearchJobs;
+use App\Models\InquiryJobs;
 use App\Models\ProductCategory;
 
 class InqurierController extends Controller
@@ -26,31 +27,23 @@ class InqurierController extends Controller
         return view('workers/inqurier/index');
     }
 
-    public function showResearches()
+    public function showInquiries()
     {
         $user = Auth::user();
-        $listCountries = Countries::all();
 
-        $productCategory = User::where('product_category_id', $user->product_category_id)->with('ProductCategory')->get();
-        $productCategories = json_decode($productCategory, true);
-
-        $listResearchJobs = ResearchJobs::where('user_id', $user->id)->with('Country', 'JobsStatus')->get();
-        $researchJobsLists = json_decode($listResearchJobs, true);
-        
-        return view('workers/inqurier/researches', compact('researchJobsLists','listCountries','productCategories', 'user'))->with('i');
+        $listInquiriesJobs = InquiryJobs::where('user_id', $user->id)->with('ResearchJobs')->get();
+        return $listInquiriesJobs;
+        return view('workers/inqurier/inquiries', compact('listInquiriesJobs'))->with('i');
     }
 
-    public function showDetailResearches($id)
-    {   
-        $listCountries = Countries::all();
-        $listResearchJobs = ResearchJobs::where('id', $id)->with('Country', 'JobsStatus')->get();
-        $researchJobsLists = json_decode($listResearchJobs, true);
+    public function showCompanies()
+    {
+        $user = Auth::user();
 
-        foreach($researchJobsLists as $researchList){
-            $researchJobsLists = $researchList;
-        }
+        $listCompanies = ResearchJobs::where('job_status_id', 1)->with('Country')->inRandomOrder()->limit(10)->get();
+        $companiesList = json_decode($listCompanies, true);
 
-        return view('workers/inqurier/updateResearches', compact('researchJobsLists', 'listCountries'))->with('i');
+        return view('workers/inqurier/companies', compact('companiesList'))->with('i');
     }
 
     public function showFAQ()
@@ -86,28 +79,6 @@ class InqurierController extends Controller
         return view('workers/inqurier/my-work', compact('companiesApproved', 'companiesPending', 'companiesDisapproved'));
     }
 
-    public function showCountryRecords()
-    {
-        $researchJobsList = ResearchJobs::with('Country')->distinct()->get('country_id');
-        $researchJobsLists = json_decode($researchJobsList, true);
-
-        $countriesRecords = [];
-
-        foreach($researchJobsLists as $researchesList){
-            $searchResearch = ResearchJobs::whereIn('country_id', array($researchesList['country']['id']))->count();
-        
-                if($searchResearch > 0){
-                    array_push($countriesRecords, [
-                        'country_id' => $researchesList['country']['id'],
-                        'country_name' => $researchesList['country']['country_name'],
-                        'count' => $searchResearch,
-                    ]);
-                }
-            }
-
-        return view('workers/inqurier/country-records', compact('countriesRecords'))->with('i');
-    }
-
     public function showProfile()
     {
         $listCountries = Countries::all();
@@ -123,32 +94,14 @@ class InqurierController extends Controller
         return view('workers/inqurier/profile', compact('userData','listCountries'))->with('i');
     }
 
-    public function addCompanyData(Request $request)
+    public function addInquiryData(Request $request)
     {
-        $request->validate([
-            'user_id'               => 'required',
-            'job_status_id'         => 'required',
-            'product_category_id'   => 'required',
-            'country_id'            => 'required',
-            'company_name'          => 'required',
-            'company_website'       => 'required',
-            'company_email'         => 'required|email',
-            'company_phone'         => 'required',
-            'company_product_url'   => 'required',
-            'is_form'               => 'required',
-        ]);
-
-        return $this->service->addCompanyData($request);
+        return $this->service->addInquiryData($request);
     }
 
-    public function checkCompanyData(Request $request)
+    public function addReportData(Request $request)
     {
-        $request->validate([
-            'input_data'            => 'required',
-            'type_search'           => 'required',
-        ]);
-
-        return $this->service->checkCompanyData($request);
+        return $this->service->addReportData($request);
     }
 
     public function updateProfile(Request $request)
@@ -157,17 +110,4 @@ class InqurierController extends Controller
         return $this->service->updateProfile($request, $id);
     }
 
-    public function updateResearches(Request $request, $id)
-    {
-        $request->validate([
-            'country_id'            => 'required',
-            'company_name'          => 'required',
-            'company_website'       => 'required',
-            'company_email'         => 'required|email',
-            'company_phone'         => 'required',
-            'company_product_url'   => 'required',
-        ]);
-
-        return $this->service->updateResearches($request, $id);
-    }
 }

@@ -30,6 +30,7 @@
   <!-- Custom styles for this page -->
   <link href="{{ asset('assets/admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- =======================================================
   * Template Name: BizLand - v1.2.1
   * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/

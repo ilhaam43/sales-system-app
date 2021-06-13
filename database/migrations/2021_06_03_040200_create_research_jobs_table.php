@@ -25,6 +25,7 @@ class CreateResearchJobsTable extends Migration
             $table->string('company_phone')->unique();
             $table->string('company_product_url')->unique();
             $table->enum('is_form',['Yes', 'No']);
+            $table->enum('is_blacklist',['Yes', 'No']);
             $table->integer('count_inquiry')->nullable();
             $table->timestamps();
             $table->softDeletes();

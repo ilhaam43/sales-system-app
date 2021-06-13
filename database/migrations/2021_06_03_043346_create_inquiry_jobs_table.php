@@ -17,9 +17,10 @@ class CreateInquiryJobsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreignId('research_jobs_id')->constrained('research_jobs');
-            $table->foreignId('product_category_id')->constrained('product_category')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('job_status_id')->constrained('jobs_status');
-            $table->string('screenshot_url');
+            $table->string('screenshot_url')->nullable();
+            $table->enum('is_form',['Yes', 'No']);
+            $table->text('report_message')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

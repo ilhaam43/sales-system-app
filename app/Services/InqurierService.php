@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Countries;
 use App\Models\ResearchJobs;
+use App\Models\InquiryJobs;
 
 class InqurierService
 {
@@ -85,115 +86,50 @@ class InqurierService
         return redirect()->route('researcher.profile')->with('success', 'User data updated successfully');
     }
 
-    public function updateResearches($request, $id)
-    {
-        $urlFilter = preg_replace('/\b(?:(?:https?|ftp):\/\/|www\.)/', '', $request['company_website']); //regex for filter url
-
-        $emailFilter = preg_replace('^[A-z0-9.]+@^', '', $request['company_email']); //regex for filter email
-
-        $domainMailAllowed = array("gmail.com", "yahoo.com", "ymail.com", "rocketmail.com", "hotmail.com", "qq.com", "outlook.com", "live.com", "aol.com");
-
-        if(in_array($emailFilter, $domainMailAllowed)){
-            $emailFilter = $request['company_email'];
-        }
-
-        try {
-            $checkUrl = ResearchJobs::where('company_website','LIKE','%' . $urlFilter . '%')->get();
-            $checkEmail = ResearchJobs::where('company_email','LIKE','%' . $emailFilter . '%')->get();
-
-            if(count($checkUrl) > 0){
-                return back()->withError('Company data failed to add because company website data already exists');
-            }elseif(count($checkEmail) > 0){
-                return back()->withError('Company data failed to add because company email data already exists');
-            }
-
-            $updateCompanyData = ResearchJobs::find($id)->update($request->all());
-
-        } catch(\Throwable $th) {
-            return back()->withError('Company data failed to update because company data already exists');
-        }
-        
-        return redirect()->route('researcher.researches')->with('success', 'Company data updated successfully');
-    }
-
-    public function addCompanyData($request)
+    public function addInquiryData($request)
     {       
-            $urlFilter = preg_replace('/\b(?:(?:https?|ftp):\/\/|www\.)/', '', $request['company_website']); //regex for filter url
+        try{   
+            $researchJobs = ResearchJobs::where('id', $request['research_jobs_id'])->first();
 
-            $emailFilter = preg_replace('^[A-z0-9.]+@^', '', $request['company_email']); //regex for filter email
+            $request['user_id'] = $researchJobs->id;
+            $request['job_status_id'] = 3;
+            $request['is_form'] = "Yes";
 
-            $domainMailAllowed = array("gmail.com", "yahoo.com", "ymail.com", "rocketmail.com", "hotmail.com", "qq.com", "outlook.com", "live.com", "aol.com");
+            $name = date('YmdHis') . $request->file('screenshot')->getClientOriginalName();
+            
+            $uploadImage = $request['screenshot']->move(public_path('inquriers/img/inquiry'), $name);
 
-            if(in_array($emailFilter, $domainMailAllowed)){
-                $emailFilter = $request['company_email'];
-            }
-
-        try {
-            $checkUrl = ResearchJobs::where('company_website','LIKE','%' . $urlFilter . '%')->get();
-            $checkEmail = ResearchJobs::where('company_email','LIKE','%' . $emailFilter . '%')->get();
-
-            if(count($checkUrl) > 0){
-                return back()->withError('Company data failed to add because company website data already exists');
-            }elseif(count($checkEmail) > 0){
-                return back()->withError('Company data failed to add because company email data already exists');
-            }
-
-            $addCompanyData = ResearchJobs::create($request->all());
+            $request['screenshot_url'] = 'inquriers/img/inquiry/' . $name;
+            
+            $addInquiryData = InquiryJobs::create($request->except(['screenshot']));
 
         } catch(\Throwable $th) {
-            return back()->withError('Company data failed to add because company data already exists');
+            return back()->withError('Inquiry data failed to add');
         }
         
-        return redirect()->route('researcher.researches')->with('success', 'Company data added successfully');
+        return redirect()->route('inqurier.companies')->with('success', 'Inquiry data added successfully');
     }
 
-    public function checkCompanyData($request)
-    {
-        try{
-            if($request['type_search'] == "name"){
-                $checkName = ResearchJobs::where('company_name','LIKE','%' . $request['input_data'] . '%')->get();
-                
-                if(count($checkName) > 0){
-                    return back()->withError('Company name data already exists');
-                }
-            }elseif($request['type_search'] == "website"){
-                $urlFilter = preg_replace('/\b(?:(?:https?|ftp):\/\/|www\.)/', '', $request['input_data']); //regex for filter url
+    public function addReportData($request)
+    {       
+        try{   
+            $researchJobs = ResearchJobs::where('id', $request['research_jobs_id'])->first();
 
-                $checkWebsite = ResearchJobs::where('company_website','LIKE','%' . $urlFilter . '%')->get();
-                if(count($checkWebsite) > 0){
-                    return back()->withError('Company website data already exists');
-                }
-            }elseif($request['type_search'] == "email"){
-                $emailFilter = preg_replace('^[A-z0-9.]+@^', '', $request['input_data']); //regex for filter email
+            $request['user_id'] = $researchJobs->id;
+            $request['job_status_id'] = 3;
+            $request['is_form'] = "No";
+            
+            $addReportData = InquiryJobs::create($request->all());
 
-                $domainMailAllowed = array("gmail.com", "yahoo.com", "ymail.com", "rocketmail.com", "hotmail.com", "qq.com", "outlook.com", "live.com", "aol.com");
+            $updateResearchJobs = $researchJobs->update([
+                'is_form' => $request['is_form'],
+            ]);
 
-                if(in_array($emailFilter, $domainMailAllowed)){
-                    $emailFilter = $request['input_data'];
-                }
-
-                $checkEmail = ResearchJobs::where('company_website','LIKE','%' . $emailFilter . '%')->get();
-                if(count($checkEmail) > 0){
-                    return back()->withError('Company email data already exists');
-                }
-            }elseif($request['type_search'] == "phone"){
-                $checkPhone = ResearchJobs::where('company_name','LIKE','%' . $request['input_data'] . '%')->get();
-
-                if(count($checkPhone) > 0){
-                    return back()->withError('Company phone data already exists');
-                }
-            }elseif($request['type_search'] == "product_url"){
-                $checkProductUrl = ResearchJobs::where('company_name','LIKE','%' . $request['input_data'] . '%')->get();
-
-                if(count($checkProductUrl) > 0){
-                    return back()->withError('Company phone data already exists');
-                }
-            }
-
-        }catch(\Throwable $th){
-            return back()->withError('Company data already exists');
+        } catch(\Throwable $th) {
+            return back()->withError('Report data failed to add');
         }
-        return redirect()->route('researcher.researches')->with('success', 'Company data not exists');
+        
+        return redirect()->route('inqurier.companies')->with('success', 'Report data added successfully');
     }
 
 }

@@ -23,10 +23,6 @@ class ProductCategory extends Model
         return $this->hasMany(ResearchJobs::class, 'product_category_id', 'id');
     }
 
-    public function inquiryJobs(){
-        return $this->hasMany(InquiryJobs::class, 'product_category_id', 'id');
-    }
-
     public function auditorResearchJobs(){
         return $this->hasMany(AuditorResearchJobs::class, 'product_category_id', 'id');
     }

@@ -99,18 +99,16 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['prefix' => 'inqurier', 'middleware' => ['authorized:inqurier']], function () {
-        Route::get('/', [InqurierController::class, 'index'])->name('inquirer.index');
-        Route::get('/faq', [InqurierController::class, 'showFAQ'])->name('inquirer.faq');
-        Route::get('/notice', [InqurierController::class, 'showNotice'])->name('inquirer.notice');
-        Route::get('/my-work', [InqurierController::class, 'showMyWork'])->name('inquirer.mywork');
-        Route::get('/payments', [InqurierController::class, 'showPayments'])->name('inquirer.payments');
-        Route::post('/add-company', [InqurierController::class, 'addCompanyData'])->name('inquirer.store.company');
-        Route::post('/check-company', [InqurierController::class, 'checkCompanyData'])->name('inquirer.check.company');
-        Route::get('/country-records', [InqurierController::class, 'showCountryRecords'])->name('inquirer.countyrecords');
-        Route::get('/profile', [InqurierController::class, 'showProfile'])->name('inquirer.profile');
-        Route::put('/profile', [InqurierController::class, 'updateProfile'])->name('inquirer.update');
-        Route::get('/inquries', [InqurierController::class, 'showInquries'])->name('inquirer.inquries');
-        Route::get('/inquries/{id}', [InqurierController::class, 'showDetailInquries'])->name('inquirer.detail.inquries');
-        Route::put('/inquries/{id}', [InqurierController::class, 'updateInquries'])->name('inquirer.update.inquries');
+        Route::get('/', [InqurierController::class, 'index'])->name('inqurier.index');
+        Route::get('/faq', [InqurierController::class, 'showFAQ'])->name('inqurier.faq');
+        Route::get('/notice', [InqurierController::class, 'showNotice'])->name('inqurier.notice');
+        Route::get('/my-work', [InqurierController::class, 'showMyWork'])->name('inqurier.mywork');
+        Route::get('/payments', [InqurierController::class, 'showPayments'])->name('inqurier.payments');
+        Route::get('/inquiries', [InqurierController::class, 'showInquiries'])->name('inqurier.inquiries');
+        Route::get('/companies', [InqurierController::class, 'showCompanies'])->name('inqurier.companies');
+        Route::post('/add-inquiry', [InqurierController::class, 'addInquiryData'])->name('inqurier.store.inquiry');
+        Route::post('/add-report', [InqurierController::class, 'addReportData'])->name('inqurier.store.report');
+        Route::get('/profile', [InqurierController::class, 'showProfile'])->name('inqurier.profile');
+        Route::put('/profile', [InqurierController::class, 'updateProfile'])->name('inqurier.update');
     });
 });

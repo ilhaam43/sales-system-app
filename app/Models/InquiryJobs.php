@@ -19,10 +19,6 @@ class InquiryJobs extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function productCategory(){
-        return $this->belongsTo(ProductCategory::class);
-    }
-
     public function researchJobs(){
         return $this->belongsTo(ResearchJobs::class);
     }

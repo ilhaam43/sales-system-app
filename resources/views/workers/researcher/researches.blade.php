@@ -104,6 +104,7 @@
         {{ csrf_field() }}
         <input type="hidden" name="user_id" value="{{$user->id}}">
         <input type="hidden" name="job_status_id" value="3">
+        <input type="hidden" name="is_blacklist" value="No">
         <div class="form-group">
           <label for="name">Company Name :</label>
           <input type="text" name="company_name" class="form-control" id="company_name" required>

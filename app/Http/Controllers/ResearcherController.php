@@ -136,6 +136,7 @@ class ResearcherController extends Controller
             'company_phone'         => 'required',
             'company_product_url'   => 'required',
             'is_form'               => 'required',
+            'is_blacklist'          => 'required',
         ]);
 
         return $this->service->addCompanyData($request);
