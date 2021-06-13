@@ -83,7 +83,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['prefix' => 'researcher', 'middleware' => ['authorized:researcher']], function () {
         Route::get('/', [ResearcherController::class, 'index'])->name('researcher.index');
-        Route::get('/researches', [ResearcherController::class, 'showResearches'])->name('researcher.researches');
         Route::get('/faq', [ResearcherController::class, 'showFAQ'])->name('researcher.faq');
         Route::get('/notice', [ResearcherController::class, 'showNotice'])->name('researcher.notice');
         Route::get('/my-work', [ResearcherController::class, 'showMyWork'])->name('researcher.mywork');
@@ -93,5 +92,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/country-records', [ResearcherController::class, 'showCountryRecords'])->name('researcher.countyrecords');
         Route::get('/profile', [ResearcherController::class, 'showProfile'])->name('researcher.profile');
         Route::put('/profile', [ResearcherController::class, 'updateProfile'])->name('researcher.update');
+        Route::get('/researches', [ResearcherController::class, 'showResearches'])->name('researcher.researches');
+        Route::get('/researches/{id}', [ResearcherController::class, 'showDetailResearches'])->name('researcher.detail.researches');
+        Route::put('/researches/{id}', [ResearcherController::class, 'updateResearches'])->name('researcher.update.researches');
     });
 });

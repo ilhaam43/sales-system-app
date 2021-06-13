@@ -77,7 +77,7 @@
                       <td>{{ $researchLists['company_product_url'] }}</td>
                       <td>{{ $researchLists['country']['country_name'] }}</td>
                       <td>{{ $researchLists['jobs_status']['status']}}</td>
-                      <td><a class="btn btn-primary btn-sm" href="{{ route('users.show',$researchLists['id']) }}">Edit</a></td>
+                      <td><a class="btn btn-primary btn-sm" href="{{ route('researcher.detail.researches',$researchLists['id']) }}">Edit</a></td>
                     </tr>
                   </tbody>
                   @endforeach

@@ -85,6 +85,37 @@ class ResearcherService
         return redirect()->route('researcher.profile')->with('success', 'User data updated successfully');
     }
 
+    public function updateResearches($request, $id)
+    {
+        $urlFilter = preg_replace('/\b(?:(?:https?|ftp):\/\/|www\.)/', '', $request['company_website']); //regex for filter url
+
+        $emailFilter = preg_replace('^[A-z0-9.]+@^', '', $request['company_email']); //regex for filter email
+
+        $domainMailAllowed = array("gmail.com", "yahoo.com", "ymail.com", "rocketmail.com", "hotmail.com", "qq.com", "outlook.com", "live.com", "aol.com");
+
+        if(in_array($emailFilter, $domainMailAllowed)){
+            $emailFilter = $request['company_email'];
+        }
+
+        try {
+            $checkUrl = ResearchJobs::where('company_website','LIKE','%' . $urlFilter . '%')->get();
+            $checkEmail = ResearchJobs::where('company_email','LIKE','%' . $emailFilter . '%')->get();
+
+            if(count($checkUrl) > 0){
+                return back()->withError('Company data failed to add because company website data already exists');
+            }elseif(count($checkEmail) > 0){
+                return back()->withError('Company data failed to add because company email data already exists');
+            }
+
+            $updateCompanyData = ResearchJobs::find($id)->update($request->all());
+
+        } catch(\Throwable $th) {
+            return back()->withError('Company data failed to update because company data already exists');
+        }
+        
+        return redirect()->route('researcher.researches')->with('success', 'Company data updated successfully');
+    }
+
     public function addCompanyData($request)
     {       
             $urlFilter = preg_replace('/\b(?:(?:https?|ftp):\/\/|www\.)/', '', $request['company_website']); //regex for filter url

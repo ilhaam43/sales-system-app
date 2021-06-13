@@ -40,6 +40,19 @@ class ResearcherController extends Controller
         return view('workers/researcher/researches', compact('researchJobsLists','listCountries','productCategories', 'user'))->with('i');
     }
 
+    public function showDetailResearches($id)
+    {   
+        $listCountries = Countries::all();
+        $listResearchJobs = ResearchJobs::where('id', $id)->with('Country', 'JobsStatus')->get();
+        $researchJobsLists = json_decode($listResearchJobs, true);
+
+        foreach($researchJobsLists as $researchList){
+            $researchJobsLists = $researchList;
+        }
+
+        return view('workers/researcher/updateResearches', compact('researchJobsLists', 'listCountries'))->with('i');
+    }
+
     public function showFAQ()
     {
         return view('workers/researcher/faq');
@@ -129,5 +142,19 @@ class ResearcherController extends Controller
     {
         $id = Auth::user()->id;
         return $this->service->updateProfile($request, $id);
+    }
+
+    public function updateResearches(Request $request, $id)
+    {
+        $request->validate([
+            'country_id'            => 'required',
+            'company_name'          => 'required',
+            'company_website'       => 'required',
+            'company_email'         => 'required|email',
+            'company_phone'         => 'required',
+            'company_product_url'   => 'required',
+        ]);
+
+        return $this->service->updateResearches($request, $id);
     }
 }
