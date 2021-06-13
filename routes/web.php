@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ResearcherController;
+use App\Http\Controllers\InqurierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,5 +96,21 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/researches', [ResearcherController::class, 'showResearches'])->name('researcher.researches');
         Route::get('/researches/{id}', [ResearcherController::class, 'showDetailResearches'])->name('researcher.detail.researches');
         Route::put('/researches/{id}', [ResearcherController::class, 'updateResearches'])->name('researcher.update.researches');
+    });
+
+    Route::group(['prefix' => 'inqurier', 'middleware' => ['authorized:inqurier']], function () {
+        Route::get('/', [InqurierController::class, 'index'])->name('inquirer.index');
+        Route::get('/faq', [InqurierController::class, 'showFAQ'])->name('inquirer.faq');
+        Route::get('/notice', [InqurierController::class, 'showNotice'])->name('inquirer.notice');
+        Route::get('/my-work', [InqurierController::class, 'showMyWork'])->name('inquirer.mywork');
+        Route::get('/payments', [InqurierController::class, 'showPayments'])->name('inquirer.payments');
+        Route::post('/add-company', [InqurierController::class, 'addCompanyData'])->name('inquirer.store.company');
+        Route::post('/check-company', [InqurierController::class, 'checkCompanyData'])->name('inquirer.check.company');
+        Route::get('/country-records', [InqurierController::class, 'showCountryRecords'])->name('inquirer.countyrecords');
+        Route::get('/profile', [InqurierController::class, 'showProfile'])->name('inquirer.profile');
+        Route::put('/profile', [InqurierController::class, 'updateProfile'])->name('inquirer.update');
+        Route::get('/inquries', [InqurierController::class, 'showInquries'])->name('inquirer.inquries');
+        Route::get('/inquries/{id}', [InqurierController::class, 'showDetailInquries'])->name('inquirer.detail.inquries');
+        Route::put('/inquries/{id}', [InqurierController::class, 'updateInquries'])->name('inquirer.update.inquries');
     });
 });

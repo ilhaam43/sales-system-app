@@ -57,15 +57,16 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="{{ request()->is('researcher') ? 'active' : ''}}"><a href="{{ url('researcher') }}">How We Work</a></li>
-          <li class="{{ request()->is('researcher/researches') ? 'active' : ''}}"><a href="{{ url('researcher/researches') }}">Researches</a></li>
-          <li class="{{ request()->is('researcher/faq') ? 'active' : ''}}"><a href="{{ url('researcher/faq') }}">FAQ</a></li>
-          <li class="{{ request()->is('researcher/notice') ? 'active' : ''}}"><a href="{{ url('researcher/notice') }}">Notice</a></li>
-          <li class="{{ request()->is('researcher/my-work') ? 'active' : ''}}"><a href="{{ url('researcher/my-work') }}">My Work</a></li>
-          <li class="{{ request()->is('researcher/payments') ? 'active' : ''}}"><a href="{{ url('researcher/payments') }}">Payments</a></li>
+          <li class="{{ request()->is('inqurier') ? 'active' : ''}}"><a href="{{ url('inqurier') }}">How We Work</a></li>
+          <li class="{{ request()->is('inqurier/inquiries') ? 'active' : ''}}"><a href="{{ url('inqurier/inquiries') }}">Inquiries</a></li>
+          <li class="{{ request()->is('inqurier/companies') ? 'active' : ''}}"><a href="{{ url('inqurier/companies') }}">Companies</a></li>
+          <li class="{{ request()->is('inqurier/faq') ? 'active' : ''}}"><a href="{{ url('inqurier/faq') }}">FAQ</a></li>
+          <li class="{{ request()->is('inqurier/notice') ? 'active' : ''}}"><a href="{{ url('inqurier/notice') }}">Notice</a></li>
+          <li class="{{ request()->is('inqurier/my-work') ? 'active' : ''}}"><a href="{{ url('inqurier/my-work') }}">My Work</a></li>
+          <li class="{{ request()->is('inqurier/payments') ? 'active' : ''}}"><a href="{{ url('inqurier/payments') }}">Payments</a></li>
           <li class="drop-down"><a href="">Account</a>
             <ul>
-              <li><a href="{{ url('researcher/profile') }}">Profile</a></li>
+              <li><a href="{{ url('inqurier/profile') }}">Profile</a></li>
               <li><a href="{{ url('logout') }}">Logout</a></li>
             </ul>
           </li>
@@ -78,4 +79,4 @@
   </header><!-- End Header -->
     @yield('content')
 
-    @include('workers.researcher.layout.footer')
+    @include('workers.inqurier.layout.footer')
