@@ -31,8 +31,8 @@ class InqurierController extends Controller
     {
         $user = Auth::user();
 
-        $listInquiriesJobs = InquiryJobs::where('user_id', $user->id)->with('ResearchJobs')->get();
-        return $listInquiriesJobs;
+        $listInquiriesJobs = InquiryJobs::where('user_id', $user->id)->where('is_form', 'Yes')->get();
+
         return view('workers/inqurier/inquiries', compact('listInquiriesJobs'))->with('i');
     }
 

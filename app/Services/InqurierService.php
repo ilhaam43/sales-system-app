@@ -87,11 +87,12 @@ class InqurierService
     }
 
     public function addInquiryData($request)
-    {       
+    {  
+        $user = Auth::user();             
         try{   
             $researchJobs = ResearchJobs::where('id', $request['research_jobs_id'])->first();
 
-            $request['user_id'] = $researchJobs->id;
+            $request['user_id'] = $user['id'];
             $request['job_status_id'] = 3;
             $request['is_form'] = "Yes";
 
@@ -112,10 +113,12 @@ class InqurierService
 
     public function addReportData($request)
     {       
+        $user = Auth::user();
+        
         try{   
             $researchJobs = ResearchJobs::where('id', $request['research_jobs_id'])->first();
 
-            $request['user_id'] = $researchJobs->id;
+            $request['user_id'] = $user['id'];
             $request['job_status_id'] = 3;
             $request['is_form'] = "No";
             
