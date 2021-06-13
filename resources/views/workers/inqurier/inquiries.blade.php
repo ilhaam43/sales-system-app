@@ -17,10 +17,7 @@
     <div class="card shadow mb-4">
       <div class="card-body">
       <h4 style="margin-left:10px;">My Inquiries List</h4>
-    
-      </br>
-      </br>
-      </br>
+
       </br>
 
       @if (session('error'))
@@ -46,21 +43,21 @@
                     <tr>
                       <th width="5%">No</th>
                       <th>Company</th>
-                      <th>Website</th>
                       <th>Country</th>
-                      <th>Inquiry</th>
-                      <th>Website Problem</th>
+                      <th>Website</th>
+                      <th>Inquiry Status</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($inquiriesJobs as $inquiries)
                     <tr>
-                      <td>1</td>
-                      <td>KepoCompany</td>
-                      <td>kepocompany.com</td>
-                      <td>Indonesia</td>
-                      <td>Approved</td>
-                      <td>Approved</td>
+                      <td>{{++$i}}</td>
+                      <td>{{$inquiries['research_jobs']['company_name']}}</td>
+                      <td>{{$inquiries['research_jobs']['country']['country_name']}}</td>
+                      <td>{{$inquiries['research_jobs']['company_website']}}</td>
+                      <td>{{$inquiries['jobs_status']['status']}}</td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

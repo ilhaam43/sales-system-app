@@ -31,9 +31,10 @@ class InqurierController extends Controller
     {
         $user = Auth::user();
 
-        $listInquiriesJobs = InquiryJobs::where('user_id', $user->id)->where('is_form', 'Yes')->get();
+        $listInquiriesJobs = InquiryJobs::where('user_id', $user->id)->where('is_form', 'Yes')->with('ResearchJobs.Country','JobsStatus')->get();
+        $inquiriesJobs = json_decode($listInquiriesJobs, true);
 
-        return view('workers/inqurier/inquiries', compact('listInquiriesJobs'))->with('i');
+        return view('workers/inqurier/inquiries', compact('inquiriesJobs'))->with('i');
     }
 
     public function showCompanies()
