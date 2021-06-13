@@ -26,26 +26,26 @@
 <div class="card mb-3">
   <div class="card-header backMainColor bg-primary text-white"><i class="fa fa-money-bill"></i> Payment and Quantity  </div>
   <div class="card-body shadow b-b-5">
-   
-    <div class="row">
-       <div class="col-md-4 text-center ">
-          <div class="form-group shadow m-b-30 b-1-ddd p-20 ">
-          <h2 class="text-info"><i class="fa fa-users fa-2x"></i></h2>
-          <h2>Research Quantity <br> <hr> 0</h2></br>
-        </div>
-          </div>
+  
+      <div class="row">
         <div class="col-md-4 text-center ">
-          <div class="form-group shadow m-b-30 b-1-ddd p-20 ">
-          <h2 class="text-success"> <i class="fa fa-check-square fa-2x"></i></h2>
-          <h2> Research Paid <br> <hr> 0 </h2></br>
-        </div>
+            <div class="form-group shadow m-b-30 b-1-ddd p-20 ">
+            <h2 class="text-info"><i class="fa fa-users fa-2x"></i></h2>
+            <h2>Research Quantity <br> <hr> {{$researchQuantity}}</h2></br>
           </div>
-        <div class="col-md-4 text-center">
-          <div class="form-group shadow m-b-30 b-1-ddd p-20 ">
-          <h2 class="text-success"><i class="fa fa-money-bill fa-2x"></i></h2>
-          <h2> Amount Paid <br><hr> 0</h2></br>
+            </div>
+          <div class="col-md-4 text-center ">
+            <div class="form-group shadow m-b-30 b-1-ddd p-20 ">
+            <h2 class="text-success"> <i class="fa fa-check-square fa-2x"></i></h2>
+            <h2> Research Paid <br> <hr> {{$researchPaid ?? 0}}</h2></br>
+          </div>
+            </div>
+          <div class="col-md-4 text-center">
+            <div class="form-group shadow m-b-30 b-1-ddd p-20 ">
+            <h2 class="text-success"><i class="fa fa-money-bill fa-2x"></i></h2>
+            <h2> Amount Paid <br><hr> {{$amountPaid ?? 0}}</h2></br>
+          </div>
         </div>
-      </div>
 
         </div>
 
