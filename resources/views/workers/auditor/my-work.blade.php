@@ -28,35 +28,26 @@
 <div class="card-body ">
 
   <div class="row m-b-20">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="shadow card text-center p-30 white text-white" style="background:#5cb85c">
         </br>
         <span><i class="fa fa-users fa-3x"></i>
-        <span style="font-size:3em; font-family:Open Sans, sans-serif;"> {{$companiesApproved}}</span> 
+        <span style="font-size:3em; font-family:Open Sans, sans-serif;"> {{$companiesUpdated}}</span> 
         </span>
-        <h3 style="font-size:1em font-family:Open Sans, sans-serif;"> Companies Approved </h3>
+        <h3 style="font-size:1em font-family:Open Sans, sans-serif;"> Companies Updated </h3>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="bg-dot bg-light shadow card text-center p-30">
-      </br>
-        <span><i class="fa fa-sync fa-spin fa-3x"> </i> 
-        <span style="font-size:3em; font-family:Open Sans, sans-serif;"> {{$companiesPending}}</span> 
+
+    <div class="col-md-6">
+      <div class="shadow card text-center p-30 white text-white" style="background:#5cb85c">
+        </br>
+        <span><i class="fa fa-envelope fa-3x"></i>
+        <span style="font-size:3em; font-family:Open Sans, sans-serif;"> {{$inquiriesUpdated}}</span> 
         </span>
-        <h3 style="font-size:1em font-family:Open Sans, sans-serif;"> Companies Pending </h3>
+        <h3 style="font-size:1em font-family:Open Sans, sans-serif;"> Inquiries Updated </h3>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="bg-dot bg-danger shadow card text-center p-30 text-white">
-      </br>
-        <span style="font-size:3em; font-family:Open Sans, sans-serif;"><i class="fa fa-times fa-1x"> </i> 
-        <span> 
-          {{$companiesDisapproved}}
-        </span>
-        </span>
-        <h3 style="font-size:1em font-family:Open Sans, sans-serif;"> Companies Not Approved </h3>
-      </div>
-    </div>
+    
    
     </div>
 

@@ -12,6 +12,8 @@ use App\Models\Countries;
 use App\Models\JobsStatus;
 use App\Models\ResearchJobs;
 use App\Models\InquiryJobs;
+use App\Models\AuditorInquiryJobs;
+use App\Models\AuditorResearchJobs;
 use App\Models\ProductCategory;
 
 class AuditorController extends Controller
@@ -123,11 +125,10 @@ class AuditorController extends Controller
     {
         $userId = Auth::user()->id;
         
-        $companiesApproved = count(ResearchJobs::where('user_id', $userId)->where('job_status_id', 1)->get());
-        $companiesPending = count(ResearchJobs::where('user_id', $userId)->where('job_status_id', 3)->get());
-        $companiesDisapproved = count(ResearchJobs::where('user_id', $userId)->whereIn('job_status_id', array(2,4))->get());
+        $companiesUpdated = count(AuditorResearchJobs::where('user_id', $userId)->get());
+        $inquiriesUpdated = count(AuditorInquiryJobs::where('user_id', $userId)->get());
 
-        return view('workers/auditor/my-work', compact('companiesApproved', 'companiesPending', 'companiesDisapproved'));
+        return view('workers/auditor/my-work', compact('companiesUpdated', 'inquiriesUpdated'));
     }
 
     public function showProfile()
