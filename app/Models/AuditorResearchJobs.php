@@ -20,7 +20,7 @@ class AuditorResearchJobs extends Model
     }
 
     public function researchJobs(){
-        return $this->hasOne(ResearchJobs::class);
+        return $this->hasOne(ResearchJobs::class, 'researcher_job_id', 'id');
     }
 
     public function productCategory(){

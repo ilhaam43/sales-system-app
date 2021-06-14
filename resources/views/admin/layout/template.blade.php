@@ -89,11 +89,11 @@
         <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Researches menu :</h6>
-            <a class="collapse-item" href="register.html">All Companies</a>
-            <a class="collapse-item" href="register.html">Companies Approved</a>
-            <a class="collapse-item" href="register.html">Companies Pending</a>
-            <a class="collapse-item" href="register.html">Companies Rejected</a>
-            <a class="collapse-item" href="register.html">Companies Removed</a>
+            <a class="collapse-item" href="/admin/researches">All Companies</a>
+            <a class="collapse-item" href="/admin/researches/approved">Companies Approved</a>
+            <a class="collapse-item" href="/admin/researches/pending">Companies Pending</a>
+            <a class="collapse-item" href="/admin/researches/rejected">Companies Rejected</a>
+            <a class="collapse-item" href="/admin/researches/removed">Companies Removed</a>
           </div>
         </div>
       </li>
@@ -107,11 +107,11 @@
         <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Inquiries menu :</h6>
-            <a class="collapse-item" href="register.html">All Inquiries</a>
-            <a class="collapse-item" href="register.html">Inquiries Approved</a>
-            <a class="collapse-item" href="register.html">Inquiries Pending</a>
-            <a class="collapse-item" href="register.html">Inquiries Rejected</a>
-            <a class="collapse-item" href="register.html">Inquiries Removed</a>
+            <a class="collapse-item" href="/admin/inquiries">All Inquiries</a>
+            <a class="collapse-item" href="/admin/inquiries/approved">Inquiries Approved</a>
+            <a class="collapse-item" href="/admin/inquiries/pending">Inquiries Pending</a>
+            <a class="collapse-item" href="/admin/inquiries/rejected">Inquiries Rejected</a>
+            <a class="collapse-item" href="/admin/inquiries/removed">Inquiries Removed</a>
           </div>
         </div>
       </li>
@@ -125,7 +125,7 @@
         <div id="collapsePages4" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Reports menu :</h6>
-            <a class="collapse-item" href="register.html">All Reports</a>
+            <a class="collapse-item" href="/admin/reports">All Reports</a>
           </div>
         </div>
       </li>
@@ -139,7 +139,7 @@
         <div id="collapsePages5" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Results menu :</h6>
-            <a class="collapse-item" href="register.html">All Results</a>
+            <a class="collapse-item" href="/admin/results">All Results</a>
           </div>
         </div>
       </li>
@@ -160,7 +160,7 @@
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="/admin/blacklist">
           <i class="fas fa-fw fa-times"></i>
           <span>Blacklist</span></a>
       </li>

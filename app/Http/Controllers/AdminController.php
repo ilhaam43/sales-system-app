@@ -14,6 +14,11 @@ use App\Models\UsersStatus;
 use App\Models\Photos;
 use App\Models\Countries;
 use App\Models\Settings;
+use App\Models\JobsStatus;
+use App\Models\ResearchJobs;
+use App\Models\InquiryJobs;
+use App\Models\AuditorInquiryJobs;
+use App\Models\AuditorResearchJobs;
 
 class AdminController extends Controller
 {
@@ -150,6 +155,62 @@ class AdminController extends Controller
     public function deleteUserWorkers($workers, $id)
     {
         return $this->service->deleteUserWorkers($workers, $id);
+    }
+
+    //researches function
+    public function showAllResearches()
+    {
+        $auth = Auth::user();
+
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+
+        $researchesList = json_decode($listResearches, true);
+
+        return view('/admin/researches/index', compact('researchesList'))->with('i');
+    }
+
+    public function showApprovedResearches()
+    {
+        $auth = Auth::user();
+
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 1)->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+
+        $researchesList = json_decode($listResearches, true);
+
+        return view('/admin/researches/approved', compact('researchesList'))->with('i');
+    }
+
+    public function showPendingResearches()
+    {
+        $auth = Auth::user();
+
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 3)->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+
+        $researchesList = json_decode($listResearches, true);
+
+        return view('/admin/researches/pending', compact('researchesList'))->with('i');
+    }
+
+    public function showRejectedResearches()
+    {
+        $auth = Auth::user();
+
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 2)->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+
+        $researchesList = json_decode($listResearches, true);
+
+        return view('/admin/researches/rejected', compact('researchesList'))->with('i');
+    }
+
+    public function showRemovedResearches()
+    {
+        $auth = Auth::user();
+
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 4)->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+
+        $researchesList = json_decode($listResearches, true);
+
+        return view('/admin/researches/removed', compact('researchesList'))->with('i');
     }
 
     //general setting function

@@ -28,7 +28,7 @@ class ResearchJobs extends Model
     }
 
     public function auditorResearchJobs(){
-        return $this->hasOne(AuditorResearchJobs::class);
+        return $this->hasOne(AuditorResearchJobs::class, 'researcher_job_id', 'id');
     }
 
     public function country(){

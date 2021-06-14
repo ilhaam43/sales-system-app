@@ -102,6 +102,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('/{workers}/{id}', [AdminController::class, 'updateUserWorkers'])->name('admin.workers.update');
             Route::delete('/{workers}/{id}', [AdminController::class, 'deleteUserWorkers'])->name('admin.workers.destroy');
         });
+
+        //researches route
+        Route::group(['prefix' => 'researches'], function () {
+            Route::get('/', [AdminController::class, 'showAllResearches'])->name('admin.researches.index');
+            Route::get('/approved', [AdminController::class, 'showApprovedResearches'])->name('admin.researches.approved');
+            Route::get('/pending', [AdminController::class, 'showPendingResearches'])->name('admin.researches.pending');
+            Route::get('/rejected', [AdminController::class, 'showRejectedResearches'])->name('admin.researches.rejected');
+            Route::get('/removed', [AdminController::class, 'showRemovedResearches'])->name('admin.researches.removed');
+        });
+
         //settings general route
         Route::group(['prefix' => 'setting'], function () {
             Route::get('/', [AdminController::class, 'showGeneralSetting'])->name('admin.settings.index');
