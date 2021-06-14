@@ -98,13 +98,20 @@ class ResearcherService
         }
 
         try {
-            $checkUrl = ResearchJobs::where('company_website','LIKE','%' . $urlFilter . '%')->get();
-            $checkEmail = ResearchJobs::where('company_email','LIKE','%' . $emailFilter . '%')->get();
 
-            if(count($checkUrl) > 0){
-                return back()->withError('Company data failed to add because company website data already exists');
-            }elseif(count($checkEmail) > 0){
-                return back()->withError('Company data failed to add because company email data already exists');
+            $researchJobs = ResearchJobs::where('id', $id)->first();
+
+            if($researchJobs->company_website !== $request['company_website'] || $researchJobs->company_email !== $request['company_email']){
+
+                $checkUrl = ResearchJobs::where('company_website','LIKE','%' . $urlFilter . '%')->get();
+                $checkEmail = ResearchJobs::where('company_email','LIKE','%' . $emailFilter . '%')->get();
+
+                if(count($checkUrl) > 0){
+                    return back()->withError('Company data failed to add because company website data already exists');
+                }elseif(count($checkEmail) > 0){
+                    return back()->withError('Company data failed to add because company email data already exists');
+                }
+
             }
 
             $updateCompanyData = ResearchJobs::find($id)->update($request->all());
