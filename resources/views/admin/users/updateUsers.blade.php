@@ -29,7 +29,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Edit User</h6>
         </div>
         <div class="card-body">
-        <form method="POST" action="{{ route('users.update',$users->id) }}">
+        <form method="POST" action="{{ route('admin.users.update',$users->id) }}">
             @csrf
             @method('PUT')
             <div class="form-row">
@@ -92,7 +92,7 @@
                 </div>
             </div>
             </br>
-            <a href="{{url('superadmin/users')}}" class="btn btn-danger">Cancel</a>
+            <a href="{{url('admin/users')}}" class="btn btn-danger">Cancel</a>
             <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

@@ -70,12 +70,12 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Users menu :</h6>
-            <a class="collapse-item" href="login.html">All Users</a>
+            <a class="collapse-item" href="/admin/users">All Users</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">Workers Menu :</h6>
-            <a class="collapse-item" href="404.html">Researcher List</a>
-            <a class="collapse-item" href="blank.html">Inquirier List</a>
-            <a class="collapse-item" href="blank.html">Auditor List</a>
+            <a class="collapse-item" href="/admin/workers/researcher">Researcher List</a>
+            <a class="collapse-item" href="/admin/workers/inqurier">Inquirier List</a>
+            <a class="collapse-item" href="/admin/workers/auditor">Auditor List</a>
           </div>
         </div>
       </li>

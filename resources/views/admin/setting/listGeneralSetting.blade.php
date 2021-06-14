@@ -50,7 +50,7 @@
                 <td>{{ $setting->setting_name }}</td>
                 <td>{{ "$setting->setting_description" }}</td>
                 <td width="15%">
-                    <a class="btn btn-primary btn-sm" href="{{ route('settings.detail',$setting->id) }}">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('admin.settings.detail',$setting->id) }}">Edit</a>
 
                     <button class="btn btn-danger btn-sm remove-user" data-id="{{ $setting->id }}" data-action="{{ route('settings.destroy',$setting->id) }}" onclick="deleteConfirmation({{$setting->id}})"> Delete</button>
                   </form>
@@ -71,5 +71,5 @@
     
 @endsection
 </body>
-<script src="{{ asset('assets/superadmin/js/ajax/deleteGeneralSetting.js') }}"></script>
+<script src="{{ asset('assets/admin/js/ajax/deleteGeneralSetting.js') }}"></script>
 </html>

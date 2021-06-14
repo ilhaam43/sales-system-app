@@ -55,9 +55,8 @@
                 <td>{{ $user['product_category']['category_name'] ?? "" }}</td>
                 <td>{{ $user['users_status']['status'] }}</td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('users.show',$user['id']) }}">Edit</a>
-
-                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $user['id'] }}" data-action="{{ route('users.destroy',$user['id']) }}" onclick="deleteConfirmation({{$user['id']}})"> Delete</button>
+                    <a class="btn btn-primary btn-sm" href="{{ route('admin.users.show',$user['id']) }}">Edit</a>
+                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $user['id'] }}" data-action="{{ route('admin.users.destroy',$user['id']) }}" onclick="deleteConfirmation({{$user['id']}})"> Delete</button>
                   </form>
                 </td>
               </tr>
@@ -77,5 +76,5 @@
     
 @endsection
 </body>
-<script src="{{ asset('assets/superadmin/js/ajax/deleteUsers.js') }}"></script>
+<script src="{{ asset('assets/admin/js/ajax/deleteUsers.js') }}"></script>
 </html>

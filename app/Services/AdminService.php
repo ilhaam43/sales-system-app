@@ -22,11 +22,11 @@ class AdminService
         $name = $request->file('photo_image')->getClientOriginalName();
         
         try{
-        $uploadPhoto = $request->photo_image->move(public_path('superadmins/img/photos'), $name);
+        $uploadPhoto = $request->photo_image->move(public_path('admins/img/photos'), $name);
 
         $addPhotos = new Photos([
             "photo_name" => $request['photo_name'],
-            "photo_url" =>  'superadmins/img/photos/' . $name
+            "photo_url" =>  'admins/img/photos/' . $name
         ]);
 
         $addPhotos->save();
@@ -34,7 +34,7 @@ class AdminService
             return back()->withError('Photo failed to add');
         }
 
-        return redirect()->route('photos')->with('success', 'Photo added successfully');
+        return redirect()->route('admin.photos')->with('success', 'Photo added successfully');
     }
 
     public function deletePhoto($id)
@@ -78,10 +78,10 @@ class AdminService
                 $updateUsers = User::find($id)->update($request->except(['password', 'confirm_password']));
             }
         }catch(\Throwable $th){
-            return redirect()->route('users.show', $id)->with('error', 'User data failed to update because email that want to update is already registered in this system');
+            return redirect()->route('admin.users.show', $id)->with('error', 'User data failed to update because email that want to update is already registered in this system');
         }
 
-        return redirect()->route('users.index')->with('success', 'User data updated successfully');
+        return redirect()->route('admin.users.index')->with('success', 'User data updated successfully');
     }
 
     //workers function logic
@@ -93,7 +93,7 @@ class AdminService
         try{
             if($check == 0){
                 if($request['password'] !== $request['confirm_password']){
-                    return redirect()->route('workers.show', ['workers' => $workers, 'id' => $id])->with('error', $workers . ' failed to update cause password and confirm password not same');
+                    return redirect()->route('admin.workers.show', ['workers' => $workers, 'id' => $id])->with('error', $workers . ' failed to update cause password and confirm password not same');
                 }
                 $request['password'] = Hash::make($request['password']);
 
@@ -102,10 +102,10 @@ class AdminService
                 $updateUserWorkers = User::find($id)->update($request->except(['password', 'confirm_password']));
             }
         }catch(\Throwable $th){
-            return redirect()->route('workers.show', ['workers' => $workers, 'id' => $id])->with('error', $workers .' data failed to update because email that want to update is already registered in this system');
+            return redirect()->route('admin.workers.show', ['workers' => $workers, 'id' => $id])->with('error', $workers .' data failed to update because email that want to update is already registered in this system');
         }
 
-        return redirect()->route('workers.index', $workers)->with('success', $workers . ' data updated successfully');
+        return redirect()->route('admin.workers.index', $workers)->with('success', $workers . ' data updated successfully');
     }
 
     public function deleteUserWorkers($workers, $id)
@@ -128,7 +128,7 @@ class AdminService
             return back()->withError('Setting data failed to add because product categories cannot be duplicated');
         }
         
-        return redirect()->route('settings.index')->with('success', 'Setting data added successfully');
+        return redirect()->route('admin.settings.index')->with('success', 'Setting data added successfully');
     }
 
     public function updateGeneralSetting($request, $id)
@@ -139,7 +139,7 @@ class AdminService
             return back()->withError('Setting data failed to update because product categories cannot be duplicated');
         }
 
-        return redirect()->route('settings.index')->with('success', 'Setting data updated successfully');
+        return redirect()->route('admin.settings.index')->with('success', 'Setting data updated successfully');
     }
 
     public function deleteGeneralSetting($id)

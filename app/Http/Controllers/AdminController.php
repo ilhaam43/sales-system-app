@@ -53,7 +53,7 @@ class AdminController extends Controller
     //all users function
     public function showUsersList()
     {
-        $user = User::whereNotIn('id', [1])->with('ProductCategory', 'UsersStatus', 'UsersRole', 'Country')->get();
+        $user = User::whereNotIn('id', [1,2])->with('ProductCategory', 'UsersStatus', 'UsersRole', 'Country')->get();
         $users = json_decode($user, true);
         
         return view('/admin/users/index', compact('users'))->with('i');
@@ -100,7 +100,7 @@ class AdminController extends Controller
         $usersRole = UsersRole::where('role', $workers)->get();
 
         if(count($usersRole) == 0){
-            return redirect()->route('admins.index');
+            return redirect()->route('admin.workers.index');
         }
         
         foreach($usersRole as $i => $roles){

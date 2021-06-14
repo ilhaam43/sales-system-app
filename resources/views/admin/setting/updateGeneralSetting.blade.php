@@ -29,7 +29,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Edit Setting Data</h6>
       </div>
       <div class="card-body">
-      <form method="POST" action="{{ route('settings.update',$setting->id) }}">
+      <form method="POST" action="{{ route('admin.settings.update',$setting->id) }}">
           @csrf
           @method('PUT')
           <div class="form-row">
@@ -44,7 +44,7 @@
             </div>
           </div>
           </br>
-          <a href="{{url('superadmin/setting')}}" class="btn btn-danger">Cancel</a>
+          <a href="{{url('admin/setting')}}" class="btn btn-danger">Cancel</a>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>

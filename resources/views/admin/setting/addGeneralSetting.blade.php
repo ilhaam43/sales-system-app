@@ -29,7 +29,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Add Settings</h6>
       </div>
       <div class="card-body">
-      <form method="POST" action="{{ route('settings.store') }}">
+      <form method="POST" action="{{ route('admin.settings.store') }}">
       @csrf
           <div class="form-row">
             <div class="col-sm-12">

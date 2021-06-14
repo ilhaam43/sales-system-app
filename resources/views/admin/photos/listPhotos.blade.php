@@ -52,7 +52,7 @@
                 <td>{{ $photo->photo_url }}</td>
                 <td><img src="{{asset($photo->photo_url)}}" width="120" height="120"></img></td>
                 <td>
-                <button class="btn btn-danger btn-sm remove-user" data-id="{{$photo->id}}" data-action="{{ route('photos.destroy',$photo->id) }}" onclick="deleteConfirmation({{$photo->id}})"> Delete</button>
+                <button class="btn btn-danger btn-sm remove-user" data-id="{{$photo->id}}" data-action="{{ route('admin.photos.destroy',$photo->id) }}" onclick="deleteConfirmation({{$photo->id}})"> Delete</button>
                   </form>
                 </td>
               </tr>
@@ -79,7 +79,7 @@
           </button>
         </div>
         <div class="modal-body">
-        <form method="POST" action="{{url('superadmin/photos')}}" enctype="multipart/form-data">
+        <form method="POST" action="{{url('admin/photos')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="form-group">
           <label for="name"><b>Photo Name :</label></b>
@@ -102,5 +102,5 @@
     
 @endsection
 </body>
-<script src="{{ asset('assets/superadmin/js/ajax/deletePhoto.js') }}"></script>
+<script src="{{ asset('assets/admin/js/ajax/deletePhoto.js') }}"></script>
 </html>
