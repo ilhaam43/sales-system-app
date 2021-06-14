@@ -50,7 +50,7 @@
                 <td>{{ $admin['name'] }}</td>
                 <td>{{ $admin['email'] }}</td>
                 <td>{{ $admin['country']['country_name'] }}</td>
-                <td>{{ $admin['product_category']['category_name'] }}</td>
+                <td>{{ $admin['product_category']['category_name'] ?? "" }}</td>
                 <td>{{ $admin['users_status']['status'] }}</td>
                 <td>
                     <a class="btn btn-primary btn-sm" href="{{ route('admins.show',$admin['id']) }}">Edit</a>

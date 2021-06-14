@@ -16,7 +16,7 @@ class CreateInquiryJobsTable extends Migration
         Schema::create('inquiry_jobs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreignId('research_jobs_id')->constrained('research_jobs');
+            $table->foreignId('research_jobs_id')->nullable()->constrained('research_jobs')->onDelete('set null');;
             $table->foreignId('job_status_id')->constrained('jobs_status');
             $table->string('screenshot_url')->nullable();
             $table->enum('is_form',['Yes', 'No']);

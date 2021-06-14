@@ -16,7 +16,7 @@ class CreateAuditorInquiryJobsTable extends Migration
         Schema::create('auditor_inquiry_jobs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreignId('inquiry_job_id')->constrained('inquiry_jobs');
+            $table->foreignId('inquiry_job_id')->nullable()->constrained('inquiry_jobs')->onDelete('set null');;
             $table->foreignId('product_category_id')->constrained('product_category');
             $table->timestamps();
             $table->softDeletes();

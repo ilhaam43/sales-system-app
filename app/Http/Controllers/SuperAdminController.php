@@ -151,7 +151,7 @@ class SuperAdminController extends Controller
 
     public function showAdminList()
     {
-        $admin = User::where('role_id', 2)->with('ProductCategory', 'UsersStatus')->get();
+        $admin = User::where('role_id', 2)->with('ProductCategory', 'UsersStatus','Country')->get();
         $admins = json_decode($admin, true);
         
         return view('/superadmin/admin/index', compact('admins'))->with('i');
