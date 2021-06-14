@@ -11,9 +11,9 @@ function deleteConfirmation(id) {
             if (e.value === true) {
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
-                    type: 'DELETE',
+                    type: 'POST',
                     url: "/superadmin/product-category/" + id,
-                    data: {_token: CSRF_TOKEN},
+                    data: {_token: CSRF_TOKEN, _method: 'DELETE'},
                     dataType: 'JSON',
                     success: function (results) {
                         if (results.success === true) {

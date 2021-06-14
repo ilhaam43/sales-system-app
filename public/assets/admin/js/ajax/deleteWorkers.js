@@ -11,9 +11,10 @@ function deleteConfirmation(id, workers) {
         if (e.value === true) {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
-                type: 'DELETE',
+                type: 'POST',
                 url: "/admin/workers/" + workers + "/" + id,
-                data: {_token: CSRF_TOKEN},
+                cache: false,
+                data: {_token: CSRF_TOKEN, _method: 'DELETE'},
                 dataType: 'JSON',
                 success: function (results) {
                     if (results.success === true) {
