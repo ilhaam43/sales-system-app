@@ -79,8 +79,38 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
     
-    Route::group(['middleware' => ['authorized:admin']], function () {
-        Route::resource('admin', AdminController::class);
+    Route::group(['prefix' => 'admin', 'middleware' => ['authorized:admin']], function () {
+        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+
+        //photos route
+        Route::group(['prefix' => 'photos'], function () {
+            Route::get('/', [AdminController::class, 'showPhotoList'])->name('admin.photos');
+            Route::post('/', [AdminController::class, 'addPhoto'])->name('admin.photos.store');
+            Route::delete('/{id}', [AdminController::class, 'deletePhoto'])->name('admin.photos.destroy');
+        });
+        //all users route
+        Route::group(['prefix' => 'users'], function () {
+            Route::get('/', [AdminController::class, 'showUsersList'])->name('admin.users.index');
+            Route::get('/{id}', [AdminController::class, 'showUsersDetails'])->name('admin.users.show');
+            Route::put('/{id}', [AdminController::class, 'updateUsers'])->name('admin.users.update');
+            Route::delete('/{id}', [AdminController::class, 'deleteUsers'])->name('admin.users.destroy');
+        });
+        //workers user route
+        Route::group(['prefix' => 'workers'], function () {
+            Route::get('/{workers}', [SuperAdminController::class, 'showWorkersList'])->name('admin.workers.index');
+            Route::get('/{workers}/{id}', [SuperAdminController::class, 'showWorkersDetails'])->name('admin.workers.show');
+            Route::put('/{workers}/{id}', [SuperAdminController::class, 'updateUserWorkers'])->name('admin.workers.update');
+            Route::delete('/{workers}/{id}', [SuperAdminController::class, 'deleteUserWorkers'])->name('admin.workers.destroy');
+        });
+        //settings general route
+        Route::group(['prefix' => 'setting'], function () {
+            Route::get('/', [SuperAdminController::class, 'showGeneralSetting'])->name('admin.settings.index');
+            Route::get('/create', [SuperAdminController::class, 'showFormAddGeneralSetting'])->name('admin.settings.store.index');
+            Route::post('/create', [SuperAdminController::class, 'addGeneralSetting'])->name('admin.settings.store');
+            Route::get('/{id}', [SuperAdminController::class, 'showDetailGeneralSetting'])->name('admin.settings.detail');
+            Route::put('/{id}', [SuperAdminController::class, 'updateGeneralSetting'])->name('admin.settings.update');
+            Route::delete('/{id}', [SuperAdminController::class, 'deleteGeneralSetting'])->name('admin.settings.destroy');
+        });
     });
 
     Route::group(['prefix' => 'researcher', 'middleware' => ['authorized:researcher']], function () {
