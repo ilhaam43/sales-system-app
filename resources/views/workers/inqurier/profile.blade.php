@@ -44,7 +44,7 @@
         <div class="row">
         <div class="col-md-2 text-center">
             <div class="form-group">
-            <img src="{{asset($userData['profile_image']) ?? "https://searchclientnow.com/images/avatar.jpg"}}" width="150" height="150">
+            <img src="{{ $userData['profile_image'] ? asset($userData['profile_image']) : 'https://searchclientnow.com/images/avatar.jpg' }}" width="150" height="150">
             </div>
             </div>
         </div>

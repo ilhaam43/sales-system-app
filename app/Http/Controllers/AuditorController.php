@@ -114,11 +114,13 @@ class AuditorController extends Controller
         $userId = Auth::user()->id;
         $user = User::where('id', $userId)->first();
 
-        $researchQuantity = count(ResearchJobs::where('user_id', $userId)->get());
+        $researchQuantity = count(AuditorResearchJobs::where('user_id', $userId)->get());
+        $inquiriesQuantity = count(AuditorInquiryJobs::where('user_id', $userId)->get());
         $researchPaid = $user->quantity_research_paid;
+        $inquiriesPaid = $user->quantity_inquiries_paid;
         $amountPaid = $user->amount_paid;
 
-        return view('workers/auditor/payments', compact('researchQuantity', 'researchPaid', 'amountPaid'));
+        return view('workers/auditor/payments', compact('researchQuantity', 'inquiriesQuantity', 'researchPaid', 'inquiriesPaid', 'amountPaid'));
     }
 
     public function showMyWork()

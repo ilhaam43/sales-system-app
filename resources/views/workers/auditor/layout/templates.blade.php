@@ -51,7 +51,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="{{ url('researcher') }}">GoSearch<span>Client</span></a></h1>
+      <h1 class="logo mr-auto"><a href="{{ url('auditor') }}">GoSearch<span>Client</span></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt=""></a>-->
 
@@ -66,7 +66,7 @@
           <li class="{{ request()->is('auditor/payments') ? 'active' : ''}}"><a href="{{ url('auditor/payments') }}">Payments</a></li>
           <li class="drop-down"><a href="">Account</a>
             <ul>
-              <li><a href="{{ url('researcher/profile') }}">Profile</a></li>
+              <li><a href="{{ url('auditor/profile') }}">Profile</a></li>
               <li><a href="{{ url('logout') }}">Logout</a></li>
             </ul>
           </li>

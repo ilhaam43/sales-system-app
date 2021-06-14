@@ -28,25 +28,42 @@
   <div class="card-body shadow b-b-5">
   
       <div class="row">
-        <div class="col-md-4 text-center ">
+        <div class="col-md-6 text-center ">
             <div class="form-group shadow m-b-30 b-1-ddd p-20 ">
             <h2 class="text-info"><i class="fa fa-users fa-2x"></i></h2>
-            <h2>Research Quantity <br> <hr> {{$researchQuantity}}</h2></br>
-          </div>
+            <h2>  Research Quantity <br> <hr> {{$researchQuantity}}</h2></br>
             </div>
-          <div class="col-md-4 text-center ">
+        </div>
+          <div class="col-md-6 text-center ">
             <div class="form-group shadow m-b-30 b-1-ddd p-20 ">
             <h2 class="text-success"> <i class="fa fa-check-square fa-2x"></i></h2>
             <h2> Research Paid <br> <hr> {{$researchPaid ?? 0}}</h2></br>
-          </div>
             </div>
-          <div class="col-md-4 text-center">
-            <div class="form-group shadow m-b-30 b-1-ddd p-20 ">
-            <h2 class="text-success"><i class="fa fa-money-bill fa-2x"></i></h2>
-            <h2> Amount Paid <br><hr> {{$amountPaid ?? 0}}</h2></br>
           </div>
         </div>
 
+        <div class="row">
+        <div class="col-md-6 text-center ">
+            <div class="form-group shadow m-b-30 b-1-ddd p-20 ">
+            <h2 class="text-info"><i class="fa fa-envelope fa-2x"></i></h2>
+            <h2>  Inquiries Quantity <br> <hr> {{$inquiriesQuantity}}</h2></br>
+            </div>
+        </div>
+          <div class="col-md-6 text-center ">
+            <div class="form-group shadow m-b-30 b-1-ddd p-20 ">
+            <h2 class="text-success"> <i class="fa fa-check-square fa-2x"></i></h2>
+            <h2>  Inquiries Paid <br> <hr> {{$inquiriesPaid ?? 0}}</h2></br>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="form-group shadow m-b-30 b-1-ddd p-20 ">
+            <h2 class="text-success"><i class="fa fa-money-bill fa-2x"></i></h2>
+            <h2> Amount Paid <br><hr> {{$amountPaid ?? 0}}</h2></br>
+            </div>
+          </div>
         </div>
 
       </div>

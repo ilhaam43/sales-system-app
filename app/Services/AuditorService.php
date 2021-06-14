@@ -82,10 +82,10 @@ class AuditorService
                 ]);
             }
         }catch(\Throwable $th){
-            return redirect()->route('researcher.profile')->with('error', 'User data failed to update cause your input data is invalid');
+            return redirect()->route('auditor.profile')->with('error', 'User data failed to update cause your input data is invalid');
         }
 
-        return redirect()->route('researcher.profile')->with('success', 'User data updated successfully');
+        return redirect()->route('auditor.profile')->with('success', 'User data updated successfully');
     }
 
     public function updateResearches($request, $id)
