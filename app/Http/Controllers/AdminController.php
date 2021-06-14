@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use App\Services\AdminService;
 
 use App\Models\ProductCategory;
@@ -53,7 +54,8 @@ class AdminController extends Controller
     //all users function
     public function showUsersList()
     {
-        $user = User::whereNotIn('id', [1,2])->with('ProductCategory', 'UsersStatus', 'UsersRole', 'Country')->get();
+        $auth = Auth::user();
+        $user = User::whereNotIn('id', [1,2])->where('product_category_id', $auth->product_category_id)->with('ProductCategory', 'UsersStatus', 'UsersRole', 'Country')->get();
         $users = json_decode($user, true);
         
         return view('/admin/users/index', compact('users'))->with('i');
@@ -64,7 +66,7 @@ class AdminController extends Controller
         $users = User::find($id);
 
         if(!$users){
-            return redirect()->route('users.index');
+            return redirect()->route('admin.users.index');
         }
 
         $usersRole = UsersRole::all();
@@ -107,7 +109,9 @@ class AdminController extends Controller
             $usersRole[$i] = $roles;
         }
 
-        $workersList = User::where('role_id', $roles->id)->with('ProductCategory', 'UsersStatus', 'UsersRole', 'Country')->get();
+        $auth = Auth::user();
+
+        $workersList = User::where('role_id', $roles->id)->where('product_category_id', $auth->product_category_id)->with('ProductCategory', 'UsersStatus', 'UsersRole', 'Country')->get();
         $workersLists = json_decode($workersList, true);
 
         return view('/admin/workers/index', compact('workersLists', 'workers'))->with('i');
