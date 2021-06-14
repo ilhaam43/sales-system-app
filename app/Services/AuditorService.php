@@ -12,6 +12,7 @@ use App\Models\Countries;
 use App\Models\ResearchJobs;
 use App\Models\InquiryJobs;
 use App\Models\AuditorInquiryJobs;
+use App\Models\AuditorResearchJobs;
 
 class AuditorService
 {
@@ -89,33 +90,23 @@ class AuditorService
 
     public function updateResearches($request, $id)
     {
-        $urlFilter = preg_replace('/\b(?:(?:https?|ftp):\/\/|www\.)/', '', $request['company_website']); //regex for filter url
+        $user = Auth::user();
 
-        $emailFilter = preg_replace('^[A-z0-9.]+@^', '', $request['company_email']); //regex for filter email
+        try{
+            $researchJobs = ResearchJobs::where('id', $id)->first();
 
-        $domainMailAllowed = array("gmail.com", "yahoo.com", "ymail.com", "rocketmail.com", "hotmail.com", "qq.com", "outlook.com", "live.com", "aol.com");
+            $createAuditInquiriesData = AuditorResearchJobs::create([
+                'user_id' => $user->id,
+                'researcher_job_id' => $id,
+                'product_category_id' => $researchJobs->product_category_id,
+            ]);
 
-        if(in_array($emailFilter, $domainMailAllowed)){
-            $emailFilter = $request['company_email'];
+            $updateResearchData = ResearchJobs::find($id)->update($request->all());
+        }catch(\Throwable $th){
+            return back()->withError('Researches data failed to update');
         }
 
-        try {
-            $checkUrl = ResearchJobs::where('company_website','LIKE','%' . $urlFilter . '%')->get();
-            $checkEmail = ResearchJobs::where('company_email','LIKE','%' . $emailFilter . '%')->get();
-
-            if(count($checkUrl) > 0){
-                return back()->withError('Company data failed to add because company website data already exists');
-            }elseif(count($checkEmail) > 0){
-                return back()->withError('Company data failed to add because company email data already exists');
-            }
-
-            $updateCompanyData = ResearchJobs::find($id)->update($request->all());
-
-        } catch(\Throwable $th) {
-            return back()->withError('Company data failed to update because company data already exists');
-        }
-        
-        return redirect()->route('researcher.researches')->with('success', 'Company data updated successfully');
+        return redirect()->route('auditor.researches')->with('success', 'Researches data updated successfully');
     }
 
     public function updateInquiries($request, $id)
@@ -123,16 +114,16 @@ class AuditorService
         $user = Auth::user();
 
         try{
-        $inquiryJobs = InquiryJobs::where('id', $id)->first();
-        $researchJobs = ResearchJobs::where('id', $inquiryJobs->research_jobs_id)->first();
+            $inquiryJobs = InquiryJobs::where('id', $id)->first();
+            $researchJobs = ResearchJobs::where('id', $inquiryJobs->research_jobs_id)->first();
 
-        $createAuditInquiriesData = AuditorInquiryJobs::create([
-            'user_id' => $user->id,
-            'inquiry_job_id' => $id,
-            'product_category_id' => $researchJobs->product_category_id,
-        ]);
+            $createAuditInquiriesData = AuditorInquiryJobs::create([
+                'user_id' => $user->id,
+                'inquiry_job_id' => $id,
+                'product_category_id' => $researchJobs->product_category_id,
+            ]);
 
-        $updateInquiriesData = InquiryJobs::find($id)->update($request->all());
+            $updateInquiriesData = InquiryJobs::find($id)->update($request->all());
         }catch(\Throwable $th){
             return back()->withError('Inquiries data failed to update');
         }

@@ -45,15 +45,15 @@ class AuditorController extends Controller
 
     public function showDetailResearches($id)
     {   
-        $listCountries = Countries::all();
-        $listResearchJobs = ResearchJobs::where('id', $id)->with('Country', 'JobsStatus')->get();
+        $listJobsStatus = JobsStatus::whereNotIn('id', array(4))->get();
+        $listResearchJobs = ResearchJobs::where('id', $id)->with('Country', 'JobsStatus', 'ProductCategory')->get();
         $researchJobsLists = json_decode($listResearchJobs, true);
 
         foreach($researchJobsLists as $researchList){
             $researchJobsLists = $researchList;
         }
 
-        return view('workers/auditor/updateResearches', compact('researchJobsLists', 'listCountries'))->with('i');
+        return view('workers/auditor/updateResearches', compact('researchJobsLists', 'listJobsStatus'))->with('i');
     }
 
     public function showInquiries()
@@ -143,10 +143,20 @@ class AuditorController extends Controller
     public function updateInquiries(Request $request, $id)
     {
         $request->validate([
-            'job_status_id'         => 'required',
+            'job_status_id' => 'required',
         ]);
 
         return $this->service->updateInquiries($request, $id);
+    }
+
+    public function updateResearches(Request $request, $id)
+    {
+        $request->validate([
+            'is_form'       => 'required',
+            'job_status_id' => 'required',
+        ]);
+
+        return $this->service->updateResearches($request, $id);
     }
 
     public function updateProfile(Request $request)
@@ -155,17 +165,4 @@ class AuditorController extends Controller
         return $this->service->updateProfile($request, $id);
     }
 
-    public function updateResearches(Request $request, $id)
-    {
-        $request->validate([
-            'country_id'            => 'required',
-            'company_name'          => 'required',
-            'company_website'       => 'required',
-            'company_email'         => 'required|email',
-            'company_phone'         => 'required',
-            'company_product_url'   => 'required',
-        ]);
-
-        return $this->service->updateResearches($request, $id);
-    }
 }
