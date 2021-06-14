@@ -50,8 +50,8 @@
             </ul>
         </div>
     @endif
-
-              <table class="table table-responsive table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   </br>
                   <thead>
                     <tr>
@@ -86,6 +86,7 @@
             </div>
         </div>
     </div>  
+</div>
   
   </main><!-- End #main -->
 

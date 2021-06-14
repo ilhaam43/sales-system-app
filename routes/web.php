@@ -120,7 +120,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/my-work', [AuditorController::class, 'showMyWork'])->name('auditor.mywork');
         Route::get('/payments', [AuditorController::class, 'showPayments'])->name('auditor.payments');
         Route::get('/inquiries', [AuditorController::class, 'showInquiries'])->name('auditor.inquiries');
-        Route::get('/companies', [AuditorController::class, 'showCompanies'])->name('auditor.companies');
+        Route::get('/researches', [AuditorController::class, 'showResearches'])->name('auditor.researches');
         Route::post('/add-inquiry', [AuditorController::class, 'addInquiryData'])->name('auditor.store.inquiry');
         Route::post('/add-report', [AuditorController::class, 'addReportData'])->name('auditor.store.report');
         Route::get('/profile', [AuditorController::class, 'showProfile'])->name('auditor.profile');

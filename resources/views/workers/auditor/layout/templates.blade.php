@@ -79,4 +79,4 @@
   </header><!-- End Header -->
     @yield('content')
 
-    @include('workers.researcher.layout.footer')
+    @include('workers.auditor.layout.footer')

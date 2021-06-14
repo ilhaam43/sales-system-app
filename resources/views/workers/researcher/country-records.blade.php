@@ -17,6 +17,7 @@
         <div class="card shadow mb-4">
         <div class="card-body">
         <h4 style="margin-left:10px;">Country Records List</h4>
+        <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     </br>
                     <thead>
@@ -40,6 +41,7 @@
                 </div>
             </div>
         </div>  
+    </div>
     
     </main><!-- End #main -->
 

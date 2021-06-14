@@ -9,14 +9,14 @@
           <h3></h3>
           <ol>
             <li style="margin-left:20px;"><a href="#">Auditor</a></li>
-            <li style="margin-right:20px;">Researches</li>
+            <li style="margin-right:20px;">Inquiries</li>
           </ol>
         </div>
     </section><!-- End Breadcrumbs -->
 
     <div class="card shadow mb-4">
       <div class="card-body">
-      <h4 style="margin-left:10px;">Researches List</h4>
+      <h4 style="margin-left:10px;">Inquiries List</h4>
       
       </br>
 
@@ -42,22 +42,20 @@
                   <thead>
                     <tr>
                       <th width="5%">No</th>
-                      <th>Company Name</th>
-                      <th>Website</th>
-                      <th>Product Page</th>
+                      <th>Company</th>
+                      <th>Screenshot</th>
                       <th>Status</th>
                       <th>Edit</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      @foreach($researchJobsLists as $researchLists)
+                      @foreach($inquiryJobsLists as $inquiryLists)
                       <td>{{ ++$i }}</td>
-                      <td>{{ $researchLists['company_name'] }}</td>
-                      <td>{{ $researchLists['company_website'] }}</td>
-                      <td>{{ $researchLists['company_product_url'] }}</td>
-                      <td>{{ $researchLists['jobs_status']['status']}}</td>
-                      <td><a class="btn btn-primary btn-sm" href="{{ route('researcher.detail.researches',$researchLists['id']) }}">Edit</a></td>
+                      <td>{{ $inquiryLists['research_jobs']['company_name'] }}</td>
+                      <td><a href="{{ asset($inquiryLists['screenshot_url']) }}">Screenshot</a></td>
+                      <td>{{ $inquiryLists['jobs_status']['status']}}</td>
+                      <td><a class="btn btn-primary btn-sm" href="{{ route('researcher.detail.researches',$inquiryLists['id']) }}">Edit</a></td>
                     </tr>
                   </tbody>
                   @endforeach

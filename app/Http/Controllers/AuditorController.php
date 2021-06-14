@@ -10,6 +10,7 @@ use App\Services\AuditorService;
 use App\Models\User;
 use App\Models\Countries;
 use App\Models\ResearchJobs;
+use App\Models\InquiryJobs;
 use App\Models\ProductCategory;
 
 class AuditorController extends Controller
@@ -29,12 +30,13 @@ class AuditorController extends Controller
     public function showResearches()
     {
         $user = Auth::user();
+
         $listCountries = Countries::all();
 
         $productCategory = User::where('product_category_id', $user->product_category_id)->with('ProductCategory')->get();
         $productCategories = json_decode($productCategory, true);
 
-        $listResearchJobs = ResearchJobs::where('user_id', $user->id)->with('Country', 'JobsStatus')->get();
+        $listResearchJobs = ResearchJobs::where('job_status_id', 3)->where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
         $researchJobsLists = json_decode($listResearchJobs, true);
         
         return view('workers/auditor/researches', compact('researchJobsLists','listCountries','productCategories', 'user'))->with('i');
@@ -51,6 +53,29 @@ class AuditorController extends Controller
         }
 
         return view('workers/auditor/updateResearches', compact('researchJobsLists', 'listCountries'))->with('i');
+    }
+
+    public function showInquiries()
+    {
+        $user = Auth::user();
+
+        $listCountries = Countries::all();
+
+        $productCategory = User::where('product_category_id', $user->product_category_id)->with('ProductCategory')->get();
+        $productCategories = json_decode($productCategory, true);
+
+        $researchJobsId = [];
+        $listResearchJobs = ResearchJobs::where('job_status_id', 3)->where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        $researchJobsLists = json_decode($listResearchJobs, true);
+
+        foreach($researchJobsLists as $researchLists){
+            array_push($researchJobsId, $researchLists['id']);
+        }
+
+        $listInquiryJobs = InquiryJobs::whereIn('research_jobs_id', array($researchJobsId))->where('job_status_id', 3)->where('is_form', 'Yes')->with('ResearchJobs', 'JobsStatus')->get();
+        $inquiryJobsLists = json_decode($listInquiryJobs, true);
+        
+        return view('workers/auditor/inquiries', compact('inquiryJobsLists','listCountries','productCategories', 'user'))->with('i');
     }
 
     public function showFAQ()
@@ -86,28 +111,6 @@ class AuditorController extends Controller
         return view('workers/auditor/my-work', compact('companiesApproved', 'companiesPending', 'companiesDisapproved'));
     }
 
-    public function showCountryRecords()
-    {
-        $researchJobsList = ResearchJobs::with('Country')->distinct()->get('country_id');
-        $researchJobsLists = json_decode($researchJobsList, true);
-
-        $countriesRecords = [];
-
-        foreach($researchJobsLists as $researchesList){
-            $searchResearch = ResearchJobs::whereIn('country_id', array($researchesList['country']['id']))->count();
-        
-                if($searchResearch > 0){
-                    array_push($countriesRecords, [
-                        'country_id' => $researchesList['country']['id'],
-                        'country_name' => $researchesList['country']['country_name'],
-                        'count' => $searchResearch,
-                    ]);
-                }
-            }
-
-        return view('workers/auditor/country-records', compact('countriesRecords'))->with('i');
-    }
-
     public function showProfile()
     {
         $listCountries = Countries::all();
@@ -121,35 +124,6 @@ class AuditorController extends Controller
         }
 
         return view('workers/auditor/profile', compact('userData','listCountries'))->with('i');
-    }
-
-    public function addCompanyData(Request $request)
-    {
-        $request->validate([
-            'user_id'               => 'required',
-            'job_status_id'         => 'required',
-            'product_category_id'   => 'required',
-            'country_id'            => 'required',
-            'company_name'          => 'required',
-            'company_website'       => 'required',
-            'company_email'         => 'required|email',
-            'company_phone'         => 'required',
-            'company_product_url'   => 'required',
-            'is_form'               => 'required',
-            'is_blacklist'          => 'required',
-        ]);
-
-        return $this->service->addCompanyData($request);
-    }
-
-    public function checkCompanyData(Request $request)
-    {
-        $request->validate([
-            'input_data'            => 'required',
-            'type_search'           => 'required',
-        ]);
-
-        return $this->service->checkCompanyData($request);
     }
 
     public function updateProfile(Request $request)
