@@ -112,6 +112,15 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/removed', [AdminController::class, 'showRemovedResearches'])->name('admin.researches.removed');
         });
 
+        //inquiries route
+        Route::group(['prefix' => 'inquiries'], function () {
+            Route::get('/', [AdminController::class, 'showAllInquiries'])->name('admin.inquiries.index');
+            Route::get('/approved', [AdminController::class, 'showApprovedInquiries'])->name('admin.inquiries.approved');
+            Route::get('/pending', [AdminController::class, 'showPendingInquiries'])->name('admin.inquiries.pending');
+            Route::get('/rejected', [AdminController::class, 'showRejectedInquiries'])->name('admin.inquiries.rejected');
+            Route::get('/removed', [AdminController::class, 'showRemovedInquiries'])->name('admin.inquiries.removed');
+        });
+
         //settings general route
         Route::group(['prefix' => 'setting'], function () {
             Route::get('/', [AdminController::class, 'showGeneralSetting'])->name('admin.settings.index');

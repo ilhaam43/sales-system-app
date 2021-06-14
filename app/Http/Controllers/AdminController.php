@@ -213,6 +213,122 @@ class AdminController extends Controller
         return view('/admin/researches/removed', compact('researchesList'))->with('i');
     }
 
+    //inquiries function
+    public function showAllInquiries()
+    {
+        $user = Auth::user();
+
+        $researchJobsId = [];
+
+        $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        $researchJobsLists = json_decode($listResearchJobs, true);
+
+        foreach($researchJobsLists as $researchLists){
+            array_push($researchJobsId, $researchLists['id']);
+        }
+
+        if(count($researchJobsId) == 0){
+            $researchJobsId = 0;
+        }
+
+        $listInquiryJobs = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('is_form', 'Yes')->with('ResearchJobs', 'JobsStatus','User')->get();
+        $inquiryJobsLists = json_decode($listInquiryJobs, true);
+
+        return view('/admin/inquiries/index', compact('inquiryJobsLists'))->with('i');
+    }
+
+    public function showApprovedInquiries()
+    {
+        $user = Auth::user();
+
+        $researchJobsId = [];
+
+        $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        $researchJobsLists = json_decode($listResearchJobs, true);
+
+        foreach($researchJobsLists as $researchLists){
+            array_push($researchJobsId, $researchLists['id']);
+        }
+
+        if(count($researchJobsId) == 0){
+            $researchJobsId = 0;
+        }
+
+        $listInquiryJobs = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 1)->where('is_form', 'Yes')->with('ResearchJobs', 'JobsStatus','User')->get();
+        $inquiryJobsLists = json_decode($listInquiryJobs, true);
+
+        return view('/admin/inquiries/approved', compact('inquiryJobsLists'))->with('i');
+    }
+
+    public function showPendingInquiries()
+    {
+        $user = Auth::user();
+
+        $researchJobsId = [];
+
+        $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        $researchJobsLists = json_decode($listResearchJobs, true);
+
+        foreach($researchJobsLists as $researchLists){
+            array_push($researchJobsId, $researchLists['id']);
+        }
+
+        if(count($researchJobsId) == 0){
+            $researchJobsId = 0;
+        }
+
+        $listInquiryJobs = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->with('ResearchJobs', 'JobsStatus','User')->get();
+        $inquiryJobsLists = json_decode($listInquiryJobs, true);
+
+        return view('/admin/inquiries/pending', compact('inquiryJobsLists'))->with('i');
+    }
+
+    public function showRejectedInquiries()
+    {
+        $user = Auth::user();
+
+        $researchJobsId = [];
+
+        $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        $researchJobsLists = json_decode($listResearchJobs, true);
+
+        foreach($researchJobsLists as $researchLists){
+            array_push($researchJobsId, $researchLists['id']);
+        }
+
+        if(count($researchJobsId) == 0){
+            $researchJobsId = 0;
+        }
+
+        $listInquiryJobs = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 2)->where('is_form', 'Yes')->with('ResearchJobs', 'JobsStatus','User')->get();
+        $inquiryJobsLists = json_decode($listInquiryJobs, true);
+
+        return view('/admin/inquiries/rejected', compact('inquiryJobsLists'))->with('i');
+    }
+
+    public function showRemovedInquiries()
+    {
+        $user = Auth::user();
+
+        $researchJobsId = [];
+
+        $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        $researchJobsLists = json_decode($listResearchJobs, true);
+
+        foreach($researchJobsLists as $researchLists){
+            array_push($researchJobsId, $researchLists['id']);
+        }
+
+        if(count($researchJobsId) == 0){
+            $researchJobsId = 0;
+        }
+
+        $listInquiryJobs = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 4)->where('is_form', 'Yes')->with('ResearchJobs', 'JobsStatus','User')->get();
+        $inquiryJobsLists = json_decode($listInquiryJobs, true);
+
+        return view('/admin/inquiries/removed', compact('inquiryJobsLists'))->with('i');
+    }
+
     //general setting function
     public function showFormAddGeneralSetting()
     {

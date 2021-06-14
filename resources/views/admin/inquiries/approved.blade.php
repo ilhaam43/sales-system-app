@@ -6,7 +6,7 @@
         <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Approved Companies List</h1>
+    <h1 class="h3 mb-2 text-gray-800">Approved Inquiries List</h1>
     
     </br>
     @if (session('error'))
@@ -27,7 +27,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Approved Companies List</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Approved Inquiries List</h6>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -35,33 +35,25 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Name</th>
-                    <th>Website</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Product Page</th>
-                    <th>Country</th>
+                    <th>Company</th>
+                    <th>Screenshot</th>
+                    <th>Website Link</th>
+                    <th>User</th>
                     <th>Status</th>
-                    <th>Researches</th>
-                    <th>Auditor</th>
                     <th>Edit</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($researchesList as $researches)
+                @foreach ($inquiryJobsLists as $inquiries)
                 <tr>
                 <td>{{ ++$i }}</td>
-                <td>{{ $researches['company_name'] }}</td>
-                <td>{{ $researches['company_website'] }}</td>
-                <td>{{ $researches['company_email'] }}</td>
-                <td>{{ $researches['company_phone'] }}</td>
-                <td>{{ $researches['company_product_url'] }}</td>
-                <td>{{ $researches['country']['country_name'] }}</td>
-                <td>{{ $researches['jobs_status']['status'] }}</td>
-                <td>{{ $researches['user']['name'] }}</td>
-                <td>{{ $researches['auditor_research_jobs']['user']['name'] ?? "No" }}</td>
+                <td>{{ $inquiries['research_jobs']['company_name'] }}</td>
+                <td><a class="btn btn-success btn-sm" href="{{ asset($inquiries['screenshot_url']) }}">Screenshot</a></td>
+                <td><a class="btn btn-info btn-sm" href="{{ '//'.$inquiries['research_jobs']['company_website'] }}">Website Link</a></td>
+                <td>{{ $inquiries['user']['name'] ?? "" }}</td>
+                <td>{{ $inquiries['jobs_status']['status'] }}</td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('admin.users.show',$researches['id']) }}">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('admin.users.show',$inquiries['id']) }}">Edit</a>
                   </form>
                 </td>
               </tr>

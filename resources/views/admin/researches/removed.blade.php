@@ -58,7 +58,7 @@
                 <td>{{ $researches['company_product_url'] }}</td>
                 <td>{{ $researches['country']['country_name'] }}</td>
                 <td>{{ $researches['jobs_status']['status'] }}</td>
-                <td>{{ $researches['user']['name'] }}</td>
+                <td>{{ $researches['user']['name'] ?? "" }}</td>
                 <td>{{ $researches['auditor_research_jobs']['user']['name'] ?? "No" }}</td>
                 <td>
                     <a class="btn btn-primary btn-sm" href="{{ route('admin.users.show',$researches['id']) }}">Edit</a>
