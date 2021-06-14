@@ -329,6 +329,42 @@ class AdminController extends Controller
         return view('/admin/inquiries/removed', compact('inquiryJobsLists'))->with('i');
     }
 
+    //reports function
+    public function showAllReports()
+    {
+        $user = Auth::user();
+
+        $researchJobsId = [];
+
+        $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        $researchJobsLists = json_decode($listResearchJobs, true);
+
+        foreach($researchJobsLists as $researchLists){
+            array_push($researchJobsId, $researchLists['id']);
+        }
+
+        if(count($researchJobsId) == 0){
+            $researchJobsId = 0;
+        }
+
+        $listInquiryJobs = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('is_form', 'No')->with('ResearchJobs', 'JobsStatus','User')->get();
+        $inquiryJobsLists = json_decode($listInquiryJobs, true);
+
+        return view('/admin/reports/index', compact('inquiryJobsLists'))->with('i');
+    }
+
+    //blacklist function
+    public function showAllBlacklist()
+    {
+        $auth = Auth::user();
+
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('is_blacklist', 'Yes')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+
+        $researchesList = json_decode($listResearches, true);
+
+        return view('/admin/blacklist/index', compact('researchesList'))->with('i');
+    }
+
     //general setting function
     public function showFormAddGeneralSetting()
     {

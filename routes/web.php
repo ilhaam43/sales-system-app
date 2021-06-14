@@ -121,6 +121,15 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/removed', [AdminController::class, 'showRemovedInquiries'])->name('admin.inquiries.removed');
         });
 
+        //inquiries route
+        Route::group(['prefix' => 'reports'], function () {
+            Route::get('/', [AdminController::class, 'showAllReports'])->name('admin.reports.index');
+        });
+
+        Route::group(['prefix' => 'blacklist'], function () {
+            Route::get('/', [AdminController::class, 'showAllBlacklist'])->name('admin.blacklist.index');
+        });
+
         //settings general route
         Route::group(['prefix' => 'setting'], function () {
             Route::get('/', [AdminController::class, 'showGeneralSetting'])->name('admin.settings.index');

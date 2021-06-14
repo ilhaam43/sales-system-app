@@ -130,20 +130,6 @@
         </div>
       </li>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages5" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-clipboard-list"></i>
-          <span>Results</span>
-        </a>
-        <div id="collapsePages5" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Results menu :</h6>
-            <a class="collapse-item" href="/admin/results">All Results</a>
-          </div>
-        </div>
-      </li>
-
       <!-- Nav Item - Charts -->
       <li class="nav-item">
         <a class="nav-link" href="/admin/photos">
