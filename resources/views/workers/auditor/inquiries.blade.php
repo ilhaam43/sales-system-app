@@ -55,7 +55,7 @@
                       <td>{{ $inquiryLists['research_jobs']['company_name'] }}</td>
                       <td><a href="{{ asset($inquiryLists['screenshot_url']) }}">Screenshot</a></td>
                       <td>{{ $inquiryLists['jobs_status']['status']}}</td>
-                      <td><a class="btn btn-primary btn-sm" href="{{ route('researcher.detail.researches',$inquiryLists['id']) }}">Edit</a></td>
+                      <td><a class="btn btn-primary btn-sm" href="{{ route('auditor.detail.inquiries',$inquiryLists['id']) }}">Edit</a></td>
                     </tr>
                   </tbody>
                   @endforeach

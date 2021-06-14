@@ -119,11 +119,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/notice', [AuditorController::class, 'showNotice'])->name('auditor.notice');
         Route::get('/my-work', [AuditorController::class, 'showMyWork'])->name('auditor.mywork');
         Route::get('/payments', [AuditorController::class, 'showPayments'])->name('auditor.payments');
-        Route::get('/inquiries', [AuditorController::class, 'showInquiries'])->name('auditor.inquiries');
-        Route::get('/researches', [AuditorController::class, 'showResearches'])->name('auditor.researches');
-        Route::post('/add-inquiry', [AuditorController::class, 'addInquiryData'])->name('auditor.store.inquiry');
-        Route::post('/add-report', [AuditorController::class, 'addReportData'])->name('auditor.store.report');
         Route::get('/profile', [AuditorController::class, 'showProfile'])->name('auditor.profile');
         Route::put('/profile', [AuditorController::class, 'updateProfile'])->name('auditor.update');
+        Route::get('/inquiries', [AuditorController::class, 'showInquiries'])->name('auditor.inquiries');
+        Route::get('/researches', [AuditorController::class, 'showResearches'])->name('auditor.researches');
+        Route::get('/inquiries/{id}', [AuditorController::class, 'showDetailInquiries'])->name('auditor.detail.inquiries');
+        Route::put('/inquiries/{id}', [AuditorController::class, 'updateInquiries'])->name('auditor.update.inquiries');
+        Route::get('/researches/{id}', [AuditorController::class, 'showDetailResearches'])->name('auditor.detail.researches');
+        Route::put('/researches/{id}', [AuditorController::class, 'updateResearches'])->name('auditor.update.researches');
     });
 });

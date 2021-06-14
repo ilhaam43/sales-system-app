@@ -9,6 +9,7 @@ use App\Services\AuditorService;
 
 use App\Models\User;
 use App\Models\Countries;
+use App\Models\JobsStatus;
 use App\Models\ResearchJobs;
 use App\Models\InquiryJobs;
 use App\Models\ProductCategory;
@@ -78,6 +79,19 @@ class AuditorController extends Controller
         return view('workers/auditor/inquiries', compact('inquiryJobsLists','listCountries','productCategories', 'user'))->with('i');
     }
 
+    public function showDetailInquiries($id)
+    {   
+        $listJobsStatus = JobsStatus::whereNotIn('id', array(4))->get();
+        $listInquiryJobs = InquiryJobs::where('id', $id)->with('JobsStatus', 'ResearchJobs')->get();
+        $inquiryJobsLists = json_decode($listInquiryJobs, true);
+
+        foreach($inquiryJobsLists as $inquiryList){
+            $inquiryJobsLists = $inquiryList;
+        }
+
+        return view('workers/auditor/updateInquiries', compact('inquiryJobsLists','listJobsStatus'))->with('i');
+    }
+
     public function showFAQ()
     {
         return view('workers/auditor/faq');
@@ -124,6 +138,15 @@ class AuditorController extends Controller
         }
 
         return view('workers/auditor/profile', compact('userData','listCountries'))->with('i');
+    }
+
+    public function updateInquiries(Request $request, $id)
+    {
+        $request->validate([
+            'job_status_id'         => 'required',
+        ]);
+
+        return $this->service->updateInquiries($request, $id);
     }
 
     public function updateProfile(Request $request)
