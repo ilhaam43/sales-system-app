@@ -5,6 +5,7 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ResearcherController;
 use App\Http\Controllers\InqurierController;
+use App\Http\Controllers\AuditorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,5 +111,19 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/add-report', [InqurierController::class, 'addReportData'])->name('inqurier.store.report');
         Route::get('/profile', [InqurierController::class, 'showProfile'])->name('inqurier.profile');
         Route::put('/profile', [InqurierController::class, 'updateProfile'])->name('inqurier.update');
+    });
+
+    Route::group(['prefix' => 'auditor', 'middleware' => ['authorized:auditor']], function () {
+        Route::get('/', [AuditorController::class, 'index'])->name('auditor.index');
+        Route::get('/faq', [AuditorController::class, 'showFAQ'])->name('auditor.faq');
+        Route::get('/notice', [AuditorController::class, 'showNotice'])->name('auditor.notice');
+        Route::get('/my-work', [AuditorController::class, 'showMyWork'])->name('auditor.mywork');
+        Route::get('/payments', [AuditorController::class, 'showPayments'])->name('auditor.payments');
+        Route::get('/inquiries', [AuditorController::class, 'showInquiries'])->name('auditor.inquiries');
+        Route::get('/companies', [AuditorController::class, 'showCompanies'])->name('auditor.companies');
+        Route::post('/add-inquiry', [AuditorController::class, 'addInquiryData'])->name('auditor.store.inquiry');
+        Route::post('/add-report', [AuditorController::class, 'addReportData'])->name('auditor.store.report');
+        Route::get('/profile', [AuditorController::class, 'showProfile'])->name('auditor.profile');
+        Route::put('/profile', [AuditorController::class, 'updateProfile'])->name('auditor.update');
     });
 });
