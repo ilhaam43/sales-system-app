@@ -66,14 +66,19 @@ class AuditorController extends Controller
         $productCategories = json_decode($productCategory, true);
 
         $researchJobsId = [];
-        $listResearchJobs = ResearchJobs::where('job_status_id', 3)->where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+
+        $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
         $researchJobsLists = json_decode($listResearchJobs, true);
 
         foreach($researchJobsLists as $researchLists){
             array_push($researchJobsId, $researchLists['id']);
         }
 
-        $listInquiryJobs = InquiryJobs::whereIn('research_jobs_id', array($researchJobsId))->where('job_status_id', 3)->where('is_form', 'Yes')->with('ResearchJobs', 'JobsStatus')->get();
+        if(count($researchJobsId) == 0){
+            $researchJobsId = 0;
+        }
+
+        $listInquiryJobs = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->with('ResearchJobs', 'JobsStatus')->get();
         $inquiryJobsLists = json_decode($listInquiryJobs, true);
         
         return view('workers/auditor/inquiries', compact('inquiryJobsLists','listCountries','productCategories', 'user'))->with('i');
