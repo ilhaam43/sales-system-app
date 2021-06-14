@@ -1,14 +1,14 @@
-@extends('superadmin.layout.template')
+@extends('admin.layout.template')
 
 @section('content')
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">List Settings</h1>
     
-    <a href="/superadmin/setting/create" class="btn btn-success btn-icon-split">
+    <a href="/admin/setting/create" class="btn btn-success btn-icon-split">
         <span class="text">Add New Setting</span>
     </a>
     </br></br>

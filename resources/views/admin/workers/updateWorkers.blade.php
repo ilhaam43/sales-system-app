@@ -1,4 +1,4 @@
-@extends('superadmin.layout.template')
+@extends('admin.layout.template')
 
 @section('content')
 

@@ -97,19 +97,19 @@ Route::group(['middleware' => ['auth']], function () {
         });
         //workers user route
         Route::group(['prefix' => 'workers'], function () {
-            Route::get('/{workers}', [SuperAdminController::class, 'showWorkersList'])->name('admin.workers.index');
-            Route::get('/{workers}/{id}', [SuperAdminController::class, 'showWorkersDetails'])->name('admin.workers.show');
-            Route::put('/{workers}/{id}', [SuperAdminController::class, 'updateUserWorkers'])->name('admin.workers.update');
-            Route::delete('/{workers}/{id}', [SuperAdminController::class, 'deleteUserWorkers'])->name('admin.workers.destroy');
+            Route::get('/{workers}', [AdminController::class, 'showWorkersList'])->name('admin.workers.index');
+            Route::get('/{workers}/{id}', [AdminController::class, 'showWorkersDetails'])->name('admin.workers.show');
+            Route::put('/{workers}/{id}', [AdminController::class, 'updateUserWorkers'])->name('admin.workers.update');
+            Route::delete('/{workers}/{id}', [AdminController::class, 'deleteUserWorkers'])->name('admin.workers.destroy');
         });
         //settings general route
         Route::group(['prefix' => 'setting'], function () {
-            Route::get('/', [SuperAdminController::class, 'showGeneralSetting'])->name('admin.settings.index');
-            Route::get('/create', [SuperAdminController::class, 'showFormAddGeneralSetting'])->name('admin.settings.store.index');
-            Route::post('/create', [SuperAdminController::class, 'addGeneralSetting'])->name('admin.settings.store');
-            Route::get('/{id}', [SuperAdminController::class, 'showDetailGeneralSetting'])->name('admin.settings.detail');
-            Route::put('/{id}', [SuperAdminController::class, 'updateGeneralSetting'])->name('admin.settings.update');
-            Route::delete('/{id}', [SuperAdminController::class, 'deleteGeneralSetting'])->name('admin.settings.destroy');
+            Route::get('/', [AdminController::class, 'showGeneralSetting'])->name('admin.settings.index');
+            Route::get('/create', [AdminController::class, 'showFormAddGeneralSetting'])->name('admin.settings.store.index');
+            Route::post('/create', [AdminController::class, 'addGeneralSetting'])->name('admin.settings.store');
+            Route::get('/{id}', [AdminController::class, 'showDetailGeneralSetting'])->name('admin.settings.detail');
+            Route::put('/{id}', [AdminController::class, 'updateGeneralSetting'])->name('admin.settings.update');
+            Route::delete('/{id}', [AdminController::class, 'deleteGeneralSetting'])->name('admin.settings.destroy');
         });
     });
 
