@@ -31,7 +31,7 @@ class ResearcherController extends Controller
         $user = Auth::user();
         $listCountries = Countries::all();
 
-        $productCategory = User::where('product_category_id', $user->product_category_id)->with('ProductCategory')->get();
+        $productCategory = User::where('id', $user->id)->with('ProductCategory')->get();
         $productCategories = json_decode($productCategory, true);
 
         $listResearchJobs = ResearchJobs::where('user_id', $user->id)->with('Country', 'JobsStatus')->get();
