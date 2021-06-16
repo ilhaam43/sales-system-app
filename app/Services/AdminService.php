@@ -158,11 +158,24 @@ class AdminService
     {
         try{
             foreach($request['id'] as $id){
+
+                $inquiryJobs = InquiryJobs::whereIn('id', $request['id'])->get();
+
+                foreach($inquiryJobs as $inquiries){
+                    $screenshotImg = file_exists(public_path($inquiries->screenshot_url));
+                    if($inquiries->screenshot_url !== NULL && $screenshotImg == 1){
+                        $deleteScreenshot = unlink($inquiries->screenshot_url);
+                    }
+                }
+
                 $approveInquiries = InquiryJobs::find($id)->update([
                     'job_status_id' => 1,
+                    'screenshot_url' => NULL,
                 ]);
             }
+
         }catch(\Throwable $th){
+            return $th;
             return response()->json(['success' => false, 'message' => "Inquiries data failed to approve",]);
         }
 
@@ -173,8 +186,18 @@ class AdminService
     {
         try{
             foreach($request['id'] as $id){
+                $inquiryJobs = InquiryJobs::whereIn('id', $request['id'])->get();
+
+                foreach($inquiryJobs as $inquiries){
+                    $screenshotImg = file_exists(public_path($inquiries->screenshot_url));
+                    if($inquiries->screenshot_url !== NULL && $screenshotImg == 1){
+                        $deleteScreenshot = unlink($inquiries->screenshot_url);
+                    }
+                }
+
                 $rejectInquiries = InquiryJobs::find($id)->update([
                     'job_status_id' => 4,
+                    'screenshot_url' => NULL,
                 ]);
             }
         }catch(\Throwable $th){
