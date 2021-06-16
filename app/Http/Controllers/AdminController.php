@@ -213,6 +213,33 @@ class AdminController extends Controller
         return view('/admin/researches/removed', compact('researchesList'))->with('i');
     }
 
+    public function approveResearches(Request $request)
+    {
+        $request->validate([
+            'id'   => 'required',
+        ]);
+
+        return $this->service->approveResearches($request);
+    }
+
+    public function rejectResearches(Request $request)
+    {
+        $request->validate([
+            'id'   => 'required',
+        ]);
+
+        return $this->service->rejectResearches($request);
+    }
+
+    public function removeResearches(Request $request)
+    {
+        $request->validate([
+            'id'   => 'required',
+        ]);
+
+        return $this->service->removeResearches($request);
+    }
+
     //inquiries function
     public function showAllInquiries()
     {

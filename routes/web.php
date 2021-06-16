@@ -110,6 +110,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/pending', [AdminController::class, 'showPendingResearches'])->name('admin.researches.pending');
             Route::get('/rejected', [AdminController::class, 'showRejectedResearches'])->name('admin.researches.rejected');
             Route::get('/removed', [AdminController::class, 'showRemovedResearches'])->name('admin.researches.removed');
+            Route::post('/approve', [AdminController::class, 'approveResearches'])->name('admin.researches.approve');
+            Route::post('/reject', [AdminController::class, 'rejectResearches'])->name('admin.researches.reject');
+            Route::post('/remove', [AdminController::class, 'removeResearches'])->name('admin.researches.remove');
         });
 
         //inquiries route

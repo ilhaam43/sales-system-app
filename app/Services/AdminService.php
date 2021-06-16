@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\ProductCategory;
 use App\Models\Photos;
+use App\Models\ResearchJobs;
+use App\Models\InquiryJobs;
+use App\Models\AuditorInquiryJobs;
+use App\Models\AuditorResearchJobs;
 use App\Models\User;
 use App\Models\UsersRole;
 use App\Models\Settings;
@@ -85,7 +89,6 @@ class AdminService
     }
 
     //workers function logic
-
     public function updateUserWorkers($request, $workers, $id)
     {
         $check = empty($request['password']);
@@ -117,6 +120,52 @@ class AdminService
         }
         
         return response()->json(['success' => true, 'message' => "{$workers} data deleted successfully",]);
+    }
+
+    //researches logic
+    public function approveResearches($request)
+    {
+        try{
+            foreach($request['id'] as $id){
+                $approveResearches = ResearchJobs::find($id)->update([
+                    'job_status_id' => 1,
+                ]);
+            }
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Researches data failed to approve",]);
+        }
+
+        return response()->json(['success' => true, 'message' => "Researches data success to approve",]);
+    }
+
+    public function rejectResearches($request)
+    {
+        try{
+            foreach($request['id'] as $id){
+                $approveResearches = ResearchJobs::find($id)->update([
+                    'job_status_id' => 2,
+                ]);
+            }
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Researches data failed to approve",]);
+        }
+
+        return response()->json(['success' => true, 'message' => "Researches data success to reject",]);
+    }
+
+    public function removeResearches($request)
+    {
+        try{
+            foreach($request['id'] as $id){
+                $approveResearches = ResearchJobs::find($id)->update([
+                    'job_status_id' => 4,
+                ]);
+            }
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Researches data failed to remove",]);
+        }
+
+        return response()->json(['success' => true, 'message' => "Researches data success to remove",]);
     }
 
     //general settings logic
