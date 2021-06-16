@@ -117,6 +117,11 @@ class AuditorService
             $inquiryJobs = InquiryJobs::where('id', $id)->first();
             $researchJobs = ResearchJobs::where('id', $inquiryJobs->research_jobs_id)->first();
 
+            if($request['job_status_id'] == 1){
+                $deleteScreenshot = unlink($inquiryJobs->screenshot_url);
+                $request['screenshot_url'] = NULL;
+            }
+
             $createAuditInquiriesData = AuditorInquiryJobs::create([
                 'user_id' => $user->id,
                 'inquiry_job_id' => $id,

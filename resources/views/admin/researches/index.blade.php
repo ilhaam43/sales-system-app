@@ -71,7 +71,6 @@
                 <td>{{ $researches['auditor_research_jobs']['user']['name'] ?? "No" }}</td>
                 <td>
                     <a class="btn btn-primary btn-sm" href="{{ route('admin.users.show',$researches['id']) }}">Edit</a>
-                  </form>
                 </td>
               </tr>
             </tbody>
