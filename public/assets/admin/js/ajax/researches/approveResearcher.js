@@ -29,7 +29,7 @@ function approveConfirmation() {
                     if (results.success === true) {
                         swal("Done!", results.message, "success");
                         window.setTimeout(function(){ 
-                            window.location.replace('/admin/researches');
+                            window.location.replace('/admin/researches/approved');
                         } ,2000);
                     } else {
                         swal("Error!", results.message, "error");

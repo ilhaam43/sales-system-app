@@ -1,10 +1,10 @@
-function rejectConfirmation() {
+function approveConfirmation() {
     swal({
-        title: "Reject researches data",
-        text: "Are you sure to reject this data?",
+        title: "Approve inquiries data",
+        text: "Are you sure to approve this data?",
         type: "warning",
         showCancelButton: !0,
-        confirmButtonText: "Reject",
+        confirmButtonText: "Approve",
         cancelButtonText: "Cancel",
         reverseButtons: !0
     }).then(function (e) {
@@ -21,7 +21,7 @@ function rejectConfirmation() {
             }else{
             $.ajax({
                 type: 'POST',
-                url: "/admin/researches/reject",
+                url: "/admin/inquiries/approve",
                 cache: false,
                 data: {_token: CSRF_TOKEN, id:id},
                 dataType: 'JSON',
@@ -29,7 +29,7 @@ function rejectConfirmation() {
                     if (results.success === true) {
                         swal("Done!", results.message, "success");
                         window.setTimeout(function(){ 
-                            window.location.replace('/admin/researches/removed');
+                            window.location.replace('/admin/inquiries/approved');
                         } ,2000);
                     } else {
                         swal("Error!", results.message, "error");

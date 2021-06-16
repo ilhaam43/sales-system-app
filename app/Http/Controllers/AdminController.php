@@ -231,15 +231,6 @@ class AdminController extends Controller
         return $this->service->rejectResearches($request);
     }
 
-    public function removeResearches(Request $request)
-    {
-        $request->validate([
-            'id'   => 'required',
-        ]);
-
-        return $this->service->removeResearches($request);
-    }
-
     //inquiries function
     public function showAllInquiries()
     {
@@ -354,6 +345,24 @@ class AdminController extends Controller
         $inquiryJobsLists = json_decode($listInquiryJobs, true);
 
         return view('/admin/inquiries/removed', compact('inquiryJobsLists'))->with('i');
+    }
+
+    public function approveInquiries(Request $request)
+    {
+        $request->validate([
+            'id'   => 'required',
+        ]);
+
+        return $this->service->approveInquiries($request);
+    }
+
+    public function rejectInquiries(Request $request)
+    {
+        $request->validate([
+            'id'   => 'required',
+        ]);
+
+        return $this->service->rejectInquiries($request);
     }
 
     //reports function

@@ -1,3 +1,7 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ asset('assets/admin/js/ajax/researches/approveResearcher.js') }}"></script>
+<script src="{{ asset('assets/admin/js/ajax/researches/rejectResearcher.js') }}"></script>
+<script src="{{ asset('assets/admin/js/ajax/researches/selectAllCheckbox.js') }}"></script>
 <script>
 $(document).ready(function(){
     $("#openAll").click(function(){

@@ -142,30 +142,46 @@ class AdminService
     {
         try{
             foreach($request['id'] as $id){
-                $approveResearches = ResearchJobs::find($id)->update([
-                    'job_status_id' => 2,
+                $rejectResearches = ResearchJobs::find($id)->update([
+                    'job_status_id' => 4,
                 ]);
             }
         }catch(\Throwable $th){
-            return response()->json(['success' => false, 'message' => "Researches data failed to approve",]);
+            return response()->json(['success' => false, 'message' => "Researches data failed to reject",]);
         }
 
         return response()->json(['success' => true, 'message' => "Researches data success to reject",]);
     }
 
-    public function removeResearches($request)
+    //inquiries function
+    public function approveInquiries($request)
     {
         try{
             foreach($request['id'] as $id){
-                $approveResearches = ResearchJobs::find($id)->update([
+                $approveInquiries = InquiryJobs::find($id)->update([
+                    'job_status_id' => 1,
+                ]);
+            }
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Inquiries data failed to approve",]);
+        }
+
+        return response()->json(['success' => true, 'message' => "Inquiries data success to approve",]);
+    }
+
+    public function rejectInquiries($request)
+    {
+        try{
+            foreach($request['id'] as $id){
+                $rejectInquiries = InquiryJobs::find($id)->update([
                     'job_status_id' => 4,
                 ]);
             }
         }catch(\Throwable $th){
-            return response()->json(['success' => false, 'message' => "Researches data failed to remove",]);
+            return response()->json(['success' => false, 'message' => "Inquiries data failed to approve",]);
         }
 
-        return response()->json(['success' => true, 'message' => "Researches data success to remove",]);
+        return response()->json(['success' => true, 'message' => "Inquiries data success to reject",]);
     }
 
     //general settings logic

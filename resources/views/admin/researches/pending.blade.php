@@ -32,8 +32,7 @@
       <div class="card-body">
       <button type="button" class="btn btn-primary btn-sm" id="selectAll" class="main"><i class="fa fa-check-circle"></i> Select All</button>
       <button type="button" class="btn btn-info btn-sm" id="openAll" class="main"><i class="fa fa-eye"></i> Open Website</button>
-      <button type="button" class="btn btn-danger btn-sm" style="float: right; margin-right:10px;" id="remove" class="main" onclick="deleteConfirmation()"><i class="fa fa-trash"></i> Remove</button>
-      <button type="button" class="btn btn-warning btn-sm" style="float: right; margin-right:10px;" id="reject" class="main" onclick="rejectConfirmation()"><i class="fa fa-times"></i> Reject</button>
+      <button type="button" class="btn btn-danger btn-sm" style="float: right; margin-right:10px;" id="reject" class="main" onclick="rejectConfirmation()"><i class="fa fa-times"></i> Reject</button>
       <button type="button" class="btn btn-success btn-sm" style="float: right; margin-right:10px;" id="approve" class="main" onclick="approveConfirmation()"><i class="fa fa-check"></i> Approve</button>
       </br>
       </br>
@@ -89,10 +88,5 @@
     
 @endsection
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="{{ asset('assets/admin/js/ajax/researches/approveResearcher.js') }}"></script>
-<script src="{{ asset('assets/admin/js/ajax/researches/rejectResearcher.js') }}"></script>
-<script src="{{ asset('assets/admin/js/ajax/researches/deleteResearcher.js') }}"></script>
-<script src="{{ asset('assets/admin/js/ajax/researches/selectAllCheckbox.js') }}"></script>
-@include('admin.javascript.openAll')
+@include('admin.javascript.openAllResearches')
 </html>

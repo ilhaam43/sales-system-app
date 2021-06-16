@@ -30,10 +30,17 @@
         <h6 class="m-0 font-weight-bold text-primary">Pending Inquiries List</h6>
       </div>
       <div class="card-body">
+      <button type="button" class="btn btn-primary btn-sm" id="selectAll" class="main"><i class="fa fa-check-circle"></i> Select All</button>
+      <button type="button" class="btn btn-info btn-sm" id="openAll" class="main"><i class="fa fa-eye"></i> Open All</button>
+      <button type="button" class="btn btn-danger btn-sm" style="float: right; margin-right:10px;" id="reject" class="main" onclick="rejectConfirmation()"><i class="fa fa-times"></i> Reject</button>
+      <button type="button" class="btn btn-success btn-sm" style="float: right; margin-right:10px;" id="approve" class="main" onclick="approveConfirmation()"><i class="fa fa-check"></i> Approve</button>
+      </br>
+      </br>
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>No</th>
                     <th>Company</th>
                     <th>Screenshot</th>
@@ -46,9 +53,14 @@
             <tbody>
                 @foreach ($inquiryJobsLists as $inquiries)
                 <tr>
+                <td><input type="checkbox" name="id_inquiries[]" id="id_inquiries" value="{{ $inquiries['id'] }}"/></td>
                 <td>{{ ++$i }}</td>
                 <td>{{ $inquiries['research_jobs']['company_name'] }}</td>
-                <td><a class="btn btn-success btn-sm" href="{{ asset($inquiries['screenshot_url']) }}">Screenshot</a></td>
+                <td>@if($inquiries['screenshot_url'] !== NULL)
+                <a class="btn btn-success btn-sm" href="{{ asset($inquiries['screenshot_url']) }}">Screenshot</a></td>
+                @else
+                DELETED</td>
+                @endif
                 <td><a class="btn btn-info btn-sm" href="{{ '//'.$inquiries['research_jobs']['company_website'] }}">Website Link</a></td>
                 <td>{{ $inquiries['user']['name'] ?? "" }}</td>
                 <td>{{ $inquiries['jobs_status']['status'] }}</td>
@@ -73,4 +85,5 @@
     
 @endsection
 </body>
+@include('admin.javascript.openAllInquiries')
 </html>

@@ -112,7 +112,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/removed', [AdminController::class, 'showRemovedResearches'])->name('admin.researches.removed');
             Route::post('/approve', [AdminController::class, 'approveResearches'])->name('admin.researches.approve');
             Route::post('/reject', [AdminController::class, 'rejectResearches'])->name('admin.researches.reject');
-            Route::post('/remove', [AdminController::class, 'removeResearches'])->name('admin.researches.remove');
         });
 
         //inquiries route
@@ -122,6 +121,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/pending', [AdminController::class, 'showPendingInquiries'])->name('admin.inquiries.pending');
             Route::get('/rejected', [AdminController::class, 'showRejectedInquiries'])->name('admin.inquiries.rejected');
             Route::get('/removed', [AdminController::class, 'showRemovedInquiries'])->name('admin.inquiries.removed');
+            Route::post('/approve', [AdminController::class, 'approveInquiries'])->name('admin.inquiries.approve');
+            Route::post('/reject', [AdminController::class, 'rejectInquiries'])->name('admin.inquiries.reject');
         });
 
         //inquiries route
