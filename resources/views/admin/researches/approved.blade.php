@@ -32,6 +32,8 @@
       <div class="card-body">
       <button type="button" class="btn btn-primary btn-sm" id="selectAll" class="main"><i class="fa fa-check-circle"></i> Select All</button>
       <button type="button" class="btn btn-info btn-sm" id="openAll" class="main"><i class="fa fa-eye"></i> Open Website</button>
+
+      <button type="button" class="btn btn-dark btn-sm" style="float: right; margin-right:10px;" id="blacklist" class="main" onclick="blacklistConfirmation()"><i class="fa fa-trash-alt"></i> Blacklist</button>
       <button type="button" class="btn btn-danger btn-sm" style="float: right; margin-right:10px;" id="reject" class="main" onclick="rejectConfirmation()"><i class="fa fa-times"></i> Reject</button>
       <button type="button" class="btn btn-success btn-sm" style="float: right; margin-right:10px;" id="approve" class="main" onclick="approveConfirmation()"><i class="fa fa-check"></i> Approve</button>
       </br>
@@ -56,7 +58,7 @@
             </thead>
             <tbody>
                 @foreach ($researchesList as $researches)
-                <tr>
+                <tr id="{{ $researches['id'] }}">
                 <td><input type="checkbox" name="id_researcher[]" id="id_researcher" value="{{ $researches['id'] }}"/></td>
                 <td>{{ ++$i }}</td>
                 <td>{{ $researches['company_name'] }}</td>
