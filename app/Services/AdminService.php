@@ -153,6 +153,21 @@ class AdminService
         return response()->json(['success' => true, 'message' => "Researches data success to reject",]);
     }
 
+    public function blacklistResearches($request)
+    {
+        try{
+            foreach($request['id'] as $id){
+                $blacklistResearches = ResearchJobs::find($id)->update([
+                    'is_blacklist' => "Yes",
+                ]);
+            }
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Researches data failed to blacklist",]);
+        }
+
+        return response()->json(['success' => true, 'message' => "Researches data success to blacklist",]);
+    }
+
     //inquiries function
     public function approveInquiries($request)
     {

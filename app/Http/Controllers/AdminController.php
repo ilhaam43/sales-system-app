@@ -251,6 +251,15 @@ class AdminController extends Controller
         return $this->service->rejectResearches($request);
     }
 
+    public function blacklistResearches(Request $request)
+    {
+        $request->validate([
+            'id'   => 'required',
+        ]);
+
+        return $this->service->blacklistResearches($request);
+    }
+
     //inquiries function
     public function showAllInquiries()
     {
