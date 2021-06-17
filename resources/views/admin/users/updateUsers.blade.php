@@ -32,14 +32,49 @@
         <form method="POST" action="{{ route('admin.users.update',$users->id) }}">
             @csrf
             @method('PUT')
+            <h5 class="m-0 font-weight-bold text-primary">Payment & Quantity</h5>
+            <hr>
             <div class="form-row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
+                <center><h5 class="m-0 font-weight-bold">Quantity Research</h5></center>
+                </br>
+                <center><h5 class="m-0 font-weight-bold">Total : {{$users->quantity_research_paid ?? 0}}</h5></center>
+                </br>
+                <center><h6 class="m-0 font-weight-bold">Enter Paid Research :</h6></center>
+                <input type="text" class="form-control" name="quantity_research_paid" value="{{$users->quantity_research_paid ?? 0}}" required>
+                </div>
+                <div class="col-sm-4">
+                <center><h5 class="m-0 font-weight-bold">Quantity Inquiry</h5></center>
+                </br>
+                <center><h5 class="m-0 font-weight-bold">Total : {{$users->quantity_inquiry_paid ?? 0}}</h5></center>
+                </br>
+                <center><h6 class="m-0 font-weight-bold">Enter Paid Inquiry :</h6></center>
+                <input type="text" class="form-control" name="quantity_inquiry_paid" value="{{$users->quantity_inquiry_paid ?? 0}}" required>
+                </div>
+                <div class="col-sm-4">
+                <center><h5 class="m-0 font-weight-bold">Quantity Reply</h5></center>
+                </br>
+                <center><h5 class="m-0 font-weight-bold">Total : {{$users->quantity_reply_paid ?? 0}}</h5></center>
+                </br>
+                <center><h6 class="m-0 font-weight-bold">Enter Paid Reply :</h6></center>
+                <input type="text" class="form-control" name="quantity_reply_paid" value="{{$users->quantity_research_paid ?? 0}}" required>
+                </div>
+            </div>
+            </br>
+            <h5 class="m-0 font-weight-bold text-primary">Profile Data</h5>
+            <hr>
+            <div class="form-row">
+                <div class="col-sm-4">
                 <label for="name"><b>Name :</label></b>
                 <input type="text" class="form-control" placeholder="Name" name="name" value="{{$users->name}}" required>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                 <label for="name"><b>Email :</label></b>
                 <input type="text" class="form-control" placeholder="Email" name="email" value="{{$users->email}}" required>
+                </div>
+                <div class="col-sm-4">
+                <label for="name"><b>Enter Amount Paid :</label></b>
+                <input type="text" class="form-control" name="amount_paid" value="{{$users->amount_paid ?? 0}}" required>
                 </div>
             </div>
             </br>
