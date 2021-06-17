@@ -52,7 +52,7 @@
             </thead>
             <tbody>
                 @foreach ($inquiryJobsLists as $inquiries)
-                <tr>
+                <tr id="{{$inquiries['id']}}">
                 <td><input type="checkbox" name="id_inquiries[]" id="id_inquiries" value="{{ $inquiries['id'] }}"/></td>
                 <td>{{ ++$i }}</td>
                 <td>{{ $inquiries['research_jobs']['company_name'] }}</td>

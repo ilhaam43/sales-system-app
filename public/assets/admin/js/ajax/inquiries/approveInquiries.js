@@ -27,10 +27,11 @@ function approveConfirmation() {
                 dataType: 'JSON',
                 success: function (results) {
                     if (results.success === true) {
-                        swal("Done!", results.message, "success");
-                        window.setTimeout(function(){ 
-                            window.location.replace('/admin/inquiries/approved');
-                        } ,2000);
+                        for(var i=0; i<id.length; i++){
+                            swal("Done!", results.message, "success");
+                            $('tr#'+id[i]+'').css('background-color', '#ccc');
+                            $('tr#'+id[i]+'').fadeOut('slow');
+                        }
                     } else {
                         swal("Error!", results.message, "error");
                     }
