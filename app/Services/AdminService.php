@@ -19,6 +19,34 @@ use App\Models\Settings;
 
 class AdminService
 {
+    //global function 
+    public function globalPendingResearch($auth)
+    {
+        $globalPendingResearch = count(ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 3)->where('is_blacklist', 'No')->get());
+
+        return $globalPendingResearch;
+    }
+
+    public function globalPendingInquiry($auth)
+    {
+        $researchJobsId = [];
+        
+        $listResearchJobs = ResearchJobs::where('product_category_id', $auth->product_category_id)->get();
+        $researchJobsLists = json_decode($listResearchJobs, true);
+
+        foreach($researchJobsLists as $researchLists){
+            array_push($researchJobsId, $researchLists['id']);
+        }
+
+        if(count($researchJobsId) == 0){
+            $researchJobsId = 0;
+        }
+
+        $globalPendingInquiry = count(InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->get());
+
+        return $globalPendingInquiry;
+    }
+
 
     //photo function logic
     public function addPhoto($request)

@@ -83,7 +83,11 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages">
+          @if($globalPendingResearch > 0)
+          <i class="fas fa-fw fa-building"></i><i class="fas fa-fw fa-sync fa-spin"></i>
+          @else
           <i class="fas fa-fw fa-building"></i>
+          @endif
           <span>Researches</span>
         </a>
         <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -101,7 +105,11 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3" aria-expanded="true" aria-controls="collapsePages">
+        @if($globalPendingInquiry > 0)
+          <i class="fas fa-fw fa-envelope"></i><i class="fas fa-fw fa-sync fa-spin"></i>
+        @else
           <i class="fas fa-fw fa-envelope"></i>
+        @endif
           <span>Inquiries</span>
         </a>
         <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
