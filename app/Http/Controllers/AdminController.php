@@ -55,29 +55,6 @@ class AdminController extends Controller
         return view('/admin/index', compact('researchApproved','inquiryApproved','user'));
     }
 
-    /*public function pendingSignTemplate()
-    {
-        $researchJobsId = [];
-        $auth = Auth::user();
-
-        $listResearchJobs = ResearchJobs::where('product_category_id', $auth->product_category_id)->get();
-        $researchJobsLists = json_decode($listResearchJobs, true);
-
-        foreach($researchJobsLists as $researchLists){
-            array_push($researchJobsId, $researchLists['id']);
-        }
-
-        if(count($researchJobsId) == 0){
-            $researchJobsId = 0;
-        }
-
-        $researchPending = count(ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 3)->where('is_blacklist', 'No')->get());
-
-        $inquiryPending = count(InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->with('ResearchJobs', 'JobsStatus','User')->get());
-
-        return view('/admin/layout/template', compact('researchPending','inquiryPending'));
-    }*/
-
     //photo function
     public function showPhotoList()
     {
