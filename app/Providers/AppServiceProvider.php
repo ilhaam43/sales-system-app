@@ -35,13 +35,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {   
         view()->composer('*', function ($view) 
-        {
+        {   if(Auth::check()){
             $auth = Auth::user();
             $globalPendingResearch = $this->service->globalPendingResearch($auth);
             $globalPendingInquiry = $this->service->globalPendingInquiry($auth);
             
             view()->share('globalPendingResearch', $globalPendingResearch);
             view()->share('globalPendingInquiry', $globalPendingInquiry);
+            }
         });
     }
 }
