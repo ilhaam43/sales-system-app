@@ -45,13 +45,18 @@ class AdminController extends Controller
             $researchJobsId = 0;
         }
 
-        $researchApproved = count(ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 1)->get());
+        $researchApproved = count(ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 1)->where('is_blacklist', 'No')->get());
 
         $inquiryApproved = count(InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 1)->where('is_form', 'Yes')->with('ResearchJobs', 'JobsStatus','User')->get());
 
         $user = count(User::whereNotIn('id', [1,2])->where('product_category_id', $auth->product_category_id)->get());
 
         return view('/admin/index', compact('researchApproved','inquiryApproved','user'));
+    }
+
+    public function pendingSign()
+    {
+
     }
 
     //photo function
@@ -193,7 +198,7 @@ class AdminController extends Controller
     {
         $auth = Auth::user();
 
-        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 1)->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 1)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
 
         $researchesList = json_decode($listResearches, true);
 
