@@ -187,7 +187,7 @@ class AdminController extends Controller
     {
         $auth = Auth::user();
 
-        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
 
         $researchesList = json_decode($listResearches, true);
 
@@ -209,7 +209,7 @@ class AdminController extends Controller
     {
         $auth = Auth::user();
 
-        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 3)->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 3)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
 
         $researchesList = json_decode($listResearches, true);
 
@@ -220,7 +220,7 @@ class AdminController extends Controller
     {
         $auth = Auth::user();
 
-        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 2)->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 2)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
 
         $researchesList = json_decode($listResearches, true);
 
@@ -231,7 +231,7 @@ class AdminController extends Controller
     {
         $auth = Auth::user();
 
-        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 4)->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 4)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
 
         $researchesList = json_decode($listResearches, true);
 
