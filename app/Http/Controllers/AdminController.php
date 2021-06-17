@@ -31,7 +31,27 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('/admin/index');
+        $researchJobsId = [];
+        $auth = Auth::user();
+
+        $listResearchJobs = ResearchJobs::where('product_category_id', $auth->product_category_id)->get();
+        $researchJobsLists = json_decode($listResearchJobs, true);
+
+        foreach($researchJobsLists as $researchLists){
+            array_push($researchJobsId, $researchLists['id']);
+        }
+
+        if(count($researchJobsId) == 0){
+            $researchJobsId = 0;
+        }
+
+        $researchApproved = count(ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 1)->get());
+
+        $inquiryApproved = count(InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 1)->where('is_form', 'Yes')->with('ResearchJobs', 'JobsStatus','User')->get());
+
+        $user = count(User::whereNotIn('id', [1,2])->where('product_category_id', $auth->product_category_id)->get());
+
+        return view('/admin/index', compact('researchApproved','inquiryApproved','user'));
     }
 
     //photo function
