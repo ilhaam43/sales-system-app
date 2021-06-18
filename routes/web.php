@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ResearcherController;
 use App\Http\Controllers\InqurierController;
 use App\Http\Controllers\AuditorController;
+use App\Http\Controllers\AjaxDataResearchesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +114,14 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/approve', [AdminController::class, 'approveResearches'])->name('admin.researches.approve');
             Route::post('/reject', [AdminController::class, 'rejectResearches'])->name('admin.researches.reject');
             Route::post('/blacklist', [AdminController::class, 'blacklistResearches'])->name('admin.researches.blacklist');
+
+            Route::group(['prefix' => 'data'], function () {
+                Route::get('/all/', [AjaxDataResearchesController::class, 'allDataResearches'])->name('admin.researches.data.all');
+                Route::get('/approved/', [AjaxDataResearchesController::class, 'approvedDataResearches'])->name('admin.researches.data.approved');
+                Route::get('/pending/', [AjaxDataResearchesController::class, 'pendingDataResearches'])->name('admin.researches.data.pending');
+                Route::get('/rejected/', [AjaxDataResearchesController::class, 'rejectedDataResearches'])->name('admin.researches.data.rejected');
+                Route::get('/removed/', [AjaxDataResearchesController::class, 'removedDataResearches'])->name('admin.researches.data.removed');
+            });
         });
 
         //inquiries route

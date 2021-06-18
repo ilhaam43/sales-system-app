@@ -51,29 +51,9 @@
                     <th>Status</th>
                     <th>Researches</th>
                     <th>Auditor</th>
-                    <th>Edit</th>
+                    <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach ($researchesList as $researches)
-                <tr id="{{ $researches['id'] }}">
-                <td><input type="checkbox" name="id_researcher[]" id="id_researcher" value="{{ $researches['id'] }}"/></td>
-                <td>{{ ++$i }}</td>
-                <td>{{ $researches['company_name'] }}</td>
-                <td><a class="btn btn-primary btn-sm" href="{{ $researches['company_website'] }}" target="_blank">Website</a></td>
-                <td>{{ $researches['company_email'] }}</td>
-                <td>{{ $researches['company_phone'] }}</td>
-                <td><a class="btn btn-info btn-sm" href="{{ $researches['company_product_url'] }}" target="_blank">Product</a></td>
-                <td>{{ $researches['country']['country_name'] }}</td>
-                <td>{{ $researches['jobs_status']['status'] }}</td>
-                <td><a href="{{ '/admin/users/'.$researches['user']['id'] }}">{{ $researches['user']['name'] ?? "" }}</a></td>
-                <td>{{ $researches['auditor_research_jobs']['user']['name'] ?? "No" }}</td>
-                <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('admin.users.show',$researches['id']) }}">Edit</a>
-                </td>
-              </tr>
-            </tbody>
-            @endforeach
           </table>
         </div>
       </div>
@@ -89,4 +69,6 @@
 @endsection
 </body>
 @include('admin.javascript.openAllResearches')
+<!-- Script -->
+@include('admin.javascript.researches.showAllResearches')
 </html>
