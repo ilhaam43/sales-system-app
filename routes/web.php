@@ -107,6 +107,7 @@ Route::group(['middleware' => ['auth']], function () {
         //researches route
         Route::group(['prefix' => 'researches'], function () {
             Route::get('/', [AdminController::class, 'showAllResearches'])->name('admin.researches.index');
+            Route::get('/export-approved-excel', [AdminController::class, 'exportApprovedResearches'])->name('admin.export.approved.excel');
             Route::get('/approved', [AdminController::class, 'showApprovedResearches'])->name('admin.researches.approved');
             Route::get('/pending', [AdminController::class, 'showPendingResearches'])->name('admin.researches.pending');
             Route::get('/rejected', [AdminController::class, 'showRejectedResearches'])->name('admin.researches.rejected');

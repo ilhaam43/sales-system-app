@@ -36,6 +36,7 @@
       <button type="button" class="btn btn-dark btn-sm" style="float: right; margin-right:10px;" id="blacklist" class="main" onclick="blacklistConfirmation()"><i class="fa fa-trash-alt"></i> Blacklist</button>
       <button type="button" class="btn btn-danger btn-sm" style="float: right; margin-right:10px;" id="reject" class="main" onclick="rejectConfirmation()"><i class="fa fa-times"></i> Reject</button>
       <button type="button" class="btn btn-success btn-sm" style="float: right; margin-right:10px;" id="approve" class="main" onclick="approveConfirmation()"><i class="fa fa-check"></i> Approve</button>
+      <a href="{{route('admin.export.approved.excel')}}" class="btn btn-success btn-sm" style="float: right; margin-right:10px;" id="export" class="main"><i class="fa fa-file-excel"></i> Export Excel</a>
       </br>
       </br>
         <div class="table-responsive">

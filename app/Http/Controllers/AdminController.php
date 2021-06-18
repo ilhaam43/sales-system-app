@@ -21,6 +21,9 @@ use App\Models\InquiryJobs;
 use App\Models\AuditorInquiryJobs;
 use App\Models\AuditorResearchJobs;
 
+use App\Exports\ApprovedResearches;
+use Excel;
+
 class AdminController extends Controller
 {
     private $service;
@@ -199,6 +202,19 @@ class AdminController extends Controller
         $researchesList = json_decode($listResearches, true);
 
         return view('/admin/researches/approved', compact('researchesList'))->with('i');
+    }
+
+    public function exportApprovedResearches()
+    {
+        $auth = Auth::user();
+
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 1)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+
+        $researchesList = json_decode($listResearches, true);
+
+        $i = 0;
+
+        return Excel::download(new ApprovedResearches($researchesList, $i), 'research_approved.xlsx');
     }
 
     public function showPendingResearches()
