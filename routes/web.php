@@ -108,10 +108,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{workers}/{id}', [AdminController::class, 'showWorkersDetails'])->name('admin.workers.show');
             Route::put('/{workers}/{id}', [AdminController::class, 'updateUserWorkers'])->name('admin.workers.update');
             Route::delete('/{workers}/{id}', [AdminController::class, 'deleteUserWorkers'])->name('admin.workers.destroy');
-
-            Route::group(['prefix' => 'data'], function () {
-                Route::get('/researcher/', [AjaxDataUsersController::class, 'allDataResearcher'])->name('admin.researcher.data.all');
-            });
+            
+            Route::get('/{workers}/data/all/', [AjaxDataUsersController::class, 'allDataWorkers'])->name('admin.workers.data.all');
         });
 
         //researches route

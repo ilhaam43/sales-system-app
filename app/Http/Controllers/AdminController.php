@@ -84,7 +84,7 @@ class AdminController extends Controller
     public function showUsersList()
     {
         $auth = Auth::user();
-        $user = User::whereNotIn('id', [1,2])->where('product_category_id', $auth->product_category_id)->with('ProductCategory', 'UsersStatus', 'UsersRole', 'Country')->get();
+        $user = User::whereNotIn('role_id', [1,2])->where('product_category_id', $auth->product_category_id)->with('ProductCategory', 'UsersStatus', 'UsersRole', 'Country')->get();
         $users = json_decode($user, true);
         
         return view('/admin/users/index', compact('users'))->with('i');

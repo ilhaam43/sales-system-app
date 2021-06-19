@@ -29,7 +29,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Edit {{ucwords($workers)}} User</h6>
         </div>
         <div class="card-body">
-        <form method="POST" action="{{ route('workers.update',['workers' => $workers, 'id' => $worker['id']]) }}">
+        <form method="POST" action="{{ route('admin.workers.update',['workers' => $workers, 'id' => $worker['id']]) }}">
             @csrf
             @method('PUT')
             <div class="form-row">
@@ -92,7 +92,7 @@
                 </div>
             </div>
             </br>
-            <a href="{{route('workers.index', $workers)}}" class="btn btn-danger">Cancel</a>
+            <a href="{{route('admin.workers.index', $workers)}}" class="btn btn-danger">Cancel</a>
             <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
