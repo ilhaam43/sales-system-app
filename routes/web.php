@@ -8,6 +8,7 @@ use App\Http\Controllers\InqurierController;
 use App\Http\Controllers\AuditorController;
 use App\Http\Controllers\AjaxDataResearchesController;
 use App\Http\Controllers\AjaxDataInquiriesController;
+use App\Http\Controllers\AjaxDataUsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,6 +97,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{id}', [AdminController::class, 'showUsersDetails'])->name('admin.users.show');
             Route::put('/{id}', [AdminController::class, 'updateUsers'])->name('admin.users.update');
             Route::delete('/{id}', [AdminController::class, 'deleteUsers'])->name('admin.users.destroy');
+
+            Route::group(['prefix' => 'data'], function () {
+                Route::get('/all/', [AjaxDataUsersController::class, 'allDataUsers'])->name('admin.users.data.all');
+            });
         });
         //workers user route
         Route::group(['prefix' => 'workers'], function () {
@@ -103,6 +108,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{workers}/{id}', [AdminController::class, 'showWorkersDetails'])->name('admin.workers.show');
             Route::put('/{workers}/{id}', [AdminController::class, 'updateUserWorkers'])->name('admin.workers.update');
             Route::delete('/{workers}/{id}', [AdminController::class, 'deleteUserWorkers'])->name('admin.workers.destroy');
+
+            Route::group(['prefix' => 'data'], function () {
+                Route::get('/researcher/', [AjaxDataUsersController::class, 'allDataResearcher'])->name('admin.researcher.data.all');
+            });
         });
 
         //researches route
