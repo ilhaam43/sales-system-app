@@ -239,4 +239,26 @@ class AjaxDataResearchesController extends Controller
         }
     }
 
+    public function showResearcherData(Request $request)
+    {
+        if ($request->ajax()) {
+            $auth = Auth::user();
+
+            $data = ResearchJobs::where('user_id', $auth->id)->with('Country', 'JobsStatus')->select('research_jobs.*');
+            
+            return Datatables::eloquent($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($data){
+                    $editRoute = route('researcher.detail.researches',$data->id);
+                    $actionBtn = '<td><a class="btn btn-primary btn-sm" href="'.$editRoute.'">Edit</a></td>';
+    
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])->setRowId(function ($data) {
+                    return $data->id;
+                })
+                ->make(true);
+        }
+    }
+
 }

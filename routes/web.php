@@ -186,6 +186,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/researches', [ResearcherController::class, 'showResearches'])->name('researcher.researches');
         Route::get('/researches/{id}', [ResearcherController::class, 'showDetailResearches'])->name('researcher.detail.researches');
         Route::put('/researches/{id}', [ResearcherController::class, 'updateResearches'])->name('researcher.update.researches');
+
+        Route::group(['prefix' => 'data'], function () {
+            Route::get('/all/', [AjaxDataResearchesController::class, 'showResearcherData'])->name('researcher.data.all');
+        });
     });
 
     Route::group(['prefix' => 'inqurier', 'middleware' => ['authorized:inqurier']], function () {
