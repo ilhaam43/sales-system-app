@@ -50,27 +50,6 @@
                     <th>Edit</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach ($inquiryJobsLists as $inquiries)
-                <tr id="{{$inquiries['id']}}">
-                <td><input type="checkbox" name="id_inquiries[]" id="id_inquiries" value="{{ $inquiries['id'] }}"/></td>
-                <td>{{ ++$i }}</td>
-                <td>{{ $inquiries['research_jobs']['company_name'] }}</td>
-                <td>@if($inquiries['screenshot_url'] !== NULL)
-                <a class="btn btn-success btn-sm" href="{{ asset($inquiries['screenshot_url']) }}">Screenshot</a></td>
-                @else
-                DELETED</td>
-                @endif
-                <td><a class="btn btn-info btn-sm" href="{{ '//'.$inquiries['research_jobs']['company_website'] }}">Website Link</a></td>
-                <td>{{ $inquiries['user']['name'] ?? "" }}</td>
-                <td>{{ $inquiries['jobs_status']['status'] }}</td>
-                <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('admin.users.show',$inquiries['id']) }}">Edit</a>
-                  </form>
-                </td>
-              </tr>
-            </tbody>
-            @endforeach
           </table>
         </div>
       </div>
@@ -86,4 +65,5 @@
 @endsection
 </body>
 @include('admin.javascript.openAllInquiries')
+@include('admin.javascript.inquiries.showPendingInquiries')
 </html>

@@ -5,6 +5,7 @@
             processing: true,
             serverSide: true,
             ajax: "{{route('admin.researches.data.all')}}",
+            "lengthMenu": [ 10, 20, 30, 50 ],
             columns: [
                 { data: 'checkbox', 
                     name: 'checkbox', 

@@ -4,7 +4,7 @@
         $('#dataTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{route('admin.researches.data.removed')}}",
+            ajax: "{{route('admin.inquiries.data.all')}}",
             "lengthMenu": [ 10, 20, 30, 50 ],
             columns: [
                 { data: 'checkbox', 
@@ -19,27 +19,23 @@
                     }
                 },
 
-                { data: 'company_name', name: 'company_name'},
+                { data: 'research_jobs.company_name', name: 'ResearchJobs.company_name', orderable: false },
 
-                { data: 'website', 
+                {   data: 'screenshot', 
+                    name: 'screenshot', 
+                    orderable: false, 
+                    searchable: false 
+                },
+
+                {   data: 'website', 
                     name: 'website', 
                     orderable: false, 
                     searchable: false 
                 },
-                
-                { data: 'company_email', name: 'company_email'},
-                { data: 'company_phone', name: 'company_phone'},
 
-                { data: 'product_page', 
-                    name: 'product_page', 
-                    orderable: false, 
-                    searchable: false 
-                },
+                { data: 'user', name: 'user'},
 
-                { data: 'country', name: 'country'},
                 { data: 'status', name: 'status'},
-                { data: 'researcher', name: 'researcher'},
-                { data: 'auditor', name: 'auditor'},
 
                 {
                     data: 'action', 
