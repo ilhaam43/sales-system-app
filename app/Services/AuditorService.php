@@ -95,11 +95,15 @@ class AuditorService
         try{
             $researchJobs = ResearchJobs::where('id', $id)->first();
 
-            $createAuditInquiriesData = AuditorResearchJobs::create([
-                'user_id' => $user->id,
-                'researcher_job_id' => $id,
-                'product_category_id' => $researchJobs->product_category_id,
-            ]);
+            
+
+            if($request['job_status_id'] !== '3'){
+                $createAuditInquiriesData = AuditorResearchJobs::create([
+                    'user_id' => $user->id,
+                    'researcher_job_id' => $id,
+                    'product_category_id' => $researchJobs->product_category_id,
+                ]);
+            }   
 
             $updateResearchData = ResearchJobs::find($id)->update($request->all());
         }catch(\Throwable $th){
