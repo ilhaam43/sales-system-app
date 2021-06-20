@@ -57,10 +57,40 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="{{ request()->is('researcher') ? 'active' : ''}}"><a href="{{ url('researcher') }}">How We Work</a></li>
-          <li class="{{ request()->is('researcher/researches') ? 'active' : ''}}"><a href="{{ url('researcher/researches') }}">Researches</a></li>
-          <li class="{{ request()->is('researcher/faq') ? 'active' : ''}}"><a href="{{ url('researcher/faq') }}">FAQ</a></li>
-          <li class="{{ request()->is('researcher/notice') ? 'active' : ''}}"><a href="{{ url('researcher/notice') }}">Notice</a></li>
+      
+      @if($globalWorkerNotifications)
+        @if($globalWorkerNotifications->how_we_work == 1)
+          <li class="{{ request()->is('researcher') ? 'active' : ''}}"><a href="{{ url('researcher') }}"><i class="fas fa-fw fa-sync fa-spin"></i> How We Work</a></li>
+        @endif
+        @if($globalWorkerNotifications->how_we_work == 0)
+          <li class="{{ request()->is('researcher') ? 'active' : ''}}"><a href="{{ url('researcher') }}"> How We Work</a></li>
+        @endif
+      @else
+          <li class="{{ request()->is('researcher') ? 'active' : ''}}"><a href="{{ url('researcher') }}"> How We Work</a></li>
+      @endif
+
+          <li class="{{ request()->is('researcher/researches') ? 'active' : ''}}"><a href="{{ url('researcher/researches') }}"> Researches</a></li>
+      @if($globalWorkerNotifications)
+        @if($globalWorkerNotifications->faq == 1)
+          <li class="{{ request()->is('researcher/faq') ? 'active' : ''}}"><a href="{{ url('researcher/faq') }}"><i class="fas fa-fw fa-sync fa-spin"></i> FAQ</a></li>
+        @endif
+        @if($globalWorkerNotifications->faq == 0)
+          <li class="{{ request()->is('researcher/faq') ? 'active' : ''}}"><a href="{{ url('researcher/faq') }}"> FAQ</a></li>
+        @endif
+      @else
+        <li class="{{ request()->is('researcher/faq') ? 'active' : ''}}"><a href="{{ url('researcher/faq') }}"> FAQ</a></li>
+      @endif
+
+      @if($globalWorkerNotifications)
+        @if($globalWorkerNotifications->notice == 1)
+          <li class="{{ request()->is('researcher/notice') ? 'active' : ''}}"><a href="{{ url('researcher/notice') }}"><i class="fas fa-fw fa-sync fa-spin"></i> Notice</a></li>
+        @endif  
+        @if($globalWorkerNotifications->notice == 0)
+          <li class="{{ request()->is('researcher/notice') ? 'active' : ''}}"><a href="{{ url('researcher/notice') }}"> Notice</a></li>
+        @endif
+      @else
+        <li class="{{ request()->is('researcher/notice') ? 'active' : ''}}"><a href="{{ url('researcher/notice') }}"> Notice</a></li>
+      @endif
           <li class="{{ request()->is('researcher/my-work') ? 'active' : ''}}"><a href="{{ url('researcher/my-work') }}">My Work</a></li>
           <li class="{{ request()->is('researcher/payments') ? 'active' : ''}}"><a href="{{ url('researcher/payments') }}">Payments</a></li>
           <li class="drop-down"><a href="">Account</a>

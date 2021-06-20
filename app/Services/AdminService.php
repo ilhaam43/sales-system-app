@@ -16,6 +16,7 @@ use App\Models\AuditorResearchJobs;
 use App\Models\User;
 use App\Models\UsersRole;
 use App\Models\Settings;
+use App\Models\WorkerNotifications;
 
 class AdminService
 {
@@ -45,6 +46,13 @@ class AdminService
         $globalPendingInquiry = count(InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->get());
 
         return $globalPendingInquiry;
+    }
+
+    public function globalWorkerNotifications($auth)
+    {
+        $globalWorkerNotifications = WorkerNotifications::where('user_id', $auth->id)->first();
+        
+        return $globalWorkerNotifications;
     }
 
 

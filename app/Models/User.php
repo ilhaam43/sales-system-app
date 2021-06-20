@@ -73,4 +73,8 @@ class User extends Authenticatable
     public function country(){
         return $this->belongsTo(Countries::class, 'country_id', 'id');
     }
+
+    public function workerNotifications(){
+        return $this->hasMany(WorkerNotifications::class, 'user_id', 'id');
+    }
 }

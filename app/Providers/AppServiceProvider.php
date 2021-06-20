@@ -36,15 +36,23 @@ class AppServiceProvider extends ServiceProvider
     {   
         view()->composer('*', function ($view) 
         {   if(Auth::check()){
-            $auth = Auth::user();
-            if($auth->role_id == 2){
-            $globalPendingResearch = $this->service->globalPendingResearch($auth);
-            $globalPendingInquiry = $this->service->globalPendingInquiry($auth);
-            
-            view()->share('globalPendingResearch', $globalPendingResearch);
-            view()->share('globalPendingInquiry', $globalPendingInquiry);
+                $auth = Auth::user();
+
+                if($auth->role_id == 2){
+                    $globalPendingResearch = $this->service->globalPendingResearch($auth);
+                    $globalPendingInquiry = $this->service->globalPendingInquiry($auth);
+                    
+                    view()->share('globalPendingResearch', $globalPendingResearch);
+                    view()->share('globalPendingInquiry', $globalPendingInquiry);
+                }
+
+                if($auth->role_id !== 1 && $auth->role_id !== 2)
+                {
+                    $globalWorkerNotifications = $this->service->globalWorkerNotifications($auth);
+
+                    view()->share('globalWorkerNotifications', $globalWorkerNotifications);
+                }
             }
-        }
         });
     }
 }

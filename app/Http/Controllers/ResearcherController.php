@@ -12,6 +12,7 @@ use App\Models\Countries;
 use App\Models\ResearchJobs;
 use App\Models\ProductCategory;
 use App\Models\Settings;
+use App\Models\WorkerNotifications;
 
 class ResearcherController extends Controller
 {
@@ -24,7 +25,10 @@ class ResearcherController extends Controller
 
     public function index()
     {
+        $auth = Auth::user();
         $howWeWork = Settings::where('id', 1)->first();
+        
+        $updateWeWork = WorkerNotifications::where('user_id', $auth->id)->update(['how_we_work' => 0]);
 
         return view('workers/researcher/index', compact('howWeWork'));
     }
@@ -58,14 +62,20 @@ class ResearcherController extends Controller
 
     public function showFAQ()
     {
+        $auth = Auth::user();
         $researchFAQ = Settings::where('id', 4)->first();
+
+        $updateFAQ = WorkerNotifications::where('user_id', $auth->id)->update(['faq' => 0]);
 
         return view('workers/researcher/faq', compact('researchFAQ'));
     }
 
     public function showNotice()
     {
+        $auth = Auth::user();
         $researchNotice = Settings::where('id', 7)->first();
+
+        $updateNotice = WorkerNotifications::where('user_id', $auth->id)->update(['notice' => 0]);
 
         return view('workers/researcher/notice', compact('researchNotice'));
     }
