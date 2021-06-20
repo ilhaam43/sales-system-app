@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Countries;
 use App\Models\ResearchJobs;
 use App\Models\ProductCategory;
+use App\Models\Settings;
 
 class ResearcherController extends Controller
 {
@@ -23,7 +24,9 @@ class ResearcherController extends Controller
 
     public function index()
     {
-        return view('workers/researcher/index');
+        $howWeWork = Settings::where('id', 1)->first();
+
+        return view('workers/researcher/index', compact('howWeWork'));
     }
 
     public function showResearches()
@@ -55,12 +58,16 @@ class ResearcherController extends Controller
 
     public function showFAQ()
     {
-        return view('workers/researcher/faq');
+        $researchFAQ = Settings::where('id', 4)->first();
+
+        return view('workers/researcher/faq', compact('researchFAQ'));
     }
 
     public function showNotice()
     {
-        return view('workers/researcher/notice');
+        $researchNotice = Settings::where('id', 7)->first();
+
+        return view('workers/researcher/notice', compact('researchNotice'));
     }
 
     public function showPayments()

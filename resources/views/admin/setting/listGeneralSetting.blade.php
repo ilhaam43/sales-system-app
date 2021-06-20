@@ -34,7 +34,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <table class="table table-bordered" width="100%" cellspacing="0">
             <thead>
               <tr>
                 <th>No</th>
@@ -48,12 +48,11 @@
               <tr>
                 <td>{{ ++$i }}</td>
                 <td>{{ $setting->setting_name }}</td>
-                <td>{{ "$setting->setting_description" }}</td>
-                <td width="15%">
-                    <a class="btn btn-primary btn-sm" href="{{ route('admin.settings.detail',$setting->id) }}">Edit</a>
-
-                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $setting->id }}" data-action="{{ route('settings.destroy',$setting->id) }}" onclick="deleteConfirmation({{$setting->id}})"> Delete</button>
-                  </form>
+                <td>{!! $setting->setting_description !!}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="{{ route('admin.settings.detail',$setting->id) }}">Edit</a></br></br>
+                    
+                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $setting->id }}" data-action="{{ route('admin.settings.destroy',$setting->id) }}" onclick="deleteConfirmation({{$setting->id}})">Delete</button>
                 </td>
               </tr>
             </tbody>

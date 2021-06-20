@@ -12,6 +12,7 @@ use App\Models\Countries;
 use App\Models\ResearchJobs;
 use App\Models\InquiryJobs;
 use App\Models\ProductCategory;
+use App\Models\Settings;
 
 class InqurierController extends Controller
 {
@@ -24,7 +25,9 @@ class InqurierController extends Controller
 
     public function index()
     {
-        return view('workers/inqurier/index');
+        $inquirerHowWeWork = Settings::where('id', 2)->first();
+
+        return view('workers/inqurier/index', compact('inquirerHowWeWork'));
     }
 
     public function showInquiries()
@@ -49,12 +52,16 @@ class InqurierController extends Controller
 
     public function showFAQ()
     {
-        return view('workers/inqurier/faq');
+        $inquirerFAQ = Settings::where('id', 5)->first();
+
+        return view('workers/inqurier/faq', compact('inquirerFAQ'));
     }
 
     public function showNotice()
     {
-        return view('workers/inqurier/notice');
+        $inquirerNotice = Settings::where('id', 8)->first();
+
+        return view('workers/inqurier/notice', compact('inquirerNotice'));
     }
 
     public function showPayments()

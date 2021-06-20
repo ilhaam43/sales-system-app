@@ -85,7 +85,7 @@
                 <label>Form Available :</label>
                 <select name="is_form" class="form-control">
                     <option value="Yes" {{ ( 'Yes' == $researchJobsLists['is_form']) ? 'selected' : '' }}>Yes</option>
-                    <option value="Yes" {{ ( 'No' == $researchJobsLists['is_form']) ? 'selected' : '' }}>No</option>
+                    <option value="No" {{ ( 'No' == $researchJobsLists['is_form']) ? 'selected' : '' }}>No</option>
                 </select>
         </div>
         <div class="form-group col-md-6">

@@ -15,6 +15,7 @@ use App\Models\InquiryJobs;
 use App\Models\AuditorInquiryJobs;
 use App\Models\AuditorResearchJobs;
 use App\Models\ProductCategory;
+use App\Models\Settings;
 
 class AuditorController extends Controller
 {
@@ -27,7 +28,9 @@ class AuditorController extends Controller
 
     public function index()
     {
-        return view('workers/auditor/index');
+        $auditorHowWeWork = Settings::where('id', 3)->first();
+
+        return view('workers/auditor/index', compact('auditorHowWeWork'));
     }
 
     public function showResearches()
@@ -39,7 +42,7 @@ class AuditorController extends Controller
         $productCategory = User::where('product_category_id', $user->product_category_id)->with('ProductCategory')->get();
         $productCategories = json_decode($productCategory, true);
 
-        $listResearchJobs = ResearchJobs::where('job_status_id', 3)->where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        $listResearchJobs = ResearchJobs::where('job_status_id', 3)->where('product_category_id', $user->product_category_id)->where('is_blacklist', 'No')->with('Country', 'JobsStatus')->get();
         $researchJobsLists = json_decode($listResearchJobs, true);
         
         return view('workers/auditor/researches', compact('researchJobsLists','listCountries','productCategories', 'user'))->with('i');
@@ -101,12 +104,16 @@ class AuditorController extends Controller
 
     public function showFAQ()
     {
-        return view('workers/auditor/faq');
+        $auditorFAQ = Settings::where('id', 6)->first();
+
+        return view('workers/auditor/faq', compact('auditorFAQ'));
     }
 
     public function showNotice()
     {
-        return view('workers/auditor/notice');
+        $auditorNotice = Settings::where('id', 7)->first();
+
+        return view('workers/auditor/notice', compact('auditorNotice'));
     }
 
     public function showPayments()
