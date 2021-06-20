@@ -9,9 +9,7 @@ use App\Models\ProductCategory;
 use App\Models\User;
 use App\Models\UsersRole;
 use App\Models\UsersStatus;
-use App\Models\Photos;
 use App\Models\Countries;
-use App\Models\Settings;
 
 class SuperAdminController extends Controller
 {
@@ -72,28 +70,6 @@ class SuperAdminController extends Controller
         ]);
 
         return $this->service->updateProductCategory($request, $id);
-    }
-
-    //photo function
-    public function showPhotoList()
-    {
-        $photos = Photos::all();
-        return view('/superadmin/photos/listPhotos', compact('photos'))->with('i');
-    }
-
-    public function addPhoto(Request $request)
-    {
-        $request->validate([
-            'photo_name' => 'required',
-            'photo_image' => 'required|mimes:jpeg,bmp,png'
-        ]);
-
-        return $this->service->addPhoto($request);
-    }
-
-    public function deletePhoto($id)
-    {
-        return $this->service->deletePhoto($id);
     }
 
     //all users function
@@ -283,50 +259,5 @@ class SuperAdminController extends Controller
     public function deleteUserWorkers($workers, $id)
     {
         return $this->service->deleteUserWorkers($workers, $id);
-    }
-
-    //general setting function
-    public function showFormAddGeneralSetting()
-    {
-        return view('/superadmin/setting/addGeneralSetting');
-    }
-
-    public function showGeneralSetting()
-    {
-        $settings = Settings::all();
-
-        return view('/superadmin/setting/listGeneralSetting', compact('settings'))->with('i');
-    }
-
-    public function showDetailGeneralSetting($id)
-    {
-        $setting = Settings::find($id);
-
-        return view('/superadmin/setting/updateGeneralSetting', compact('setting'));
-    }
-
-    public function addGeneralSetting(Request $request)
-    {
-        $request->validate([
-            'setting_name' => 'required',
-            'setting_description' => 'required'
-        ]);
-
-        return $this->service->addGeneralSetting($request);
-    }
-
-    public function updateGeneralSetting(Request $request, $id)
-    {
-        $request->validate([
-            'setting_name' => 'required',
-            'setting_description' => 'required'
-        ]);
-
-        return $this->service->updateGeneralSetting($request, $id);
-    }
-
-    public function deleteGeneralSetting($id)
-    {
-        return $this->service->deleteGeneralSetting($id);
     }
 }

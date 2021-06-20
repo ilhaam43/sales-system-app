@@ -8,10 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\ProductCategory;
-use App\Models\Photos;
 use App\Models\User;
 use App\Models\UsersRole;
-use App\Models\Settings;
 
 class SuperAdminService
 {
@@ -47,40 +45,6 @@ class SuperAdminService
         }
         
         return response()->json(['success' => true, 'message' => "Product category data deleted successfully",]);
-    }
-
-    //photo function logic
-    public function addPhoto($request)
-    {
-        $name = $request->file('photo_image')->getClientOriginalName();
-        
-        try{
-        $uploadPhoto = $request->photo_image->move(public_path('superadmins/img/photos'), $name);
-
-        $addPhotos = new Photos([
-            "photo_name" => $request['photo_name'],
-            "photo_url" =>  'superadmins/img/photos/' . $name
-        ]);
-
-        $addPhotos->save();
-        }catch(\Throwable $th){
-            return back()->withError('Photo failed to add');
-        }
-
-        return redirect()->route('photos')->with('success', 'Photo added successfully');
-    }
-
-    public function deletePhoto($id)
-    {
-        try{
-            $photo = Photos::find($id);
-            $deletePhotoFile = unlink($photo->photo_url);
-            $deletePhotoData = Photos::where('id',$id)->delete();
-        }catch(\Throwable $th){
-            return response()->json(['success' => false, 'message' => "Photo data failed to delete",]);
-        }
-        
-        return response()->json(['success' => true, 'message' => "Photo data deleted successfully",]);
     }
 
     //all users logic
@@ -238,40 +202,6 @@ class SuperAdminService
         }
         
         return response()->json(['success' => true, 'message' => "{$workers} data deleted successfully",]);
-    }
-
-    //general settings logic
-    public function addGeneralSetting($request)
-    {
-        try {
-            $addSetting = Settings::create($request->all());
-        } catch(\Throwable $th) {
-            return back()->withError('Setting data failed to add because product categories cannot be duplicated');
-        }
-        
-        return redirect()->route('settings.index')->with('success', 'Setting data added successfully');
-    }
-
-    public function updateGeneralSetting($request, $id)
-    {
-        try{
-            $updateSetting = Settings::find($id)->update($request->all());
-        }catch(\Throwable $th) {
-            return back()->withError('Setting data failed to update because product categories cannot be duplicated');
-        }
-
-        return redirect()->route('settings.index')->with('success', 'Setting data updated successfully');
-    }
-
-    public function deleteGeneralSetting($id)
-    {
-        try{
-            $deleteSetting = Settings::where('id',$id)->delete();
-        }catch(\Throwable $th){
-            return response()->json(['success' => false, 'message' => "Setting data failed to delete",]);
-        }
-        
-        return response()->json(['success' => true, 'message' => "Setting data deleted successfully",]);
     }
 
 }

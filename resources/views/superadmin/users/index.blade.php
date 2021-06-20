@@ -34,6 +34,7 @@
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
+                <th>#</th>
                 <th>No</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -45,24 +46,6 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($users as $user)
-              <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $user['name'] }}</td>
-                <td>{{ $user['email'] }}</td>
-                <td>{{ $user['users_role']['role'] }}</td>
-                <td>{{ $user['country']['country_name'] }}</td>
-                <td>{{ $user['product_category']['category_name'] ?? "" }}</td>
-                <td>{{ $user['users_status']['status'] }}</td>
-                <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('users.show',$user['id']) }}">Edit</a>
-
-                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $user['id'] }}" data-action="{{ route('users.destroy',$user['id']) }}" onclick="deleteConfirmation({{$user['id']}})"> Delete</button>
-                  </form>
-                </td>
-              </tr>
-            </tbody>
-            @endforeach
           </table>
         </div>
       </div>
@@ -78,4 +61,5 @@
 @endsection
 </body>
 <script src="{{ asset('assets/superadmin/js/ajax/deleteUsers.js') }}"></script>
+@include('superadmin.javascript.showDataUsers')
 </html>
