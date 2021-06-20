@@ -104,7 +104,7 @@ class AjaxDataUsersController extends Controller
     {
         if ($request->ajax()) {
 
-            $data = User::whereNotIn('id', [1])->with(['ProductCategory', 'UsersStatus', 'UsersRole', 'Country'])->select('users.*');
+            $data = User::whereNotIn('role_id', [1])->with(['ProductCategory', 'UsersStatus', 'UsersRole', 'Country'])->select('users.*');
                 
             return Datatables::eloquent($data)
                 ->addIndexColumn()
@@ -155,6 +155,36 @@ class AjaxDataUsersController extends Controller
                     $routeDelete = route('workers.destroy',['workers' => $datas['users_role']['role'], 'id' => $data->id]);
 
                     $actionBtn = '<a class="btn btn-primary btn-sm" href="'.$routeEdit.'">Edit</a> <button class="btn btn-danger btn-sm remove-user" data-id="'.$data->id.'" data-action="'.$routeDelete.'" onclick="deleteConfirmation('.$data->id.', '.$datas['users_role']['role'].')">Delete</button>';
+
+                    return $actionBtn;
+                })->addColumn('checkbox', function($data){
+                    $checkbox = '<input type="checkbox" name="id_inquiries[]" id="id_inquiries" value="'.$data->id.'">';
+                    return $checkbox;
+                })->addColumn('status', function($data){
+                    $datas = json_decode($data, true);
+
+                    return $datas['users_status']['status'];
+                })
+                ->rawColumns(['actions', 'checkbox', 'status'])->setRowId(function ($data) {
+                    return $data->id;
+                })
+                ->make(true);
+        }
+    }
+
+    public function showDataAdmins(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $data = User::where('role_id', 2)->with(['ProductCategory', 'UsersStatus', 'UsersRole', 'Country'])->select('users.*');
+                
+            return Datatables::eloquent($data)
+                ->addIndexColumn()
+                ->addColumn('actions', function($data){
+                    $routeEdit = route('admins.show',$data->id);
+                    $routeDelete = route('admins.destroy',$data->id);
+
+                    $actionBtn = '<a class="btn btn-primary btn-sm" href="'.$routeEdit.'">Edit</a> <button class="btn btn-danger btn-sm remove-user" data-id="'.$data->id.'" data-action="'.$routeDelete.'" onclick="deleteConfirmation('.$data->id.')"> Delete</button>';
 
                     return $actionBtn;
                 })->addColumn('checkbox', function($data){

@@ -34,6 +34,7 @@
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
+                <th>#</th>
                 <th>No</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -43,24 +44,6 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
-              @foreach ($admins as $admin)
-              <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $admin['name'] }}</td>
-                <td>{{ $admin['email'] }}</td>
-                <td>{{ $admin['country']['country_name'] }}</td>
-                <td>{{ $admin['product_category']['category_name'] ?? "" }}</td>
-                <td>{{ $admin['users_status']['status'] }}</td>
-                <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('admins.show',$admin['id']) }}">Edit</a>
-
-                    <button class="btn btn-danger btn-sm remove-user" data-id="{{ $admin['id'] }}" data-action="{{ route('admins.destroy',$admin['id']) }}" onclick="deleteConfirmation({{$admin['id']}})"> Delete</button>
-                  </form>
-                </td>
-              </tr>
-            </tbody>
-            @endforeach
           </table>
         </div>
       </div>
@@ -76,4 +59,5 @@
 @endsection
 </body>
 <script src="{{ asset('assets/superadmin/js/ajax/deleteAdmin.js') }}"></script>
+@include('superadmin.javascript.showDataAdmins')
 </html>

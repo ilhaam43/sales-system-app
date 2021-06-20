@@ -60,6 +60,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{id}', [SuperAdminController::class, 'showAdminDetails'])->name('admins.show');
             Route::put('/{id}', [SuperAdminController::class, 'updateUserAdmin'])->name('admins.update');
             Route::delete('/{id}', [SuperAdminController::class, 'deleteUserAdmin'])->name('admins.destroy');
+
+            Route::group(['prefix' => 'data'], function () {
+                Route::get('/all/', [AjaxDataUsersController::class, 'showDataAdmins'])->name('admins.data.all');
+            });
         });
         //workers user route
         Route::group(['prefix' => 'workers'], function () {
