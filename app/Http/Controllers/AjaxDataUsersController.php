@@ -130,4 +130,46 @@ class AjaxDataUsersController extends Controller
         }
     }
 
+    public function showDataWorkers(Request $request, $workers)
+    {
+        if ($request->ajax()) {
+
+            $usersRole = UsersRole::where('role', $workers)->get();
+
+            if(count($usersRole) == 0){
+                return redirect()->route('admins.index');
+            }
+            
+            foreach($usersRole as $i => $roles){
+                $usersRole[$i] = $roles;
+            }
+
+            $data = User::where('role_id', $roles->id)->with(['ProductCategory', 'UsersStatus', 'UsersRole', 'Country'])->select('users.*');
+                
+            return Datatables::eloquent($data)
+                ->addIndexColumn()
+                ->addColumn('actions', function($data){
+                    $datas = json_decode($data, true);
+
+                    $routeEdit = route('workers.show',['workers' => $datas['users_role']['role'], 'id' => $data->id]);
+                    $routeDelete = route('workers.destroy',['workers' => $datas['users_role']['role'], 'id' => $data->id]);
+
+                    $actionBtn = '<a class="btn btn-primary btn-sm" href="'.$routeEdit.'">Edit</a> <button class="btn btn-danger btn-sm remove-user" data-id="'.$data->id.'" data-action="'.$routeDelete.'" onclick="deleteConfirmation('.$data->id.', '.$datas['users_role']['role'].')">Delete</button>';
+
+                    return $actionBtn;
+                })->addColumn('checkbox', function($data){
+                    $checkbox = '<input type="checkbox" name="id_inquiries[]" id="id_inquiries" value="'.$data->id.'">';
+                    return $checkbox;
+                })->addColumn('status', function($data){
+                    $datas = json_decode($data, true);
+
+                    return $datas['users_status']['status'];
+                })
+                ->rawColumns(['actions', 'checkbox', 'status'])->setRowId(function ($data) {
+                    return $data->id;
+                })
+                ->make(true);
+        }
+    }
+
 }

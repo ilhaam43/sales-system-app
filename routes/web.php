@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{workers}/{id}', [SuperAdminController::class, 'showWorkersDetails'])->name('workers.show');
             Route::put('/{workers}/{id}', [SuperAdminController::class, 'updateUserWorkers'])->name('workers.update');
             Route::delete('/{workers}/{id}', [SuperAdminController::class, 'deleteUserWorkers'])->name('workers.destroy');
+
+            Route::get('/{workers}/data/all/', [AjaxDataUsersController::class, 'showDataWorkers'])->name('workers.data.all');
         });
         
     });
