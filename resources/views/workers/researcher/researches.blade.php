@@ -192,7 +192,5 @@
 
   
 </body>
-@include('workers.researcher.javascript.showResearcherData')
-
-
+@include('workers.javascript.showResearcherData')
 </html>

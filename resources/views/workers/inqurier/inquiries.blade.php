@@ -48,17 +48,6 @@
                       <th>Inquiry Status</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    @foreach($inquiriesJobs as $inquiries)
-                    <tr>
-                      <td>{{++$i}}</td>
-                      <td>{{$inquiries['research_jobs']['company_name']}}</td>
-                      <td>{{$inquiries['research_jobs']['country']['country_name']}}</td>
-                      <td>{{$inquiries['research_jobs']['company_website']}}</td>
-                      <td>{{$inquiries['jobs_status']['status']}}</td>
-                    </tr>
-                    @endforeach
-                  </tbody>
                 </table>
               </div>
             </div>
@@ -76,6 +65,5 @@
 
   
 </body>
-
-
+@include('workers.javascript.showInqurierData')
 </html>

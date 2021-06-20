@@ -204,6 +204,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/add-report', [InqurierController::class, 'addReportData'])->name('inqurier.store.report');
         Route::get('/profile', [InqurierController::class, 'showProfile'])->name('inqurier.profile');
         Route::put('/profile', [InqurierController::class, 'updateProfile'])->name('inqurier.update');
+
+        Route::group(['prefix' => 'data'], function () {
+            Route::get('/all/', [AjaxDataInquiriesController::class, 'showInqurierData'])->name('inqurier.data.all');
+        });
     });
 
     Route::group(['prefix' => 'auditor', 'middleware' => ['authorized:auditor']], function () {
