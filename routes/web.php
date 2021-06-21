@@ -92,6 +92,7 @@ Route::group(['middleware' => ['auth']], function () {
         //all users route
         Route::group(['prefix' => 'users'], function () {
             Route::get('/', [AdminController::class, 'showUsersList'])->name('admin.users.index');
+            Route::post('/block', [AdminController::class, 'blockUsers'])->name('admin.users.block');
             Route::get('/{id}', [AdminController::class, 'showUsersDetails'])->name('admin.users.show');
             Route::put('/{id}', [AdminController::class, 'updateUsers'])->name('admin.users.update');
             Route::delete('/{id}', [AdminController::class, 'deleteUsers'])->name('admin.users.destroy');

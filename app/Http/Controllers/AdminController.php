@@ -125,6 +125,15 @@ class AdminController extends Controller
         return $this->service->deleteUsers($id);
     }
 
+    public function blockUsers(Request $request)
+    {
+        $request->validate([
+            'id'   => 'required',
+        ]);
+
+        return $this->service->blockUsers($request);
+    }
+
     //workers function
     public function showWorkersList($workers)
     {

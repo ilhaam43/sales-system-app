@@ -124,6 +124,21 @@ class AdminService
         return redirect()->route('admin.users.index')->with('success', 'User data updated successfully');
     }
 
+    public function blockUsers($request)
+    {
+        try{
+            foreach($request['id'] as $id){
+                $blockUsers = User::find($id)->update([
+                    'status_id' => 2,
+                ]);
+            }
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Users data failed to block",]);
+        }
+
+        return response()->json(['success' => true, 'message' => "Users data success to block",]);
+    }
+
     //workers function logic
     public function updateUserWorkers($request, $workers, $id)
     {

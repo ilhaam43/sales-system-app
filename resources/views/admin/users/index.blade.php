@@ -30,6 +30,8 @@
         <h6 class="m-0 font-weight-bold text-primary">Users List</h6>
       </div>
       <div class="card-body">
+      <button type="button" class="btn btn-danger btn-sm" style="float: right; margin-right:10px;" id="reject" class="main" onclick="blockConfirmation()"><i class="fa fa-times"></i> Block Users</button>
+      </br></br>
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
@@ -61,5 +63,6 @@
 @endsection
 </body>
 <script src="{{ asset('assets/admin/js/ajax/deleteUsers.js') }}"></script>
+<script src="{{ asset('assets/admin/js/ajax/blockUsers.js') }}"></script>
 @include('admin.javascript.users.showAllUsers')
 </html>
