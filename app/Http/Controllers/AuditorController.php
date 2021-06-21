@@ -122,7 +122,7 @@ class AuditorController extends Controller
         $auditorNotice = Settings::where('id', 7)->first();
 
         $updateNotice = WorkerNotifications::where('user_id', $auth->id)->update(['notice' => 0]);
-        
+
         return view('workers/auditor/notice', compact('auditorNotice'));
     }
 
@@ -134,7 +134,7 @@ class AuditorController extends Controller
         $researchQuantity = count(AuditorResearchJobs::where('user_id', $userId)->get());
         $inquiriesQuantity = count(AuditorInquiryJobs::where('user_id', $userId)->get());
         $researchPaid = $user->quantity_research_paid;
-        $inquiriesPaid = $user->quantity_inquiries_paid;
+        $inquiriesPaid = $user->quantity_inquire_paid;
         $amountPaid = $user->amount_paid;
 
         return view('workers/auditor/payments', compact('researchQuantity', 'inquiriesQuantity', 'researchPaid', 'inquiriesPaid', 'amountPaid'));

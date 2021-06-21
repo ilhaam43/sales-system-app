@@ -32,14 +32,70 @@
         <form method="POST" action="{{ route('admin.workers.update',['workers' => $workers, 'id' => $worker['id']]) }}">
             @csrf
             @method('PUT')
+            <h5 class="m-0 font-weight-bold text-primary">Payment & Quantity :</h5>
+            <hr>
+            <div class="form-row">
+                <div class="col-sm-4">
+                <center><h5 class="m-0 font-weight-bold">Quantity Research</h5></center>
+                </br>
+                <center><h5 class="m-0 font-weight-bold">Total : {{$countResearch ?? 0}}</h5></center>
+                </br>
+                <center><h6 class="m-0 font-weight-bold">Enter Paid Research :</h6></center>
+                <input type="text" class="form-control" name="quantity_research_paid" value="{{$worker->quantity_research_paid ?? 0}}" required>
+                </div>
+                <div class="col-sm-4">
+                <center><h5 class="m-0 font-weight-bold">Quantity Inquiry</h5></center>
+                </br>
+                <center><h5 class="m-0 font-weight-bold">Total : {{$countInquiry ?? 0}}</h5></center>
+                </br>
+                <center><h6 class="m-0 font-weight-bold">Enter Paid Inquiry :</h6></center>
+                <input type="text" class="form-control" name="quantity_inquire_paid" value="{{$worker->quantity_inquire_paid ?? 0}}" required>
+                </div>
+                <div class="col-sm-4">
+                <center><h5 class="m-0 font-weight-bold">Quantity Reply</h5></center>
+                </br>
+                <center><h5 class="m-0 font-weight-bold">Total : {{$worker->quantity_reply_paid ?? 0}}</h5></center>
+                </br>
+                <center><h6 class="m-0 font-weight-bold">Enter Paid Reply :</h6></center>
+                <input type="text" class="form-control" name="quantity_reply_paid" value="{{$worker->quantity_reply_paid ?? 0}}" required>
+                </div>
+            </div>
+            @if($workers == 'auditor')
+            </br>
             <div class="form-row">
                 <div class="col-sm-6">
+                <center><h5 class="m-0 font-weight-bold">Quantity Research Auditor</h5></center>
+                </br>
+                <center><h5 class="m-0 font-weight-bold">Total : {{$countAuditorResearch ?? 0}}</h5></center>
+                </br>
+                <center><h6 class="m-0 font-weight-bold">Enter Paid Research Auditor :</h6></center>
+                <input type="text" class="form-control" name="quantity_auditor_research_paid" value="{{$worker->quantity_auditor_research_paid ?? 0}}" required>
+                </div>
+                <div class="col-sm-6">
+                <center><h5 class="m-0 font-weight-bold">Quantity Inquiry Auditors</h5></center>
+                </br>
+                <center><h5 class="m-0 font-weight-bold">Total : {{$countAuditorInquiry ?? 0}}</h5></center>
+                </br>
+                <center><h6 class="m-0 font-weight-bold">Enter Paid Inquiry Auditor :</h6></center>
+                <input type="text" class="form-control" name="quantity_auditor_inquire_paid" value="{{$worker->quantity_auditor_inquire_paid ?? 0}}" required>
+                </div>
+            </div>
+            @endif
+            </br>
+            <h5 class="m-0 font-weight-bold text-primary">Profile Data :</h5>
+            <hr>
+            <div class="form-row">
+                <div class="col-sm-4">
                 <label for="name"><b>Name :</label></b>
                 <input type="text" class="form-control" placeholder="Name" name="name" value="{{$worker->name}}" required>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                 <label for="name"><b>Email :</label></b>
                 <input type="text" class="form-control" placeholder="Email" name="email" value="{{$worker->email}}" required>
+                </div>
+                <div class="col-sm-4">
+                <label for="name"><b>Enter Amount Paid :</label></b>
+                <input type="text" class="form-control" name="amount_paid" value="{{$worker->amount_paid ?? 0}}" required>
                 </div>
             </div>
             </br>

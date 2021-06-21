@@ -154,12 +154,17 @@ class AdminController extends Controller
             return redirect()->route('workers.index',$workers);
         }
 
+        $countResearch = count(ResearchJobs::where('user_id', $id)->get());
+        $countInquiry = count(InquiryJobs::where('user_id', $id)->where('is_form', 'Yes')->get());
+        $countAuditorResearch = count(AuditorResearchJobs::where('user_id', $id)->get());
+        $countAuditorInquiry = count(AuditorInquiryJobs::where('user_id', $id)->get());
+
         $usersRole = UsersRole::all();
         $usersStatus = UsersStatus::all();
         $listCountries = Countries::all();
         $productCategory = ProductCategory::all();
 
-        return view('/admin/workers/updateWorkers', compact('worker', 'workers', 'usersRole', 'usersStatus','listCountries', 'productCategory'))->with('i');
+        return view('/admin/workers/updateWorkers', compact('worker', 'workers', 'usersRole', 'usersStatus','listCountries', 'productCategory', 'countResearch', 'countInquiry', 'countAuditorResearch', 'countAuditorInquiry'))->with('i');
     }
 
     public function updateUserWorkers(Request $request, $workers, $id)
