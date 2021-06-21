@@ -273,6 +273,28 @@ class AdminService
     public function updateGeneralSetting($request, $id)
     {
         try{
+            //check id setting for dynamicly notifications
+
+            if($id == 1) {
+                $updateWeWork = WorkerNotifications::where('role_id', 3)->update(['how_we_work' => 1]);
+            } elseif($id == 2) {
+                $updateWeWork = WorkerNotifications::where('role_id', 4)->update(['how_we_work' => 1]);
+            } elseif($id == 3) {
+                $updateWeWork = WorkerNotifications::where('role_id', 5)->update(['how_we_work' => 1]);
+            } elseif($id == 4) {
+                $updateFAQ = WorkerNotifications::where('role_id', 3)->update(['faq' => 1]);
+            } elseif($id == 5) {
+                $updateFAQ = WorkerNotifications::where('role_id', 4)->update(['faq' => 1]);
+            } elseif($id == 6) {
+                $updateFAQ = WorkerNotifications::where('role_id', 5)->update(['faq' => 1]);
+            } elseif($id == 7) {
+                $updateNotice = WorkerNotifications::where('role_id', 3)->update(['notice' => 1]);
+            } elseif($id == 8) {
+                $updateWeWork = WorkerNotifications::where('role_id', 4)->update(['notice' => 1]);
+            } elseif($id == 9) {
+                $updateWeWork = WorkerNotifications::where('role_id', 5)->update(['notice' => 1]);
+            }
+
             $updateSetting = Settings::find($id)->update($request->all());
         }catch(\Throwable $th) {
             return back()->withError('Setting data failed to update because product categories cannot be duplicated');
