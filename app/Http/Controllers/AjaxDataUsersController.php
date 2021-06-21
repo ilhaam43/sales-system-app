@@ -81,8 +81,10 @@ class AjaxDataUsersController extends Controller
 
                     $routeEdit = route('admin.workers.show',['workers' => $datas['users_role']['role'], 'id' => $data->id]);
                     $routeDelete = route('admin.workers.destroy',['workers' => $datas['users_role']['role'], 'id' => $data->id]);
+                    $char1 = "'";
+                    $char2 = "'";
 
-                    $actionBtn = '<a class="btn btn-primary btn-sm" href="'.$routeEdit.'">Edit</a> <button class="btn btn-danger btn-sm remove-user" data-id="'.$data->id.'" data-action="'.$routeDelete.'" onclick="deleteConfirmation('.$data->id.', '.$datas['users_role']['role'].')">Delete</button>';
+                    $actionBtn = '<a class="btn btn-primary btn-sm" href="'.$routeEdit.'">Edit</a> <button class="btn btn-danger btn-sm remove-user" data-id="'.$data->id.'" data-action="'.$routeDelete.'" onclick="deleteConfirmation('.$data->id.',  '.$char1.''.$datas['users_role']['role'].''.$char2.')">Delete</button>';
 
                     return $actionBtn;
                 })->addColumn('checkbox', function($data){
@@ -154,7 +156,10 @@ class AjaxDataUsersController extends Controller
                     $routeEdit = route('workers.show',['workers' => $datas['users_role']['role'], 'id' => $data->id]);
                     $routeDelete = route('workers.destroy',['workers' => $datas['users_role']['role'], 'id' => $data->id]);
 
-                    $actionBtn = '<a class="btn btn-primary btn-sm" href="'.$routeEdit.'">Edit</a> <button class="btn btn-danger btn-sm remove-user" data-id="'.$data->id.'" data-action="'.$routeDelete.'" onclick="deleteConfirmation('.$data->id.', '.$datas['users_role']['role'].')">Delete</button>';
+                    $char1 = "'";
+                    $char2 = "'";
+
+                    $actionBtn = '<a class="btn btn-primary btn-sm" href="'.$routeEdit.'">Edit</a> <button class="btn btn-danger btn-sm remove-user" data-id="'.$data->id.'" data-action="'.$routeDelete.'" onclick="deleteConfirmation('.$data->id.', '.$char1.''.$datas['users_role']['role'].''.$char2.')">Delete</button>';
 
                     return $actionBtn;
                 })->addColumn('checkbox', function($data){

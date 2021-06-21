@@ -58,6 +58,6 @@
     
 @endsection
 </body>
-<script src="{{ asset('assets/superadmin/js/ajax/deleteWorkers.js') }}"></script>
+<script src="{{ asset('assets/admin/js/ajax/deleteWorkers.js') }}"></script>
 @include('admin.javascript.workers.showAllWorkers')
 </html>
