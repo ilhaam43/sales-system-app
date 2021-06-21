@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\ProductCategory;
 use App\Models\User;
 use App\Models\UsersRole;
+use App\Models\WorkerNotifications;
 
 class SuperAdminService
 {
@@ -163,6 +164,18 @@ class SuperAdminService
             ]);
 
             $addUserWorkers->save();
+
+            $getUserId = User::where('email', $request['email'])->first();
+
+            $addWorkerNotifications = new WorkerNotifications([
+                'user_id' => $getUserId->id,
+                'role_id' => $request['role_id'],
+                'how_we_work' => true,
+                'faq'    => true,
+                'notice' => true
+            ]);
+
+            $addWorkerNotifications->save();
         }catch(\Throwable $th){
             return redirect()->route('workers.store.index',$usersRole->role)->with('error', $usersRole->role .' failed to add because email already registered in this system');
         }
