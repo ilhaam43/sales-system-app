@@ -14,4 +14,9 @@ class UsersRole extends Model
     public function users(){
         return $this->hasMany(User::class, 'id', 'role_id');
     }
+
+    public function workerNotifications()
+    {
+        return $this->hasMany(WorkerNotifications::class, 'id', 'role_id');
+    }
 }

@@ -16,6 +16,7 @@ class CreateWorkerNotificationTable extends Migration
         Schema::create('worker_notification', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->foreignId('role_id')->constrained('users_role')->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('how_we_work');
             $table->boolean('faq');
             $table->boolean('notice');

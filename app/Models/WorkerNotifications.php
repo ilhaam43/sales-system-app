@@ -11,7 +11,13 @@ class WorkerNotifications extends Model
 
     protected $table = 'worker_notification';
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
+    }
+
+    public function usersRole()
+    {
+        return $this->belongsTo(UsersRole::class);
     }
 }
