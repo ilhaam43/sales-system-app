@@ -13,6 +13,7 @@ use App\Models\ResearchJobs;
 use App\Models\InquiryJobs;
 use App\Models\ProductCategory;
 use App\Models\Settings;
+use App\Models\WorkerNotifications;
 
 class InqurierController extends Controller
 {
@@ -25,7 +26,10 @@ class InqurierController extends Controller
 
     public function index()
     {
+        $auth = Auth::user();
         $inquirerHowWeWork = Settings::where('id', 2)->first();
+        
+        $updateWeWork = WorkerNotifications::where('user_id', $auth->id)->update(['how_we_work' => 0]);
 
         return view('workers/inqurier/index', compact('inquirerHowWeWork'));
     }
@@ -52,14 +56,20 @@ class InqurierController extends Controller
 
     public function showFAQ()
     {
+        $auth = Auth::user();
         $inquirerFAQ = Settings::where('id', 5)->first();
+
+        $updateFAQ = WorkerNotifications::where('user_id', $auth->id)->update(['faq' => 0]);
 
         return view('workers/inqurier/faq', compact('inquirerFAQ'));
     }
 
     public function showNotice()
     {
+        $auth = Auth::user();
         $inquirerNotice = Settings::where('id', 8)->first();
+
+        $updateNotice = WorkerNotifications::where('user_id', $auth->id)->update(['notice' => 0]);
 
         return view('workers/inqurier/notice', compact('inquirerNotice'));
     }

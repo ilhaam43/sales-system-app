@@ -58,11 +58,42 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
+        @if($globalWorkerNotifications)
+          @if($globalWorkerNotifications->how_we_work == 1)
+            <li class="{{ request()->is('inqurier') ? 'active' : ''}}"><a href="{{ url('inqurier') }}"><i class="fas fa-fw fa-sync fa-spin"></i>How We Work</a></li>
+          @endif
+          @if($globalWorkerNotifications->how_we_work == 0)
+            <li class="{{ request()->is('inqurier') ? 'active' : ''}}"><a href="{{ url('inqurier') }}">How We Work</a></li>
+          @endif
+        @else
           <li class="{{ request()->is('inqurier') ? 'active' : ''}}"><a href="{{ url('inqurier') }}">How We Work</a></li>
+        @endif
+
           <li class="{{ request()->is('inqurier/inquiries') ? 'active' : ''}}"><a href="{{ url('inqurier/inquiries') }}">Inquiries</a></li>
           <li class="{{ request()->is('inqurier/companies') ? 'active' : ''}}"><a href="{{ url('inqurier/companies') }}">Companies</a></li>
+        
+        @if($globalWorkerNotifications)
+          @if($globalWorkerNotifications->faq == 1)
+            <li class="{{ request()->is('inqurier/faq') ? 'active' : ''}}"><a href="{{ url('inqurier/faq') }}"><i class="fas fa-fw fa-sync fa-spin"></i>FAQ</a></li>
+          @endif
+          @if($globalWorkerNotifications->faq == 0)
           <li class="{{ request()->is('inqurier/faq') ? 'active' : ''}}"><a href="{{ url('inqurier/faq') }}">FAQ</a></li>
+          @endif
+        @else
+          <li class="{{ request()->is('inqurier/faq') ? 'active' : ''}}"><a href="{{ url('inqurier/faq') }}">FAQ</a></li>
+        @endif
+
+        @if($globalWorkerNotifications)
+          @if($globalWorkerNotifications->notice == 1)
+            <li class="{{ request()->is('inqurier/notice') ? 'active' : ''}}"><a href="{{ url('inqurier/notice') }}"><i class="fas fa-fw fa-sync fa-spin"></i>Notice</a></li>
+          @endif
+          @if($globalWorkerNotifications)
+            <li class="{{ request()->is('inqurier/notice') ? 'active' : ''}}"><a href="{{ url('inqurier/notice') }}">Notice</a></li>
+          @endif
+        @else
           <li class="{{ request()->is('inqurier/notice') ? 'active' : ''}}"><a href="{{ url('inqurier/notice') }}">Notice</a></li>
+        @endif
+        
           <li class="{{ request()->is('inqurier/my-work') ? 'active' : ''}}"><a href="{{ url('inqurier/my-work') }}">My Work</a></li>
           <li class="{{ request()->is('inqurier/payments') ? 'active' : ''}}"><a href="{{ url('inqurier/payments') }}">Payments</a></li>
           <li class="drop-down"><a href="">Account</a>
