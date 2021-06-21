@@ -57,11 +57,42 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
+        @if($globalWorkerNotifications)
+          @if($globalWorkerNotifications->how_we_work == 1)
+            <li class="{{ request()->is('auditor') ? 'active' : ''}}"><a href="{{ url('auditor') }}"><i class="fas fa-fw fa-sync fa-spin"></i> How We Work</a></li>
+          @endif
+          @if($globalWorkerNotifications->how_we_work == 0)
+            <li class="{{ request()->is('auditor') ? 'active' : ''}}"><a href="{{ url('auditor') }}">How We Work</a></li>
+          @endif
+        @else
           <li class="{{ request()->is('auditor') ? 'active' : ''}}"><a href="{{ url('auditor') }}">How We Work</a></li>
+        @endif
+
           <li class="{{ request()->is('auditor/researches') ? 'active' : ''}}"><a href="{{ url('auditor/researches') }}">Researches</a></li>
           <li class="{{ request()->is('auditor/inquiries') ? 'active' : ''}}"><a href="{{ url('auditor/inquiries') }}">Inquiries</a></li>
+
+        @if($globalWorkerNotifications)
+          @if($globalWorkerNotifications->faq == 1)
+            <li class="{{ request()->is('auditor/faq') ? 'active' : ''}}"><a href="{{ url('auditor/faq') }}"><i class="fas fa-fw fa-sync fa-spin"></i> FAQ</a></li>
+          @endif
+          @if($globalWorkerNotifications->faq == 0)
+            <li class="{{ request()->is('auditor/faq') ? 'active' : ''}}"><a href="{{ url('auditor/faq') }}">FAQ</a></li>
+          @endif
+        @else
           <li class="{{ request()->is('auditor/faq') ? 'active' : ''}}"><a href="{{ url('auditor/faq') }}">FAQ</a></li>
+        @endif
+
+        @if($globalWorkerNotifications)
+          @if($globalWorkerNotifications->notice == 1)
+            <li class="{{ request()->is('auditor/notice') ? 'active' : ''}}"><a href="{{ url('auditor/notice') }}"><i class="fas fa-fw fa-sync fa-spin"></i> Notice</a></li>
+          @endif
+          @if($globalWorkerNotifications->notice == 0)
+            <li class="{{ request()->is('auditor/notice') ? 'active' : ''}}"><a href="{{ url('auditor/notice') }}">Notice</a></li>
+          @endif
+        @else
           <li class="{{ request()->is('auditor/notice') ? 'active' : ''}}"><a href="{{ url('auditor/notice') }}">Notice</a></li>
+        @endif
+
           <li class="{{ request()->is('auditor/my-work') ? 'active' : ''}}"><a href="{{ url('auditor/my-work') }}">My Work</a></li>
           <li class="{{ request()->is('auditor/payments') ? 'active' : ''}}"><a href="{{ url('auditor/payments') }}">Payments</a></li>
           <li class="drop-down"><a href="">Account</a>

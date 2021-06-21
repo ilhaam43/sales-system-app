@@ -16,6 +16,7 @@ use App\Models\AuditorInquiryJobs;
 use App\Models\AuditorResearchJobs;
 use App\Models\ProductCategory;
 use App\Models\Settings;
+use App\Models\WorkerNotifications;
 
 class AuditorController extends Controller
 {
@@ -28,7 +29,10 @@ class AuditorController extends Controller
 
     public function index()
     {
+        $auth = Auth::user();
         $auditorHowWeWork = Settings::where('id', 3)->first();
+
+        $updateWeWork = WorkerNotifications::where('user_id', $auth->id)->update(['how_we_work' => 0]);
 
         return view('workers/auditor/index', compact('auditorHowWeWork'));
     }
@@ -104,15 +108,21 @@ class AuditorController extends Controller
 
     public function showFAQ()
     {
+        $auth = Auth::user();
         $auditorFAQ = Settings::where('id', 6)->first();
+
+        $updateFAQ = WorkerNotifications::where('user_id', $auth->id)->update(['faq' => 0]);
 
         return view('workers/auditor/faq', compact('auditorFAQ'));
     }
 
     public function showNotice()
     {
+        $auth = Auth::user();
         $auditorNotice = Settings::where('id', 7)->first();
 
+        $updateNotice = WorkerNotifications::where('user_id', $auth->id)->update(['notice' => 0]);
+        
         return view('workers/auditor/notice', compact('auditorNotice'));
     }
 
