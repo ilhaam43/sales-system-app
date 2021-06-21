@@ -18,7 +18,7 @@ $(document).ready(function(){
         var id = "{{ $researches['id'] }}"
 
         if(jQuery.inArray( parseInt(id), res) !== -1){
-            var windowPopup = window.open("{{ $researches['company_website'] }}", '_blank');
+            var windowPopup = window.open("{{ $researches['company_product_url'] }}", '_blank');
         }
         @endforeach 
     })
