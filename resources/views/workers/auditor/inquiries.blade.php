@@ -48,17 +48,6 @@
                       <th>Edit</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      @foreach($inquiryJobsLists as $inquiryLists)
-                      <td>{{ ++$i }}</td>
-                      <td>{{ $inquiryLists['research_jobs']['company_name'] }}</td>
-                      <td><a href="{{ asset($inquiryLists['screenshot_url']) }}">Screenshot</a></td>
-                      <td>{{ $inquiryLists['jobs_status']['status']}}</td>
-                      <td><a class="btn btn-primary btn-sm" href="{{ route('auditor.detail.inquiries',$inquiryLists['id']) }}">Edit</a></td>
-                    </tr>
-                  </tbody>
-                  @endforeach
                 </table>
               </div>
             </div>
@@ -77,6 +66,5 @@
 
   
 </body>
-
-
+@include('workers.javascript.showInquiriesData')
 </html>

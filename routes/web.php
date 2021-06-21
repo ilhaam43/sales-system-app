@@ -8,6 +8,7 @@ use App\Http\Controllers\InqurierController;
 use App\Http\Controllers\AuditorController;
 use App\Http\Controllers\AjaxDataResearchesController;
 use App\Http\Controllers\AjaxDataInquiriesController;
+use App\Http\Controllers\AjaxDataAuditorController;
 use App\Http\Controllers\AjaxDataUsersController;
 
 /*
@@ -221,5 +222,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/inquiries/{id}', [AuditorController::class, 'updateInquiries'])->name('auditor.update.inquiries');
         Route::get('/researches/{id}', [AuditorController::class, 'showDetailResearches'])->name('auditor.detail.researches');
         Route::put('/researches/{id}', [AuditorController::class, 'updateResearches'])->name('auditor.update.researches');
+
+        Route::group(['prefix' => 'data'], function () {
+            Route::get('/researches/', [AjaxDataAuditorController::class, 'showResearchesData'])->name('auditor.researches.data');
+            Route::get('/inquiries/', [AjaxDataAuditorController::class, 'showInquiriesData'])->name('auditor.inquiries.data');
+        });
+
     });
 });

@@ -49,18 +49,6 @@
                       <th>Edit</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      @foreach($researchJobsLists as $researchLists)
-                      <td>{{ ++$i }}</td>
-                      <td>{{ $researchLists['company_name'] }}</td>
-                      <td>{{ $researchLists['company_website'] }}</td>
-                      <td>{{ $researchLists['company_product_url'] }}</td>
-                      <td>{{ $researchLists['jobs_status']['status']}}</td>
-                      <td><a class="btn btn-primary btn-sm" href="{{ route('auditor.detail.researches',$researchLists['id']) }}">Edit</a></td>
-                    </tr>
-                  </tbody>
-                  @endforeach
                 </table>
               </div>
             </div>
@@ -79,6 +67,5 @@
 
   
 </body>
-
-
+@include('workers.javascript.showResearchesData')
 </html>
