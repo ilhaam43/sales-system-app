@@ -53,7 +53,10 @@ class AjaxDataResearchesController extends Controller
                 })->addColumn('researcher', function($data){
                     $datas = json_decode($data, true);
 
-                    $researcherLink = '<a href="/admin/users/'.$data['user']['id'].'">'.$data['user']['name'] ?? '' .'</a>';
+                    $userId = $datas['user']['id'] ?? '';
+                    $userName = $datas['user']['name'] ?? '';
+
+                    $researcherLink = '<a href="/admin/workers/researcher/'.$userId.'">'.$userName.'</a>';
                     return $researcherLink;
                 })->addColumn('auditor', function($data){
                     $datas = json_decode($data, true);
@@ -96,7 +99,10 @@ class AjaxDataResearchesController extends Controller
                 })->addColumn('researcher', function($data){
                     $datas = json_decode($data, true);
 
-                    $researcherLink = '<a href="/admin/users/'.$data['user']['id'].'">'.$data['user']['name'] ?? '' .'</a>';
+                    $userId = $datas['user']['id'] ?? '';
+                    $userName = $datas['user']['name'] ?? '';
+
+                    $researcherLink = '<a href="/admin/workers/researcher/'.$userId.'">'.$userName.'</a>';
                     return $researcherLink;
                 })->addColumn('auditor', function($data){
                     $datas = json_decode($data, true);
@@ -139,7 +145,10 @@ class AjaxDataResearchesController extends Controller
                 })->addColumn('researcher', function($data){
                     $datas = json_decode($data, true);
 
-                    $researcherLink = '<a href="/admin/users/'.$data['user']['id'].'">'.$data['user']['name'] ?? '' .'</a>';
+                    $userId = $datas['user']['id'] ?? '';
+                    $userName = $datas['user']['name'] ?? '';
+
+                    $researcherLink = '<a href="/admin/workers/researcher/'.$userId.'">'.$userName.'</a>';
                     return $researcherLink;
                 })->addColumn('auditor', function($data){
                     $datas = json_decode($data, true);
@@ -182,7 +191,10 @@ class AjaxDataResearchesController extends Controller
                 })->addColumn('researcher', function($data){
                     $datas = json_decode($data, true);
 
-                    $researcherLink = '<a href="/admin/users/'.$data['user']['id'].'">'.$data['user']['name'] ?? '' .'</a>';
+                    $userId = $datas['user']['id'] ?? '';
+                    $userName = $datas['user']['name'] ?? '';
+
+                    $researcherLink = '<a href="/admin/workers/researcher/'.$userId.'">'.$userName.'</a>';
                     return $researcherLink;
                 })->addColumn('auditor', function($data){
                     $datas = json_decode($data, true);
@@ -225,7 +237,10 @@ class AjaxDataResearchesController extends Controller
                 })->addColumn('researcher', function($data){
                     $datas = json_decode($data, true);
 
-                    $researcherLink = '<a href="/admin/users/'.$data['user']['id'].'">'.$data['user']['name'] ?? '' .'</a>';
+                    $userId = $datas['user']['id'] ?? '';
+                    $userName = $datas['user']['name'] ?? '';
+
+                    $researcherLink = '<a href="/admin/workers/researcher/'.$userId.'">'.$userName.'</a>';
                     return $researcherLink;
                 })->addColumn('auditor', function($data){
                     $datas = json_decode($data, true);

@@ -67,7 +67,12 @@ class AjaxDataInquiriesController extends Controller
                     })->addColumn('user', function($data){
                         $datas = json_decode($data, true);
 
-                        return $datas['user']['name'] ?? "";
+                        $idUser = $datas['user']['id'] ?? '';
+                        $nameUser = $datas['user']['name'] ?? '';
+
+                        $userLink = '<a href="/admin/workers/inqurier/'.$idUser.'">'.$nameUser.'</a>';
+    
+                        return $userLink;
                     })
                     ->rawColumns(['action', 'website', 'checkbox', 'status', 'user','screenshot'])->setRowId(function ($data) {
                         return $data->id;
@@ -118,8 +123,13 @@ class AjaxDataInquiriesController extends Controller
                         return $screenshotBtn;
                     })->addColumn('user', function($data){
                         $datas = json_decode($data, true);
+
+                        $idUser = $datas['user']['id'] ?? '';
+                        $nameUser = $datas['user']['name'] ?? '';
+
+                        $userLink = '<a href="/admin/workers/inqurier/'.$idUser.'">'.$nameUser.'</a>';
     
-                        return $datas['user']['name'] ?? "";
+                        return $userLink;
                     })
                     ->rawColumns(['action', 'website', 'checkbox', 'status', 'user','screenshot'])->setRowId(function ($data) {
                         return $data->id;
@@ -170,8 +180,13 @@ class AjaxDataInquiriesController extends Controller
                         return $screenshotBtn;
                     })->addColumn('user', function($data){
                         $datas = json_decode($data, true);
+
+                        $idUser = $datas['user']['id'] ?? '';
+                        $nameUser = $datas['user']['name'] ?? '';
+
+                        $userLink = '<a href="/admin/workers/inqurier/'.$idUser.'">'.$nameUser.'</a>';
     
-                        return $datas['user']['name'] ?? "";
+                        return $userLink;
                     })
                     ->rawColumns(['action', 'website', 'checkbox', 'status', 'user','screenshot'])->setRowId(function ($data) {
                         return $data->id;
@@ -222,8 +237,13 @@ class AjaxDataInquiriesController extends Controller
                         return $screenshotBtn;
                     })->addColumn('user', function($data){
                         $datas = json_decode($data, true);
+
+                        $idUser = $datas['user']['id'] ?? '';
+                        $nameUser = $datas['user']['name'] ?? '';
+
+                        $userLink = '<a href="/admin/workers/inqurier/'.$idUser.'">'.$nameUser.'</a>';
     
-                        return $datas['user']['name'] ?? "";
+                        return $userLink;
                     })
                     ->rawColumns(['action', 'website', 'checkbox', 'status', 'user','screenshot'])->setRowId(function ($data) {
                         return $data->id;
@@ -274,8 +294,13 @@ class AjaxDataInquiriesController extends Controller
                         return $screenshotBtn;
                     })->addColumn('user', function($data){
                         $datas = json_decode($data, true);
+
+                        $idUser = $datas['user']['id'] ?? '';
+                        $nameUser = $datas['user']['name'] ?? '';
+
+                        $userLink = '<a href="/admin/workers/inqurier/'.$idUser.'">'.$nameUser.'</a>';
     
-                        return $datas['user']['name'] ?? "";
+                        return $userLink;
                     })
                     ->rawColumns(['action', 'website', 'checkbox', 'status', 'user','screenshot'])->setRowId(function ($data) {
                         return $data->id;
