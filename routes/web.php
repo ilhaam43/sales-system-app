@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
         //all users route
         Route::group(['prefix' => 'users'], function () {
             Route::get('/', [SuperAdminController::class, 'showUsersList'])->name('users.index');
+            Route::post('/block', [SuperAdminController::class, 'blockUsers'])->name('users.block');
             Route::get('/{id}', [SuperAdminController::class, 'showUsersDetails'])->name('users.show');
             Route::put('/{id}', [SuperAdminController::class, 'updateUsers'])->name('users.update');
             Route::delete('/{id}', [SuperAdminController::class, 'deleteUsers'])->name('users.destroy');

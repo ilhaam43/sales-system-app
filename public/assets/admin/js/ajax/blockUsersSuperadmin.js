@@ -21,7 +21,7 @@ function blockConfirmation() {
             }else{
             $.ajax({
                 type: 'POST',
-                url: "/admin/users/block",
+                url: "/superadmin/users/block",
                 cache: false,
                 data: {_token: CSRF_TOKEN, id:id},
                 dataType: 'JSON',
