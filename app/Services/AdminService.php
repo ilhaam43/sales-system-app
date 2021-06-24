@@ -33,6 +33,13 @@ class AdminService
         $researchJobsId = [];
         
         $listResearchJobs = ResearchJobs::where('product_category_id', $auth->product_category_id)->get();
+        
+        if(count($listResearchJobs) == 0)
+        {
+            $globalPendingInquiry = 0;
+            return $globalPendingInquiry;
+        }
+        
         $researchJobsLists = json_decode($listResearchJobs, true);
 
         foreach($researchJobsLists as $researchLists){

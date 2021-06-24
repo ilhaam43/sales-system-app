@@ -72,11 +72,19 @@ class AuditorController extends Controller
         $listCountries = Countries::all();
 
         $productCategory = User::where('product_category_id', $user->product_category_id)->with('ProductCategory')->get();
+        
         $productCategories = json_decode($productCategory, true);
 
         $researchJobsId = [];
 
         $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        
+        if(count($listResearchJobs) == 0){
+            $inquiryJobsLists = [];
+
+            return view('workers/auditor/inquiries', compact('inquiryJobsLists','listCountries','productCategories', 'user'))->with('i');
+        }
+        
         $researchJobsLists = json_decode($listResearchJobs, true);
 
         foreach($researchJobsLists as $researchLists){

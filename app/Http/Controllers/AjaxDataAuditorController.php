@@ -56,18 +56,26 @@ class AjaxDataAuditorController extends Controller
             $researchJobsId = [];
 
             $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
-            $researchJobsLists = json_decode($listResearchJobs, true);
+            
+            if(count($listResearchJobs) == 0){
 
-            foreach($researchJobsLists as $researchLists){
-                array_push($researchJobsId, $researchLists['id']);
+                $data = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->with(['ResearchJobs', 'JobsStatus'])->select('inquiry_jobs.*');
+
+            }else if(count($listResearchJobs) > 0){
+
+                $researchJobsLists = json_decode($listResearchJobs, true);
+
+                foreach($researchJobsLists as $researchLists){
+                    array_push($researchJobsId, $researchLists['id']);
+                }
+
+                if(count($researchJobsId) == 0){
+                    $researchJobsId = 0;
+                }
+
+                $data = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->with(['ResearchJobs', 'JobsStatus'])->select('inquiry_jobs.*');
             }
-
-            if(count($researchJobsId) == 0){
-                $researchJobsId = 0;
-            }
-
-            $data = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->with(['ResearchJobs', 'JobsStatus'])->select('inquiry_jobs.*');
-
+            
             return Datatables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){

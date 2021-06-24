@@ -39,6 +39,17 @@ class AdminController extends Controller
         $auth = Auth::user();
 
         $listResearchJobs = ResearchJobs::where('product_category_id', $auth->product_category_id)->get();
+
+        if(count($listResearchJobs) == 0)
+        {
+            $researchApproved = 0;
+            $inquiryApproved = 0;
+            
+            $user = count(User::whereNotIn('id', [1,2])->where('product_category_id', $auth->product_category_id)->get());
+
+            return view('/admin/index', compact('researchApproved','inquiryApproved','user'));
+        }
+
         $researchJobsLists = json_decode($listResearchJobs, true);
 
         foreach($researchJobsLists as $researchLists){
@@ -299,6 +310,13 @@ class AdminController extends Controller
         $researchJobsId = [];
 
         $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        
+        if(count($listResearchJobs) == 0)
+        {
+            $inquiryJobsLists = $listResearchJobs;
+            return view('/admin/inquiries/index', compact('inquiryJobsLists'))->with('i');
+        }
+
         $researchJobsLists = json_decode($listResearchJobs, true);
 
         foreach($researchJobsLists as $researchLists){
@@ -322,6 +340,13 @@ class AdminController extends Controller
         $researchJobsId = [];
 
         $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        
+        if(count($listResearchJobs) == 0)
+        {
+            $inquiryJobsLists = $listResearchJobs;
+            return view('/admin/inquiries/approved', compact('inquiryJobsLists'))->with('i');
+        }
+
         $researchJobsLists = json_decode($listResearchJobs, true);
 
         foreach($researchJobsLists as $researchLists){
@@ -345,6 +370,13 @@ class AdminController extends Controller
         $researchJobsId = [];
 
         $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        
+        if(count($listResearchJobs) == 0)
+        {
+            $inquiryJobsLists = $listResearchJobs;
+            return view('/admin/inquiries/pending', compact('inquiryJobsLists'))->with('i');
+        }
+        
         $researchJobsLists = json_decode($listResearchJobs, true);
 
         foreach($researchJobsLists as $researchLists){
@@ -368,6 +400,13 @@ class AdminController extends Controller
         $researchJobsId = [];
 
         $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        
+        if(count($listResearchJobs) == 0)
+        {
+            $inquiryJobsLists = $listResearchJobs;
+            return view('/admin/inquiries/rejected', compact('inquiryJobsLists'))->with('i');
+        }
+
         $researchJobsLists = json_decode($listResearchJobs, true);
 
         foreach($researchJobsLists as $researchLists){
@@ -391,6 +430,13 @@ class AdminController extends Controller
         $researchJobsId = [];
 
         $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        
+        if(count($listResearchJobs) == 0)
+        {
+            $inquiryJobsLists = $listResearchJobs;
+            return view('/admin/inquiries/removed', compact('inquiryJobsLists'))->with('i');
+        }
+        
         $researchJobsLists = json_decode($listResearchJobs, true);
 
         foreach($researchJobsLists as $researchLists){
@@ -433,6 +479,13 @@ class AdminController extends Controller
         $researchJobsId = [];
 
         $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+        
+        if(count($listResearchJobs) == 0)
+        {
+            $inquiryJobsLists = $listResearchJobs;
+            return view('/admin/reports/index', compact('inquiryJobsLists'))->with('i');
+        }
+        
         $researchJobsLists = json_decode($listResearchJobs, true);
 
         foreach($researchJobsLists as $researchLists){
