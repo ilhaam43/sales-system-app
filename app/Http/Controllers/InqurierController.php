@@ -48,8 +48,19 @@ class InqurierController extends Controller
     {
         $user = Auth::user();
 
-        $listCompanies = ResearchJobs::where('job_status_id', 1)->where('is_blacklist', 'No')->where('product_category_id', $user->product_category_id)->with('Country')->inRandomOrder()->limit(10)->get();
+        $listCompanies = ResearchJobs::whereNotIn('count_inquiry', array(1))->orWhereNull('count_inquiry')->where('job_status_id', 1)->where('is_blacklist', 'No')->where('product_category_id', $user->product_category_id)->with('Country')->inRandomOrder()->get();
+
         $companiesList = json_decode($listCompanies, true);
+
+        if(count($companiesList) == 0){
+            $companies = ResearchJobs::where('job_status_id', 1)->where('is_blacklist', 'No')->where('product_category_id', $user->product_category_id)->with('Country')->get();
+
+            foreach($companies as $company){
+                $updateCompanies = ResearchJobs::find($company->id)->update([
+                    'count_inquiry' => 0,
+                ]);
+            }
+        }
 
         return view('workers/inqurier/companies', compact('companiesList'))->with('i');
     }

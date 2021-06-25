@@ -92,6 +92,10 @@ class InqurierService
         try{   
             $researchJobs = ResearchJobs::where('id', $request['research_jobs_id'])->first();
 
+            if($researchJobs->count_inquiry == 1){
+                return back()->withError('Inquiry data already added in this cycle, please inquiry another company');
+            }
+
             $request['user_id'] = $user['id'];
             $request['job_status_id'] = 3;
             $request['is_form'] = "Yes";
@@ -103,6 +107,10 @@ class InqurierService
             $request['screenshot_url'] = 'inquriers/img/inquiry/' . $name;
             
             $addInquiryData = InquiryJobs::create($request->except(['screenshot']));
+
+            $updateCountCompany = $researchJobs->update([
+                'count_inquiry' => 1
+            ]);
 
         } catch(\Throwable $th) {
             return back()->withError('Inquiry data failed to add');
