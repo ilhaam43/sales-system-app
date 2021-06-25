@@ -280,6 +280,36 @@ class AdminService
         return response()->json(['success' => true, 'message' => "Inquiries data success to reject",]);
     }
 
+    public function updateDetailInquiries($request, $id)
+    {
+        $user = Auth::user();
+
+        try{
+            $inquiryJobs = InquiryJobs::where('id', $id)->first();
+            $researchJobs = ResearchJobs::where('id', $inquiryJobs->research_jobs_id)->first();
+
+            if($request['job_status_id'] == 1 || $request['job_status_id'] == 4){
+                
+                if($inquiryJobs->screenshot_url !== NULL){
+                    $deleteScreenshot = unlink($inquiryJobs->screenshot_url);
+                    $request['screenshot_url'] = NULL;
+                }
+
+                $createAuditInquiriesData = AuditorInquiryJobs::create([
+                    'user_id' => $user->id,
+                    'inquiry_job_id' => $id,
+                    'product_category_id' => $researchJobs->product_category_id,
+                ]);
+            }
+
+            $updateInquiriesData = InquiryJobs::find($id)->update($request->all());
+        }catch(\Throwable $th){
+            return back()->withError('Inquiries data failed to update');
+        }
+
+        return redirect()->route('admin.inquiries.index')->with('success', 'Inquiries data updated successfully');
+    }
+
     //general settings logic
     public function addGeneralSetting($request)
     {

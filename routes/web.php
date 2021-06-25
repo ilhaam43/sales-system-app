@@ -142,6 +142,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/removed', [AdminController::class, 'showRemovedInquiries'])->name('admin.inquiries.removed');
             Route::post('/approve', [AdminController::class, 'approveInquiries'])->name('admin.inquiries.approve');
             Route::post('/reject', [AdminController::class, 'rejectInquiries'])->name('admin.inquiries.reject');
+            Route::get('/{id}', [AdminController::class, 'showDetailInquiries'])->name('admin.inquiries.show');
+            Route::put('/{id}', [AdminController::class, 'updateDetailInquiries'])->name('admin.inquiries.update');
 
             Route::group(['prefix' => 'data'], function () {
                 Route::get('/all/', [AjaxDataInquiriesController::class, 'allDataInquiries'])->name('admin.inquiries.data.all');

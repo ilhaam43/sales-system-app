@@ -53,7 +53,8 @@ class AjaxDataInquiriesController extends Controller
                 return Datatables::eloquent($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
-                        $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                        $routeEdit = route('admin.inquiries.update',$data->id);
+                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm">Edit</a>';
                         return $actionBtn;
                     })->addColumn('website', function($data){
                         $datas = json_decode($data, true);
@@ -68,7 +69,12 @@ class AjaxDataInquiriesController extends Controller
 
                         return $datas['jobs_status']['status'];
                     })->addColumn('screenshot', function($data){
-                        $screenshotBtn = '<a href="/admin/users/'.$data->screenshot_url.'">'.$data->screenshot_url ? 'DELETED' : $data->screenshot_url .'</a>';
+                        if($data->screenshot_url !== NULL){
+                            $screenshotBtn = '<a href="'.asset($data->screenshot_url).'" class="btn btn-primary btn-sm" target="_blank">Screenshot</a>';
+                        }else{
+                            $screenshotBtn = 'DELETED';
+                        }
+    
                         return $screenshotBtn;
                     })->addColumn('user', function($data){
                         $datas = json_decode($data, true);
@@ -116,7 +122,8 @@ class AjaxDataInquiriesController extends Controller
                 return Datatables::eloquent($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
-                        $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                        $routeEdit = route('admin.inquiries.update',$data->id);
+                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm">Edit</a>';
                         return $actionBtn;
                     })->addColumn('website', function($data){
                         $datas = json_decode($data, true);
@@ -131,7 +138,12 @@ class AjaxDataInquiriesController extends Controller
     
                         return $datas['jobs_status']['status'];
                     })->addColumn('screenshot', function($data){
-                        $screenshotBtn = '<a href="/admin/users/'.$data->screenshot_url.'">'.$data->screenshot_url ? 'DELETED' : $data->screenshot_url .'</a>';
+                        if($data->screenshot_url !== NULL){
+                            $screenshotBtn = '<a href="'.asset($data->screenshot_url).'" class="btn btn-primary btn-sm" target="_blank">Screenshot</a>';
+                        }else{
+                            $screenshotBtn = 'DELETED';
+                        }
+    
                         return $screenshotBtn;
                     })->addColumn('user', function($data){
                         $datas = json_decode($data, true);
@@ -180,7 +192,8 @@ class AjaxDataInquiriesController extends Controller
                 return Datatables::eloquent($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
-                        $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                        $routeEdit = route('admin.inquiries.update',$data->id);
+                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm">Edit</a>';
                         return $actionBtn;
                     })->addColumn('website', function($data){
                         $datas = json_decode($data, true);
@@ -195,7 +208,12 @@ class AjaxDataInquiriesController extends Controller
     
                         return $datas['jobs_status']['status'];
                     })->addColumn('screenshot', function($data){
-                        $screenshotBtn = '<a href="/admin/users/'.$data->screenshot_url.'">'.$data->screenshot_url ? 'DELETED' : $data->screenshot_url .'</a>';
+                        if($data->screenshot_url !== NULL){
+                            $screenshotBtn = '<a href="'.asset($data->screenshot_url).'" class="btn btn-primary btn-sm" target="_blank">Screenshot</a>';
+                        }else{
+                            $screenshotBtn = 'DELETED';
+                        }
+    
                         return $screenshotBtn;
                     })->addColumn('user', function($data){
                         $datas = json_decode($data, true);
@@ -244,7 +262,8 @@ class AjaxDataInquiriesController extends Controller
                 return Datatables::eloquent($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
-                        $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                        $routeEdit = route('admin.inquiries.update',$data->id);
+                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm">Edit</a>';
                         return $actionBtn;
                     })->addColumn('website', function($data){
                         $datas = json_decode($data, true);
@@ -259,7 +278,12 @@ class AjaxDataInquiriesController extends Controller
     
                         return $datas['jobs_status']['status'];
                     })->addColumn('screenshot', function($data){
-                        $screenshotBtn = '<a href="/admin/users/'.$data->screenshot_url.'">'.$data->screenshot_url ? 'DELETED' : $data->screenshot_url .'</a>';
+                        if($data->screenshot_url !== NULL){
+                            $screenshotBtn = '<a href="'.asset($data->screenshot_url).'" class="btn btn-primary btn-sm" target="_blank">Screenshot</a>';
+                        }else{
+                            $screenshotBtn = 'DELETED';
+                        }
+    
                         return $screenshotBtn;
                     })->addColumn('user', function($data){
                         $datas = json_decode($data, true);
@@ -308,7 +332,8 @@ class AjaxDataInquiriesController extends Controller
                 return Datatables::eloquent($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
-                        $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                        $routeEdit = route('admin.inquiries.update',$data->id);
+                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm">Edit</a>';
                         return $actionBtn;
                     })->addColumn('website', function($data){
                         $datas = json_decode($data, true);
@@ -323,7 +348,12 @@ class AjaxDataInquiriesController extends Controller
     
                         return $datas['jobs_status']['status'];
                     })->addColumn('screenshot', function($data){
-                        $screenshotBtn = '<a href="/admin/users/'.$data->screenshot_url.'">'.$data->screenshot_url ? 'DELETED' : $data->screenshot_url .'</a>';
+                        if($data->screenshot_url !== NULL){
+                            $screenshotBtn = '<a href="'.asset($data->screenshot_url).'" class="btn btn-primary btn-sm" target="_blank">Screenshot</a>';
+                        }else{
+                            $screenshotBtn = 'DELETED';
+                        }
+    
                         return $screenshotBtn;
                     })->addColumn('user', function($data){
                         $datas = json_decode($data, true);

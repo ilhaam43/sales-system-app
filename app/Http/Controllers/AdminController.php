@@ -453,6 +453,28 @@ class AdminController extends Controller
         return view('/admin/inquiries/removed', compact('inquiryJobsLists'))->with('i');
     }
 
+    public function showDetailInquiries($id)
+    {
+        $listJobsStatus = JobsStatus::whereNotIn('id', array(2))->get();
+        $listInquiryJobs = InquiryJobs::where('id', $id)->with('JobsStatus', 'ResearchJobs')->get();
+        $inquiryJobsLists = json_decode($listInquiryJobs, true);
+
+        foreach($inquiryJobsLists as $inquiryList){
+            $inquiryJobsLists = $inquiryList;
+        }
+
+        return view('admin/inquiries/updateInquiries', compact('inquiryJobsLists','listJobsStatus'))->with('i');
+    }
+
+    public function updateDetailInquiries(Request $request, $id)
+    {
+        $request->validate([
+            'job_status_id' => 'required',
+        ]);
+
+        return $this->service->updateDetailInquiries($request, $id);
+    }
+
     public function approveInquiries(Request $request)
     {
         $request->validate([

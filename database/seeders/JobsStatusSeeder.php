@@ -22,7 +22,7 @@ class JobsStatusSeeder extends Seeder
         ]);
 
         DB::table('jobs_status')->insert([
-            'status' => 'Disapproved',
+            'status' => 'Rejected',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
