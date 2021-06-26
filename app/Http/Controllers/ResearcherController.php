@@ -105,7 +105,8 @@ class ResearcherController extends Controller
 
     public function showCountryRecords()
     {
-        $researchJobsList = ResearchJobs::with('Country')->distinct()->get('country_id');
+        $auth = Auth::user();
+        $researchJobsList = ResearchJobs::where('user_id', $auth->id)->where('product_category_id', $auth->product_category_id)->with('Country')->distinct()->get('country_id');
         $researchJobsLists = json_decode($researchJobsList, true);
 
         $countriesRecords = [];
