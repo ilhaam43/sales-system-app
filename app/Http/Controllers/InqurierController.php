@@ -62,7 +62,9 @@ class InqurierController extends Controller
             }
         }
 
-        return view('workers/inqurier/companies', compact('companiesList'))->with('i');
+        $getTemplateMessage = Settings::where('id', 10)->first();
+
+        return view('workers/inqurier/companies', compact('companiesList', 'getTemplateMessage'))->with('i');
     }
 
     public function showFAQ()

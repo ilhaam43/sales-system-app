@@ -74,38 +74,7 @@
           </button>
         </div>
         <div class="modal-body">
-        <p>Hi,</p>
-
-        <p>This is DEL ILLUMINATION who specializes in SOLAR LED LIGHT.</p>
-
-        <p>We are a German company, whose designs are all from the German R&amp;D team.</p>
-
-        <p>Recently we have updated our product line, please check them as follows:</p>
-
-        <p>40W/60W/80W/100W/120W/160W All-in-One Solar LED Street Light</p>
-
-        <p>40W/60W/80W/100W/120W/160W All-in-Two Solar LED Street Light</p>
-
-        <p>180W Solar LED High Mast/Stadium Light</p>
-
-        <p>20W Solar LED Billboard Light</p>
-
-        <p>20W Solar LED Flood Light</p>
-
-        <p>20W Solar LED Garden Light</p>
-
-        <p>Here is our German patent design, please check this video:</p>
-
-        <p><a href="https://youtu.be/nTxK8aLghQU">https://youtu.be/nTxK8aLghQU</a></p>
-
-        <p>Here is our online latest German product catalog, please check it:</p>
-
-        <p>https://bit.ly/3gP0iZC</p>
-
-        <p>If you are interested in our products, please feel free to let us know&nbsp;by <a href="mailto:delsolarlight@hotmail.com" target="_blank">delsolarlight@hotmail.com</a>. We will send you further information.</p>
-
-        <p>PS: If you do not want to receive such a message, please feel free to let us know the website where you received it. All unsubscribe requests will be done immediately, if it is not successfully unsubscribed, please also let us know. Sometimes there is an error for the email system. We are sorry for bothering you.</p>
-
+        {!! $getTemplateMessage->setting_description !!}
         </div>
         
       </div>
