@@ -35,7 +35,8 @@
             <h5 class="m-0 font-weight-bold text-primary">Payment & Quantity :</h5>
             <hr>
             <div class="form-row">
-                <div class="col-sm-4">
+                @if($workers == 'researcher')
+                <div class="col-sm-6" style="margin: 0 auto;">
                 <center><h5 class="m-0 font-weight-bold">Quantity Research</h5></center>
                 </br>
                 <center><h5 class="m-0 font-weight-bold">Total : {{$countResearch ?? 0}}</h5></center>
@@ -43,7 +44,9 @@
                 <center><h6 class="m-0 font-weight-bold">Enter Paid Research :</h6></center>
                 <input type="text" class="form-control" name="quantity_research_paid" value="{{$worker->quantity_research_paid ?? 0}}" required>
                 </div>
-                <div class="col-sm-4">
+                @endif
+                @if($workers == 'inqurier')
+                <div class="col-sm-6" style="margin: 0 auto;">
                 <center><h5 class="m-0 font-weight-bold">Quantity Inquiry</h5></center>
                 </br>
                 <center><h5 class="m-0 font-weight-bold">Total : {{$countInquiry ?? 0}}</h5></center>
@@ -51,14 +54,7 @@
                 <center><h6 class="m-0 font-weight-bold">Enter Paid Inquiry :</h6></center>
                 <input type="text" class="form-control" name="quantity_inquire_paid" value="{{$worker->quantity_inquire_paid ?? 0}}" required>
                 </div>
-                <div class="col-sm-4">
-                <center><h5 class="m-0 font-weight-bold">Quantity Reply</h5></center>
-                </br>
-                <center><h5 class="m-0 font-weight-bold">Total : {{$worker->quantity_reply_paid ?? 0}}</h5></center>
-                </br>
-                <center><h6 class="m-0 font-weight-bold">Enter Paid Reply :</h6></center>
-                <input type="text" class="form-control" name="quantity_reply_paid" value="{{$worker->quantity_reply_paid ?? 0}}" required>
-                </div>
+                @endif
             </div>
             @if($workers == 'auditor')
             </br>
