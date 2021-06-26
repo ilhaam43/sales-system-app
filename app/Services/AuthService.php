@@ -15,6 +15,10 @@ class AuthService
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
+            if($user->status_id == 2){
+                return back()->with('error',"Your account has been blocked please contact admin");
+            }
+
             if ($user->role_id == 1) {
                 return redirect()->intended('superadmin');
             } elseif ($user->role_id == 2) {

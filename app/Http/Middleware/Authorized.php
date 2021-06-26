@@ -27,10 +27,6 @@ class Authorized
         $user = User::with('usersRole')->where('role_id', $auth->role_id)->first();
         $user = json_decode($user, true);
 
-        if($user['status_id'] == 2){
-            return redirect('/')->with('error',"Your account has been blocked please contact admin");
-        }
-
         if($user['users_role']['role'] == $role){
             return $next($request);
         }
