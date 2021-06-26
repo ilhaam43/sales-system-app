@@ -209,6 +209,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::group(['prefix' => 'data'], function () {
             Route::get('/all/', [AjaxDataInquiriesController::class, 'showInqurierData'])->name('inqurier.data.all');
+            Route::get('/company/', [AjaxDataResearchesController::class, 'showCompanyData'])->name('inqurier.data.company');
         });
     });
 

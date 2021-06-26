@@ -265,11 +265,36 @@ class AjaxDataResearchesController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
                     $editRoute = route('researcher.detail.researches',$data->id);
-                    $actionBtn = '<td><a class="btn btn-primary btn-sm" href="'.$editRoute.'">Edit</a></td>';
+                    $actionBtn = '<a class="btn btn-primary btn-sm" href="'.$editRoute.'">Edit</a>';
     
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])->setRowId(function ($data) {
+                    return $data->id;
+                })
+                ->make(true);
+        }
+    }
+
+    public function showCompanyData(Request $request)
+    {
+        if ($request->ajax()) {
+            $auth = Auth::user();
+
+            $data = ResearchJobs::whereNotIn('count_inquiry', array(1))->orWhereNull('count_inquiry')->where('job_status_id', 1)->where('is_blacklist', 'No')->where('product_category_id', $auth->product_category_id)->with('Country')->inRandomOrder()->select('research_jobs.*');
+            
+            return Datatables::eloquent($data)
+                ->addIndexColumn()
+                ->addColumn('inquiry', function($data){
+                    $inquiryBtn = '<button data-toggle="modal" data-target-id="'.$data->id.'" data-target="#sendInquiry" class="btn btn-primary btn-md"><i class="fa fa-envelope p-r-5"></i> Send Inquiry</button>';
+    
+                    return $inquiryBtn;
+                })->addColumn('website_problem', function($data){
+                    $problemBtn = '<button data-toggle="modal" data-target-id="'.$data->id.'" data-target="#sendReport" class="btn btn-danger btn-md"><i class="fa fa-info p-r-5"></i> Report</a>';
+    
+                    return $problemBtn;
+                })
+                ->rawColumns(['inquiry', 'website_problem'])->setRowId(function ($data) {
                     return $data->id;
                 })
                 ->make(true);

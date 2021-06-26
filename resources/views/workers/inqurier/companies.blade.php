@@ -54,18 +54,7 @@
                       <th width="10%">Website Problem</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    @foreach($companiesList as $companies)
-                    <tr>
-                      <td>{{++$i}}</td>
-                      <td>{{$companies['company_name']}}</td>
-                      <td>{{$companies['company_website']}}</td>
-                      <td>{{$companies['country']['country_name']}}</td>
-                      <td><button data-toggle="modal" data-target-id="{{ $companies['id'] }}" data-target="#sendInquiry" class="btn btn-primary btn-md"><i class="fa fa-envelope p-r-5"></i> Send Inquiry</button></td>
-                      <td><button data-toggle="modal" data-target-id="{{ $companies['id'] }}" data-target="#sendReport" class="btn btn-danger btn-md"><i class="fa fa-info p-r-5"></i> Report</a></td>
-                    </tr>
-                    @endforeach
-                  </tbody>
+                  
                 </table>
               </div>
             </div>
@@ -207,4 +196,5 @@
                 });
             });
 </script>
+@include('workers.javascript.showCompaniesData')
 </html>
