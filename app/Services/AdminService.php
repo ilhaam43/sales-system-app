@@ -181,6 +181,40 @@ class AdminService
     }
 
     //researches logic
+    public function updateResearches($request, $id)
+    {
+        $urlFilter = preg_replace('/\b(?:(?:https?|ftp):\/\/|www\.)/', '', $request['company_website']); //regex for filter url
+
+        try {
+
+            $researchJobs = ResearchJobs::where('id', $id)->first();
+
+            if($researchJobs->company_website !== $request['company_website']){
+
+                $checkUrl = ResearchJobs::where('company_website','LIKE','%' . $urlFilter . '%')->get();
+
+                if(count($checkUrl) > 0){
+                    return back()->withError('Company data failed to add because company website data already exists');
+                }
+            }
+
+            if($researchJobs->company_email !== $request['company_email']){
+                $checkEmail = ResearchJobs::where('company_email','LIKE','%' . $request['company_email'] . '%')->get();
+
+                if(count($checkEmail) > 0){
+                    return back()->withError('Company data failed to add because company email data already exists');
+                }
+            }
+
+            $updateCompanyData = ResearchJobs::find($id)->update($request->all());
+
+        } catch(\Throwable $th) {
+            return back()->withError('Company data failed to update because company data already exists');
+        }
+        
+        return redirect()->route('admin.researches.index')->with('success', 'Company data updated successfully');
+    }
+
     public function approveResearches($request)
     {
         try{

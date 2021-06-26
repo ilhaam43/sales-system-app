@@ -123,6 +123,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/approve', [AdminController::class, 'approveResearches'])->name('admin.researches.approve');
             Route::post('/reject', [AdminController::class, 'rejectResearches'])->name('admin.researches.reject');
             Route::post('/blacklist', [AdminController::class, 'blacklistResearches'])->name('admin.researches.blacklist');
+            Route::get('/{id}', [AdminController::class, 'showDetailResearches'])->name('admin.researches.detail');
+            Route::put('/{id}', [AdminController::class, 'updateResearches'])->name('admin.researches.update');
 
             Route::group(['prefix' => 'data'], function () {
                 Route::get('/all/', [AjaxDataResearchesController::class, 'allDataResearches'])->name('admin.researches.data.all');

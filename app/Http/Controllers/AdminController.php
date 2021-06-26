@@ -275,6 +275,33 @@ class AdminController extends Controller
         return view('/admin/researches/removed', compact('researchesList'))->with('i');
     }
 
+    public function showDetailResearches($id)
+    {   
+        $listCountries = Countries::all();
+        $listResearchJobs = ResearchJobs::where('id', $id)->with('Country', 'JobsStatus')->get();
+        $researchJobsLists = json_decode($listResearchJobs, true);
+
+        foreach($researchJobsLists as $researchList){
+            $researchJobsLists = $researchList;
+        }
+
+        return view('admin/researches/updateResearches', compact('researchJobsLists', 'listCountries'))->with('i');
+    }
+
+    public function updateResearches(Request $request, $id)
+    {
+        $request->validate([
+            'country_id'            => 'required',
+            'company_name'          => 'required',
+            'company_website'       => 'required',
+            'company_email'         => 'required|email',
+            'company_phone'         => 'required',
+            'company_product_url'   => 'required',
+        ]);
+
+        return $this->service->updateResearches($request, $id);
+    }
+
     public function approveResearches(Request $request)
     {
         $request->validate([

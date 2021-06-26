@@ -54,7 +54,7 @@ class AjaxDataInquiriesController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
                         $routeEdit = route('admin.inquiries.update',$data->id);
-                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm">Edit</a>';
+                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a>';
                         return $actionBtn;
                     })->addColumn('website', function($data){
                         $datas = json_decode($data, true);
@@ -123,7 +123,7 @@ class AjaxDataInquiriesController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
                         $routeEdit = route('admin.inquiries.update',$data->id);
-                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm">Edit</a>';
+                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a>';
                         return $actionBtn;
                     })->addColumn('website', function($data){
                         $datas = json_decode($data, true);
@@ -193,7 +193,7 @@ class AjaxDataInquiriesController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
                         $routeEdit = route('admin.inquiries.update',$data->id);
-                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm">Edit</a>';
+                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a>';
                         return $actionBtn;
                     })->addColumn('website', function($data){
                         $datas = json_decode($data, true);
@@ -263,7 +263,7 @@ class AjaxDataInquiriesController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
                         $routeEdit = route('admin.inquiries.update',$data->id);
-                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm">Edit</a>';
+                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a>';
                         return $actionBtn;
                     })->addColumn('website', function($data){
                         $datas = json_decode($data, true);
@@ -333,7 +333,7 @@ class AjaxDataInquiriesController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
                         $routeEdit = route('admin.inquiries.update',$data->id);
-                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm">Edit</a>';
+                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a>';
                         return $actionBtn;
                     })->addColumn('website', function($data){
                         $datas = json_decode($data, true);

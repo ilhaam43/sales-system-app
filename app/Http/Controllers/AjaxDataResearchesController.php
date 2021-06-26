@@ -33,7 +33,8 @@ class AjaxDataResearchesController extends Controller
             return Datatables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                    $routeEdit = route('admin.researches.detail',$data->id);
+                    $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a>';
                     return $actionBtn;
                 })->addColumn('website', function($data){
                     $websiteBtn = '<a href="'.$data->company_website.'" class="edit btn btn-primary btn-sm" target="_blank">Website</a>';
@@ -79,7 +80,8 @@ class AjaxDataResearchesController extends Controller
             return Datatables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                    $routeEdit = route('admin.researches.detail',$data->id);
+                    $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a>';
                     return $actionBtn;
                 })->addColumn('website', function($data){
                     $websiteBtn = '<a href="'.$data->company_website.'" class="edit btn btn-primary btn-sm" target="_blank">Website</a>';
@@ -125,7 +127,8 @@ class AjaxDataResearchesController extends Controller
             return Datatables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                    $routeEdit = route('admin.researches.detail',$data->id);
+                    $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a>';
                     return $actionBtn;
                 })->addColumn('website', function($data){
                     $websiteBtn = '<a href="'.$data->company_website.'" class="edit btn btn-primary btn-sm" target="_blank">Website</a>';
@@ -171,7 +174,8 @@ class AjaxDataResearchesController extends Controller
             return Datatables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                    $routeEdit = route('admin.researches.detail',$data->id);
+                    $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a>';
                     return $actionBtn;
                 })->addColumn('website', function($data){
                     $websiteBtn = '<a href="'.$data->company_website.'" class="edit btn btn-primary btn-sm" target="_blank">Website</a>';
@@ -217,7 +221,8 @@ class AjaxDataResearchesController extends Controller
             return Datatables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                    $routeEdit = route('admin.researches.detail',$data->id);
+                    $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a>';
                     return $actionBtn;
                 })->addColumn('website', function($data){
                     $websiteBtn = '<a href="'.$data->company_website.'" class="edit btn btn-primary btn-sm" target="_blank">Website</a>';

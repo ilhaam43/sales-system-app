@@ -89,29 +89,25 @@ class ResearcherService
     {
         $urlFilter = preg_replace('/\b(?:(?:https?|ftp):\/\/|www\.)/', '', $request['company_website']); //regex for filter url
 
-        $emailFilter = preg_replace('^[A-z0-9.]+@^', '', $request['company_email']); //regex for filter email
-
-        $domainMailAllowed = array("gmail.com", "yahoo.com", "ymail.com", "rocketmail.com", "hotmail.com", "qq.com", "outlook.com", "live.com", "aol.com");
-
-        if(in_array($emailFilter, $domainMailAllowed)){
-            $emailFilter = $request['company_email'];
-        }
-
         try {
 
             $researchJobs = ResearchJobs::where('id', $id)->first();
 
-            if($researchJobs->company_website !== $request['company_website'] || $researchJobs->company_email !== $request['company_email']){
+            if($researchJobs->company_website !== $request['company_website']){
 
                 $checkUrl = ResearchJobs::where('company_website','LIKE','%' . $urlFilter . '%')->get();
-                $checkEmail = ResearchJobs::where('company_email','LIKE','%' . $emailFilter . '%')->get();
 
                 if(count($checkUrl) > 0){
                     return back()->withError('Company data failed to add because company website data already exists');
-                }elseif(count($checkEmail) > 0){
+                }
+            }
+
+            if($researchJobs->company_email !== $request['company_email']){
+                $checkEmail = ResearchJobs::where('company_email','LIKE','%' . $request['company_email'] . '%')->get();
+
+                if(count($checkEmail) > 0){
                     return back()->withError('Company data failed to add because company email data already exists');
                 }
-
             }
 
             $updateCompanyData = ResearchJobs::find($id)->update($request->all());
