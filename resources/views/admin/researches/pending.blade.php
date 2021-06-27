@@ -39,18 +39,18 @@
         <div class="table-responsive">
           <table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
             <thead>
-                <tr>
+              <tr>
                     <th>#</th>
                     <th>No</th>
                     <th>Name</th>
                     <th>Website</th>
                     <th>Email</th>
-                    <th>Phone</th>
                     <th>Product Page</th>
-                    <th>Country</th>
-                    <th>Status</th>
+                    <th>Form</th>
                     <th>Researches</th>
-                    <th>Auditor</th>
+                    <th>Status</th>
+                    <th>Country</th>
+                    <th>Phone</th>
                     <th>Action</th>
                 </tr>
             </thead>

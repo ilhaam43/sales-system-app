@@ -59,12 +59,8 @@ class AjaxDataResearchesController extends Controller
 
                     $researcherLink = '<a href="/admin/workers/researcher/'.$userId.'">'.$userName.'</a>';
                     return $researcherLink;
-                })->addColumn('auditor', function($data){
-                    $datas = json_decode($data, true);
-
-                    return $datas['auditor_research_jobs']['user']['name'] ?? "NO";
                 })
-                ->rawColumns(['action', 'website', 'checkbox', 'product_page', 'country', 'status', 'researcher','auditor'])->setRowId(function ($data) {
+                ->rawColumns(['action', 'website', 'checkbox', 'product_page', 'country', 'status', 'researcher'])->setRowId(function ($data) {
                     return $data->id;
                 })
                 ->make(true);
@@ -106,12 +102,8 @@ class AjaxDataResearchesController extends Controller
 
                     $researcherLink = '<a href="/admin/workers/researcher/'.$userId.'">'.$userName.'</a>';
                     return $researcherLink;
-                })->addColumn('auditor', function($data){
-                    $datas = json_decode($data, true);
-
-                    return $datas['auditor_research_jobs']['user']['name'] ?? "NO";
                 })
-                ->rawColumns(['action', 'website', 'checkbox', 'product_page', 'country', 'status', 'researcher','auditor'])->setRowId(function ($data) {
+                ->rawColumns(['action', 'website', 'checkbox', 'product_page', 'country', 'status', 'researcher'])->setRowId(function ($data) {
                     return $data->id;
                 })
                 ->make(true);
@@ -153,12 +145,8 @@ class AjaxDataResearchesController extends Controller
 
                     $researcherLink = '<a href="/admin/workers/researcher/'.$userId.'">'.$userName.'</a>';
                     return $researcherLink;
-                })->addColumn('auditor', function($data){
-                    $datas = json_decode($data, true);
-
-                    return $datas['auditor_research_jobs']['user']['name'] ?? "NO";
                 })
-                ->rawColumns(['action', 'website', 'checkbox', 'product_page', 'country', 'status', 'researcher','auditor'])->setRowId(function ($data) {
+                ->rawColumns(['action', 'website', 'checkbox', 'product_page', 'country', 'status', 'researcher'])->setRowId(function ($data) {
                     return $data->id;
                 })
                 ->make(true);
@@ -200,12 +188,8 @@ class AjaxDataResearchesController extends Controller
 
                     $researcherLink = '<a href="/admin/workers/researcher/'.$userId.'">'.$userName.'</a>';
                     return $researcherLink;
-                })->addColumn('auditor', function($data){
-                    $datas = json_decode($data, true);
-
-                    return $datas['auditor_research_jobs']['user']['name'] ?? "NO";
                 })
-                ->rawColumns(['action', 'website', 'checkbox', 'product_page', 'country', 'status', 'researcher','auditor'])->setRowId(function ($data) {
+                ->rawColumns(['action', 'website', 'checkbox', 'product_page', 'country', 'status', 'researcher'])->setRowId(function ($data) {
                     return $data->id;
                 })
                 ->make(true);
@@ -247,12 +231,8 @@ class AjaxDataResearchesController extends Controller
 
                     $researcherLink = '<a href="/admin/workers/researcher/'.$userId.'">'.$userName.'</a>';
                     return $researcherLink;
-                })->addColumn('auditor', function($data){
-                    $datas = json_decode($data, true);
-
-                    return $datas['auditor_research_jobs']['user']['name'] ?? "NO";
                 })
-                ->rawColumns(['action', 'website', 'checkbox', 'product_page', 'country', 'status', 'researcher','auditor'])->setRowId(function ($data) {
+                ->rawColumns(['action', 'website', 'checkbox', 'product_page', 'country', 'status', 'researcher'])->setRowId(function ($data) {
                     return $data->id;
                 })
                 ->make(true);

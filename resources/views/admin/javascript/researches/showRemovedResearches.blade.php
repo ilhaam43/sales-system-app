@@ -28,18 +28,21 @@
                 },
                 
                 { data: 'company_email', name: 'company_email'},
-                { data: 'company_phone', name: 'company_phone'},
-
                 { data: 'product_page', 
                     name: 'product_page', 
                     orderable: false, 
                     searchable: false 
                 },
+                { data: 'is_form', name: 'is_form'},
+                { data: 'researcher', name: 'researcher'},
+                
+
+                { data: 'status', name: 'status'},
 
                 { data: 'country', name: 'country'},
-                { data: 'status', name: 'status'},
-                { data: 'researcher', name: 'researcher'},
-                { data: 'auditor', name: 'auditor'},
+                
+                { data: 'company_phone', name: 'company_phone'},
+                
 
                 {
                     data: 'action', 
