@@ -22,7 +22,7 @@ class UsersStatusSeeder extends Seeder
         ]);
 
         DB::table('users_status')->insert([
-            'status' => 'Deactived',
+            'status' => 'Blocked',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
