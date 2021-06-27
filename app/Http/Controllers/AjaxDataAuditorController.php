@@ -28,7 +28,7 @@ class AjaxDataAuditorController extends Controller
         if ($request->ajax()) {
             $user = Auth::user();
 
-            $data = ResearchJobs::where('job_status_id', 3)->where('product_category_id', $user->product_category_id)->where('is_blacklist', 'No')->with(['Country', 'JobsStatus'])->select('research_jobs.*');
+            $data = ResearchJobs::where('job_status_id', 3)->where('product_category_id', $user->product_category_id)->where('is_blacklist', 'No')->with(['Country', 'JobsStatus'])->inRandomOrder()->select('research_jobs.*');
 
             return Datatables::eloquent($data)
                 ->addIndexColumn()
@@ -59,7 +59,7 @@ class AjaxDataAuditorController extends Controller
             
             if(count($listResearchJobs) == 0){
 
-                $data = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->with(['ResearchJobs', 'JobsStatus'])->select('inquiry_jobs.*');
+                $data = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->with(['ResearchJobs', 'JobsStatus'])->inRandomOrder()->select('inquiry_jobs.*');
 
             }else if(count($listResearchJobs) > 0){
 
