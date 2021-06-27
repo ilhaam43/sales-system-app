@@ -59,7 +59,7 @@ class AjaxDataAuditorController extends Controller
             
             if(count($listResearchJobs) == 0){
 
-                $data = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->with(['ResearchJobs', 'JobsStatus'])->inRandomOrder()->select('inquiry_jobs.*');
+                $data = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->with(['ResearchJobs', 'JobsStatus'])->select('inquiry_jobs.*');
 
             }else if(count($listResearchJobs) > 0){
 
@@ -73,7 +73,7 @@ class AjaxDataAuditorController extends Controller
                     $researchJobsId = 0;
                 }
 
-                $data = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->with(['ResearchJobs', 'JobsStatus'])->select('inquiry_jobs.*');
+                $data = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('job_status_id', 3)->where('is_form', 'Yes')->with(['ResearchJobs', 'JobsStatus'])->inRandomOrder()->select('inquiry_jobs.*');
             }
             
             return Datatables::eloquent($data)
