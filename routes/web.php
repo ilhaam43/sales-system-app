@@ -10,6 +10,7 @@ use App\Http\Controllers\AjaxDataResearchesController;
 use App\Http\Controllers\AjaxDataInquiriesController;
 use App\Http\Controllers\AjaxDataAuditorController;
 use App\Http\Controllers\AjaxDataUsersController;
+use App\Http\Controllers\AjaxValidationDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -193,6 +194,12 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::group(['prefix' => 'data'], function () {
             Route::get('/all/', [AjaxDataResearchesController::class, 'showResearcherData'])->name('researcher.data.all');
+            //ajax validation jquery route
+            Route::post('/validation/company-name', [AjaxValidationDataController::class, 'validateCompanyName'])->name('researcher.data.validate.companyname');
+            Route::post('/validation/company-website', [AjaxValidationDataController::class, 'validateCompanyWebsite'])->name('researcher.data.validate.companywebsite');
+            Route::post('/validation/company-email', [AjaxValidationDataController::class, 'validateCompanyEmail'])->name('researcher.data.validate.companyemail');
+            Route::post('/validation/company-phone', [AjaxValidationDataController::class, 'validateCompanyPhone'])->name('researcher.data.validate.companyphone');
+            Route::post('/validation/company-product', [AjaxValidationDataController::class, 'validateCompanyProduct'])->name('researcher.data.validate.companyproduct');
         });
     });
 

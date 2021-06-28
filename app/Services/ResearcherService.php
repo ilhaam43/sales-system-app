@@ -189,7 +189,7 @@ class ResearcherService
                 $checkProductUrl = ResearchJobs::where('company_name','LIKE','%' . $request['input_data'] . '%')->get();
 
                 if(count($checkProductUrl) > 0){
-                    return back()->withError('Company phone data already exists');
+                    return back()->withError('Company product url data already exists');
                 }
             }
 

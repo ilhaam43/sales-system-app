@@ -93,23 +93,23 @@
         <input type="hidden" name="is_blacklist" value="No">
         <div class="form-group">
           <label for="name">Company Name :</label>
-          <input type="text" name="company_name" class="form-control" id="company_name" required>
+          <input type="text" name="company_name" class="form-control" id="company_name" required onblur="checkName()">
         </div>
         <div class="form-group">
           <label for="name">Company Website :</label>
-          <input type="text" name="company_website" class="form-control" id="company_website" required>
+          <input type="text" name="company_website" class="form-control" id="company_website" required onblur="checkWebsite()">
         </div>
         <div class="form-group">
           <label for="name">Company Email :</label>
-          <input type="text" name="company_email" class="form-control" id="company_email" required>
+          <input type="text" name="company_email" class="form-control" id="company_email" required onblur="checkEmail()">
         </div>
         <div class="form-group">
           <label for="name">Company Phone :</label>
-          <input type="text" name="company_phone" class="form-control" id="company_phone" required>
+          <input type="text" name="company_phone" class="form-control" id="company_phone" required onblur="checkPhone()">
         </div>
         <div class="form-group">
           <label for="name">Company Product Page :</label>
-          <input type="text" name="company_product_url" class="form-control" id="company_product_url" required>
+          <input type="text" name="company_product_url" class="form-control" id="company_product_url" required onblur="checkProduct()">
         </div>
         <div class="form-group">
         <label>Country :</label>
@@ -193,4 +193,125 @@
   
 </body>
 @include('workers.javascript.showResearcherData')
+<script>
+function checkName(){
+    let companyName = document.getElementById("company_name");
+    let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    companyName = companyName.value;
+    
+    $.ajax({
+                type: 'POST',
+                url: "/researcher/data/validation/company-name",
+                cache: false,
+                data: {_token: CSRF_TOKEN, company_name:companyName},
+                dataType: 'JSON',
+                success: function (results) {
+                  console.log(results.success);
+                    if (results.success == true) {
+                        $('#company_name').css('border', '3px solid #16e445');
+                    } else if(results.success == false) {
+                      console.log('error');
+                        $('#company_name').css({"border":"3px solid red"});
+                        alert("Company name data already exists, please input another company name");
+                    }
+                }
+      });
+}
+
+function checkWebsite(){
+    let companyWebsite = document.getElementById("company_website");
+    let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    companyWebsite = companyWebsite.value;
+    
+    $.ajax({
+                type: 'POST',
+                url: "/researcher/data/validation/company-website",
+                cache: false,
+                data: {_token: CSRF_TOKEN, company_website:companyWebsite},
+                dataType: 'JSON',
+                success: function (results) {
+                  console.log(results.success);
+                    if (results.success == true) {
+                        $('#company_website').css('border', '3px solid #16e445');
+                    } else if(results.success == false) {
+                      console.log('error');
+                        $('#company_website').css({"border":"3px solid red"});
+                        alert("Company website data already exists, please input another company website");
+                    }
+                }
+      });
+}
+
+function checkEmail(){
+    let companyEmail = document.getElementById("company_email");
+    let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    companyEmail = companyEmail.value;
+    
+    $.ajax({
+                type: 'POST',
+                url: "/researcher/data/validation/company-email",
+                cache: false,
+                data: {_token: CSRF_TOKEN, company_email:companyEmail},
+                dataType: 'JSON',
+                success: function (results) {
+                  console.log(results.success);
+                    if (results.success == true) {
+                        $('#company_email').css('border', '3px solid #16e445');
+                    } else if(results.success == false) {
+                      console.log('error');
+                        $('#company_email').css({"border":"3px solid red"});
+                        alert("Company email data already exists, please input another company email");
+                    }
+                }
+      });
+}
+
+function checkPhone(){
+    let companyPhone = document.getElementById("company_phone");
+    let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    companyPhone = companyPhone.value;
+    
+    $.ajax({
+                type: 'POST',
+                url: "/researcher/data/validation/company-phone",
+                cache: false,
+                data: {_token: CSRF_TOKEN, company_phone:companyPhone},
+                dataType: 'JSON',
+                success: function (results) {
+                  console.log(results.success);
+                    if (results.success == true) {
+                        $('#company_phone').css('border', '3px solid #16e445');
+                    } else if(results.success == false) {
+                      console.log('error');
+                        $('#company_phone').css({"border":"3px solid red"});
+                        alert("Company phone data already exists, please input another company phone");
+                    }
+                }
+      });
+}
+
+function checkProduct(){
+    let companyProduct = document.getElementById("company_product_url");
+    let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    companyProduct = companyProduct.value;
+    
+    $.ajax({
+                type: 'POST',
+                url: "/researcher/data/validation/company-product",
+                cache: false,
+                data: {_token: CSRF_TOKEN, company_product_url:companyProduct},
+                dataType: 'JSON',
+                success: function (results) {
+                  console.log(results.success);
+                    if (results.success == true) {
+                        $('#company_product_url').css('border', '3px solid #16e445');
+                    } else if(results.success == false) {
+                      console.log('error');
+                        $('#company_product_url').css({"border":"3px solid red"});
+                        alert("Company product url data already exists, please input another company product url");
+                    }
+                }
+      });
+}
+</script>
 </html>
