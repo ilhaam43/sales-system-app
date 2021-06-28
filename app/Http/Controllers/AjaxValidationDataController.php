@@ -59,7 +59,7 @@ class AjaxValidationDataController extends Controller
     {
         $companyPhone = $request['company_phone'];
 
-        $validatePhoneData = ResearchJobs::where('company_name','LIKE','%' . $companyPhone . '%')->get();
+        $validatePhoneData = ResearchJobs::where('company_phone','LIKE','%' . $companyPhone . '%')->get();
 
         if(count($validatePhoneData) > 0){
             return response()->json(['success' => false, 'message' => "Company Phone Data Already Exists"], 200);

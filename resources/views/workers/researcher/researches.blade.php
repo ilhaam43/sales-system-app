@@ -209,10 +209,11 @@ function checkName(){
                   console.log(results.success);
                     if (results.success == true) {
                         $('#company_name').css('border', '3px solid #16e445');
+                        $('#company_name').nextAll().remove();
                     } else if(results.success == false) {
-                      console.log('error');
                         $('#company_name').css({"border":"3px solid red"});
-                        alert("Company name data already exists, please input another company name");
+                        $('#company_name').nextAll().remove();
+                        $('#company_name').after("<p style=color:red;>This company already exists, please re-enter another company</p>");
                     }
                 }
       });
@@ -233,10 +234,12 @@ function checkWebsite(){
                   console.log(results.success);
                     if (results.success == true) {
                         $('#company_website').css('border', '3px solid #16e445');
+                        $('#company_website').nextAll().remove();
                     } else if(results.success == false) {
                       console.log('error');
                         $('#company_website').css({"border":"3px solid red"});
-                        alert("Company website data already exists, please input another company website");
+                        $('#company_website').nextAll().remove();
+                        $('#company_website').after("<p style=color:red;>This company already exists, please re-enter another company</p>");
                     }
                 }
       });
@@ -257,10 +260,12 @@ function checkEmail(){
                   console.log(results.success);
                     if (results.success == true) {
                         $('#company_email').css('border', '3px solid #16e445');
+                        $('#company_email').nextAll().remove();
                     } else if(results.success == false) {
                       console.log('error');
                         $('#company_email').css({"border":"3px solid red"});
-                        alert("Company email data already exists, please input another company email");
+                        $('#company_email').nextAll().remove();
+                        $('#company_email').after("<p style=color:red;>This company already exists, please re-enter another company</p>");
                     }
                 }
       });
@@ -281,10 +286,12 @@ function checkPhone(){
                   console.log(results.success);
                     if (results.success == true) {
                         $('#company_phone').css('border', '3px solid #16e445');
+                        $('#company_phone').nextAll().remove();
                     } else if(results.success == false) {
                       console.log('error');
                         $('#company_phone').css({"border":"3px solid red"});
-                        alert("Company phone data already exists, please input another company phone");
+                        $('#company_phone').nextAll().remove();
+                        $('#company_phone').after("<p style=color:red;>This company already exists, please re-enter another company</p>");
                     }
                 }
       });
@@ -305,10 +312,12 @@ function checkProduct(){
                   console.log(results.success);
                     if (results.success == true) {
                         $('#company_product_url').css('border', '3px solid #16e445');
+                        $('#company_product_url').nextAll().remove();
                     } else if(results.success == false) {
                       console.log('error');
                         $('#company_product_url').css({"border":"3px solid red"});
-                        alert("Company product url data already exists, please input another company product url");
+                        $('#company_product_url').nextAll().remove();
+                        $('#company_product_url').after("<p style=color:red;>This company already exists, please re-enter another company</p>");
                     }
                 }
       });
