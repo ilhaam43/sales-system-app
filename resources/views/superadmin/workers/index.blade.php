@@ -39,6 +39,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Country</th>
+                <th>Work Quantity</th>
                 <th>Category</th>
                 <th>Status</th>
                 <th>Actions</th>

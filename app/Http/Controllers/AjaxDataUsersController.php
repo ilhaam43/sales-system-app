@@ -139,7 +139,7 @@ class AjaxDataUsersController extends Controller
             $usersRole = UsersRole::where('role', $workers)->get();
 
             if(count($usersRole) == 0){
-                return redirect()->route('admins.index');
+                return redirect()->route('workers.index');
             }
             
             foreach($usersRole as $i => $roles){
@@ -169,8 +169,24 @@ class AjaxDataUsersController extends Controller
                     $datas = json_decode($data, true);
 
                     return $datas['users_status']['status'];
+                })->addColumn('worker_quantity', function($data){
+
+                    $research = count(ResearchJobs::where('user_id', $data->id)->get());
+                    $inquiry = count(InquiryJobs::where('user_id', $data->id)->get());
+                    $auditorResearch = count(AuditorResearchJobs::where('user_id', $data->id)->get());
+                    $auditorInquiry = count(AuditorInquiryJobs::where('user_id', $data->id)->get());
+
+                    if($data->role_id == 3){
+                        $quantity = $research;
+                    }else if($data->role_id == 4){
+                        $quantity = $inquiry;
+                    }else if($data->role_id == 5){
+                        $quantity = $auditorResearch + $auditorInquiry;
+                    }
+
+                    return $quantity;
                 })
-                ->rawColumns(['actions', 'checkbox', 'status'])->setRowId(function ($data) {
+                ->rawColumns(['actions', 'checkbox', 'status', 'worker_quantity'])->setRowId(function ($data) {
                     return $data->id;
                 })
                 ->make(true);

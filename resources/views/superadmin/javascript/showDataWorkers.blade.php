@@ -29,6 +29,7 @@
                 { data: 'name', name: 'name' },
                 { data: 'email', name: 'email' },
                 { data: 'country.country_name', name: 'Country.country_name' },
+                { data: 'worker_quantity', name: 'worker_quantity'},
                 { data: 'product_category.category_name', name: 'ProductCategory.category_name' },
 
                 { data: 'status', name: 'status'},
