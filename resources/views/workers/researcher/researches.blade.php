@@ -206,14 +206,17 @@ function checkName(){
                 data: {_token: CSRF_TOKEN, company_name:companyName},
                 dataType: 'JSON',
                 success: function (results) {
-                  console.log(results.success);
-                    if (results.success == true) {
+                  
+                    if (results.success == true && results.empty == false) {
                         $('#company_name').css('border', '3px solid #16e445');
                         $('#company_name').nextAll().remove();
-                    } else if(results.success == false) {
+                    } else if(results.success == false && results.empty == false) {
                         $('#company_name').css({"border":"3px solid red"});
                         $('#company_name').nextAll().remove();
                         $('#company_name').after("<p style=color:red;>This company already exists, please re-enter another company</p>");
+                    } else if(results.success == false && results.empty == true){
+                        $('#company_name').css({"border":""});
+                        $('#company_name').nextAll().remove();
                     }
                 }
       });
@@ -232,14 +235,17 @@ function checkWebsite(){
                 dataType: 'JSON',
                 success: function (results) {
                   console.log(results.success);
-                    if (results.success == true) {
+                    if (results.success == true && results.empty == false) {
                         $('#company_website').css('border', '3px solid #16e445');
                         $('#company_website').nextAll().remove();
-                    } else if(results.success == false) {
+                    } else if(results.success == false && results.empty == false) {
                       console.log('error');
                         $('#company_website').css({"border":"3px solid red"});
                         $('#company_website').nextAll().remove();
                         $('#company_website').after("<p style=color:red;>This company already exists, please re-enter another company</p>");
+                    } else if(results.success == false && results.empty == true){
+                        $('#company_website').css({"border":""});
+                        $('#company_website').nextAll().remove();
                     }
                 }
       });
@@ -258,14 +264,17 @@ function checkEmail(){
                 dataType: 'JSON',
                 success: function (results) {
                   console.log(results.success);
-                    if (results.success == true) {
+                    if (results.success == true && results.empty == false) {
                         $('#company_email').css('border', '3px solid #16e445');
                         $('#company_email').nextAll().remove();
-                    } else if(results.success == false) {
+                    } else if(results.success == false && results.empty == false) {
                       console.log('error');
                         $('#company_email').css({"border":"3px solid red"});
                         $('#company_email').nextAll().remove();
                         $('#company_email').after("<p style=color:red;>This company already exists, please re-enter another company</p>");
+                    } else if(results.success == false && results.empty == true){
+                        $('#company_email').css({"border":""});
+                        $('#company_email').nextAll().remove();
                     }
                 }
       });
@@ -284,14 +293,17 @@ function checkPhone(){
                 dataType: 'JSON',
                 success: function (results) {
                   console.log(results.success);
-                    if (results.success == true) {
+                    if (results.success == true && results.empty == false) {
                         $('#company_phone').css('border', '3px solid #16e445');
                         $('#company_phone').nextAll().remove();
-                    } else if(results.success == false) {
+                    } else if(results.success == false && results.empty == false) {
                       console.log('error');
                         $('#company_phone').css({"border":"3px solid red"});
                         $('#company_phone').nextAll().remove();
                         $('#company_phone').after("<p style=color:red;>This company already exists, please re-enter another company</p>");
+                    } else if(results.success == false && results.empty == true){
+                        $('#company_phone').css({"border":""});
+                        $('#company_phone').nextAll().remove();
                     }
                 }
       });
@@ -310,14 +322,17 @@ function checkProduct(){
                 dataType: 'JSON',
                 success: function (results) {
                   console.log(results.success);
-                    if (results.success == true) {
+                    if (results.success == true && results.empty == false) {
                         $('#company_product_url').css('border', '3px solid #16e445');
                         $('#company_product_url').nextAll().remove();
-                    } else if(results.success == false) {
+                    } else if(results.success == false && results.empty == false) {
                       console.log('error');
                         $('#company_product_url').css({"border":"3px solid red"});
                         $('#company_product_url').nextAll().remove();
                         $('#company_product_url').after("<p style=color:red;>This company already exists, please re-enter another company</p>");
+                    } else if(results.success == false && results.empty == true){
+                        $('#company_product_url').css({"border":""});
+                        $('#company_product_url').nextAll().remove();
                     }
                 }
       });
