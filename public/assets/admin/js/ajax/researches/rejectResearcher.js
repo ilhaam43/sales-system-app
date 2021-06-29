@@ -30,7 +30,7 @@ function rejectConfirmation() {
                         for(var i=0; i<id.length; i++){
                             swal("Done!", results.message, "success");
                             $('tr#'+id[i]+'').css('background-color', '#ccc');
-                            $('tr#'+id[i]+'').fadeOut('slow');
+                            $('tr#'+id[i]+'').remove();
                         }
                     } else {
                         swal("Error!", results.message, "error");
