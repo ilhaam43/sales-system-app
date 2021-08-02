@@ -16,7 +16,12 @@
                 },
 
                 { data: 'company_name', name: 'company_name'},
-                { data: 'company_website', name: 'company_website'},
+                {
+                    data: 'company_websites', 
+                    name: 'company_websites', 
+                    orderable: false, 
+                    searchable: false
+                },
                 { data: 'country.country_name', name: 'Country.country_name'},
 
                 {

@@ -269,7 +269,11 @@ class AjaxDataResearchesController extends Controller
             $data = ResearchJobs::whereNotIn('count_inquiry', array(1))->orWhereNull('count_inquiry')->where('job_status_id', 1)->where('is_blacklist', 'No')->where('product_category_id', $auth->product_category_id)->with('Country')->inRandomOrder()->select('research_jobs.*');
             
             return Datatables::eloquent($data)
-                ->addIndexColumn()
+                ->addIndexColumn()->addColumn('company_websites', function($data){
+                    $urlBtn = '<a class="btn btn-primary btn-md" href="'.$data->company_website.'"><i class="fa fa-link p-r-5"></i> Website Link</a>';
+    
+                    return $urlBtn;
+                })
                 ->addColumn('inquiry', function($data){
                     $inquiryBtn = '<button data-toggle="modal" data-target-id="'.$data->id.'" data-target="#sendInquiry" class="btn btn-primary btn-md"><i class="fa fa-envelope p-r-5"></i> Send Inquiry</button>';
     
@@ -279,7 +283,7 @@ class AjaxDataResearchesController extends Controller
     
                     return $problemBtn;
                 })
-                ->rawColumns(['inquiry', 'website_problem'])->setRowId(function ($data) {
+                ->rawColumns(['company_websites', 'inquiry', 'website_problem'])->setRowId(function ($data) {
                     return $data->id;
                 })
                 ->make(true);
