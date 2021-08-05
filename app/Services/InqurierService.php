@@ -113,6 +113,7 @@ class InqurierService
             ]);
 
         } catch(\Throwable $th) {
+            return $th;
             return back()->withError('Inquiry data failed to add');
         }
         
