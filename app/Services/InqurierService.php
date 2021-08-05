@@ -92,7 +92,7 @@ class InqurierService
         try{   
             $researchJobs = ResearchJobs::where('id', $request['research_jobs_id'])->first();
 
-            if($researchJobs->count_inquiry == 1){
+            if($researchJobs['count_inquiry'] == 1){
                 return back()->withError('Inquiry data already added in this cycle, please inquiry another company');
             }
 
