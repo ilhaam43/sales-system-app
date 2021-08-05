@@ -92,7 +92,7 @@ class InqurierService
 
         $researchJobs = ResearchJobs::where('id', $request['research_jobs_id'])->first();
 
-        return $researchJobs;
+        return $request;
 
         $inquiryCount = $researchJobs->count_inquiry;
 
