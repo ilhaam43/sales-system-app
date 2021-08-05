@@ -88,15 +88,17 @@ class InqurierService
 
     public function addInquiryData($request)
     {  
-        $user = Auth::user();             
+        $user = Auth::user();    
+
+        $researchJobs = ResearchJobs::where('id', $request['research_jobs_id'])->first();
+
+        $inquiryCount = $researchJobs->count_inquiry;
+
+        if($inquiryCount == 1){
+            return back()->withError('Inquiry data already added in this cycle, please inquiry another company');
+        }  
+        
         try{   
-            $researchJobs = ResearchJobs::where('id', $request['research_jobs_id'])->first();
-
-            $inquiryCount = $researchJobs->count_inquiry;
-
-            if($inquiryCount == 1){
-                return back()->withError('Inquiry data already added in this cycle, please inquiry another company');
-            }
 
             $request['user_id'] = $user['id'];
             $request['job_status_id'] = 3;
