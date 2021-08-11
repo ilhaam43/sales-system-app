@@ -150,7 +150,7 @@ class ResearcherController extends Controller
             'country_id'            => 'required',
             'company_name'          => 'required',
             'company_website'       => 'required',
-            'company_email'         => 'required|email',
+            'company_email'         => 'required',
             'company_phone'         => 'required',
             'company_product_url'   => 'required',
             'is_form'               => 'required',
@@ -182,7 +182,7 @@ class ResearcherController extends Controller
             'country_id'            => 'required',
             'company_name'          => 'required',
             'company_website'       => 'required',
-            'company_email'         => 'required|email',
+            'company_email'         => 'required',
             'company_phone'         => 'required',
             'company_product_url'   => 'required',
         ]);

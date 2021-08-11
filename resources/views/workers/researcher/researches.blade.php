@@ -102,6 +102,7 @@
         <div class="form-group">
           <label for="name">Company Email :</label>
           <input type="text" name="company_email" class="form-control" id="company_email" required onblur="checkEmail()">
+          <small id="email-notes" class="form-text text-muted"> Notes : if company email not available just fill "no" in the company email form.</small>
         </div>
         <div class="form-group">
           <label for="name">Company Phone :</label>

@@ -46,6 +46,10 @@ class AjaxValidationDataController extends Controller
 
     public function validateCompanyEmail(Request $request)
     {
+        if($request['company_email'] == "no"){
+            return response()->json(['success' => true, 'empty' => false, 'message' => "Email Data Is Acceptable"], 200);
+        }
+
         if($request['company_email'] == ""){
             return response()->json(['success' => false, 'empty' => true,  'message' => "Company Email Data Empty"], 200);
         }
