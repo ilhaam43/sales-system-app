@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Countries;
 use App\Models\ResearchJobs;
 use App\Models\ProductCategory;
+use App\Models\ProductSources;
 use App\Models\Settings;
 use App\Models\WorkerNotifications;
 
@@ -37,6 +38,7 @@ class ResearcherController extends Controller
     {
         $user = Auth::user();
         $listCountries = Countries::all();
+        $productSources = ProductSources::all();
 
         $productCategory = User::where('id', $user->id)->with('ProductCategory')->get();
         $productCategories = json_decode($productCategory, true);
@@ -44,7 +46,7 @@ class ResearcherController extends Controller
         $listResearchJobs = ResearchJobs::where('user_id', $user->id)->with('Country', 'JobsStatus')->get();
         $researchJobsLists = json_decode($listResearchJobs, true);
         
-        return view('workers/researcher/researches', compact('researchJobsLists','listCountries','productCategories', 'user'))->with('i');
+        return view('workers/researcher/researches', compact('researchJobsLists','listCountries','productCategories', 'user', 'productSources'))->with('i');
     }
 
     public function showDetailResearches($id)
@@ -147,6 +149,7 @@ class ResearcherController extends Controller
             'user_id'               => 'required',
             'job_status_id'         => 'required',
             'product_category_id'   => 'required',
+            'product_sources_id'    => 'required',
             'country_id'            => 'required',
             'company_name'          => 'required',
             'company_website'       => 'required',

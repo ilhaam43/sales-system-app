@@ -23,6 +23,10 @@ class ResearchJobs extends Model
         return $this->belongsTo(ProductCategory::class);
     }
 
+    public function productSources(){
+        return $this->belongsTo(ProductSources::class);
+    }
+
     public function inquiryJobs(){
         return $this->hasMany(InquiryJobs::class, 'research_jobs_id', 'id');
     }

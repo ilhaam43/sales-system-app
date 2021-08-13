@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Services\AdminService;
 
 use App\Models\ProductCategory;
+use App\Models\ProductSources;
 use App\Models\User;
 use App\Models\UsersRole;
 use App\Models\UsersStatus;
@@ -233,7 +234,7 @@ class AdminController extends Controller
     {
         $auth = Auth::user();
 
-        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 1)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User')->get();
+        $listResearches = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 1)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User', 'ProductSources')->get();
 
         $researchesList = json_decode($listResearches, true);
 
@@ -561,6 +562,48 @@ class AdminController extends Controller
         $researchesList = json_decode($listResearches, true);
 
         return view('/admin/blacklist/index', compact('researchesList'))->with('i');
+    }
+
+    //sources function
+    public function showSources()
+    {
+        $sources = ProductSources::all();
+
+        return view('/admin/sources/listProductSources', compact('sources'))->with('i');
+    }
+
+    public function showDetailSources($id)
+    {
+        $sources = ProductSources::find($id);
+        
+        if(!$sources){
+            return redirect()->route('admin.sources');
+        }
+
+        return view('/admin/sources/updateProductSources', compact('sources'));
+    }
+
+    public function deleteSources($id)
+    {
+        return $this->service->deleteSources($id);
+    }
+
+    public function addSources(Request $request)
+    {
+        $request->validate([
+            'sources' => 'required'
+        ]);
+
+        return $this->service->addSources($request);
+    }
+
+    public function updateSources(Request $request, $id)
+    {
+        $request->validate([
+            'sources' => 'required'
+        ]);
+
+        return $this->service->updateSources($request, $id);
     }
 
     //general setting function

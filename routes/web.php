@@ -85,6 +85,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'admin', 'middleware' => ['authorized:admin']], function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
+        //sources route
+        Route::group(['prefix' => 'sources'], function () {
+            Route::get('/', [AdminController::class, 'showSources'])->name('admin.sources');
+            Route::get('/{id}', [AdminController::class, 'showDetailSources'])->name('admin.sources.detail');
+            Route::post('/', [AdminController::class, 'addSources'])->name('admin.sources.store');
+            Route::put('/{id}', [AdminController::class, 'updateSources'])->name('admin.sources.update');
+            Route::delete('/{id}', [AdminController::class, 'deleteSources'])->name('admin.sources.destroy');
+        });
+
         //photos route
         Route::group(['prefix' => 'photos'], function () {
             Route::get('/', [AdminController::class, 'showPhotoList'])->name('admin.photos');

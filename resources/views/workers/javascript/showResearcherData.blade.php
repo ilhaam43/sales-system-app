@@ -21,6 +21,7 @@
                 { data: 'company_phone', name: 'company_phone'},
                 { data: 'company_product_url', name: 'company_product_url'},
                 { data: 'country.country_name', name: 'Country.country_name'},
+                { data: 'product_sources.sources', name: 'ProductSources.sources'},
                 { data: 'jobs_status.status', name: 'JobsStatus.status'},
 
                 {

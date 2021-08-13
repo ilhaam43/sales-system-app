@@ -62,6 +62,7 @@
                       <th>Phone</th>
                       <th>Product Page</th>
                       <th>Country</th>
+                      <th>Sources</th>
                       <th>Status</th>
                       <th>Edit</th>
                     </tr>
@@ -132,6 +133,15 @@
                 <select type="text" class="form-control" name="product_category_id">
                 @foreach($productCategories as $category)
                     <option value="{{$category['product_category']['id']}}">{{$category['product_category']['category_name']}}</option>
+                @endforeach
+        </select>
+        </div>
+
+        <div class="form-group">
+        <label>Select Source :</label>
+                <select type="text" class="form-control" name="product_sources_id">
+                @foreach($productSources as $sources)
+                    <option value="{{$sources['id']}}">{{$sources['sources']}}</option>
                 @endforeach
         </select>
         </div>

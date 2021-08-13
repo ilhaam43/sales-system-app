@@ -8,6 +8,7 @@
                 <th>Phone</th>
                 <th>Product Page</th>
                 <th>Country</th>
+                <th>Sources</th>
                 <th>Status</th>
                 <th>Researches</th>
                 <th>Auditor</th>
@@ -23,6 +24,7 @@
             <td>{{ $item['company_phone'] ?? "NULL" }}</td>
             <td>{{ $item['company_product_url'] ?? "NULL" }}</td>
             <td>{{ $item['country']['country_name'] ?? "NULL" }}</td>
+            <td>{{ $item['product_sources']['sources'] ?? "NULL" }}</td>
             <td>{{ $item['jobs_status']['status'] ?? "NULL" }}</td>
             <td>{{ $item['user']['name'] ?? "NULL" }}</td>
             <td>{{ $item['auditor_research_jobs']['user']['name'] ?? "NO" }}</td>

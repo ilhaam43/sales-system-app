@@ -42,8 +42,9 @@
                 { data: 'country', name: 'country'},
                 
                 { data: 'company_phone', name: 'company_phone'},
-                
 
+                { data: 'product_sources.sources', name: 'ProductSources.sources'},
+                
                 {
                     data: 'action', 
                     name: 'action', 

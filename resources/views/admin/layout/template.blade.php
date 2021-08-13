@@ -138,6 +138,20 @@
         </div>
       </li>
 
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#sourcePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-list"></i>
+          <span>Sources</span>
+        </a>
+        <div id="sourcePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Sources menu :</h6>
+            <a class="collapse-item" href="/admin/sources">All Sources</a>
+          </div>
+        </div>
+      </li>
+
       <!-- Nav Item - Charts -->
       <li class="nav-item">
         <a class="nav-link" href="/admin/photos">

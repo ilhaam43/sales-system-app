@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\ProductCategory;
+use App\Models\ProductSources;
 use App\Models\User;
 use App\Models\UsersRole;
 use App\Models\UsersStatus;
@@ -28,7 +29,7 @@ class AjaxDataResearchesController extends Controller
     {
         if ($request->ajax()) {
             $auth = Auth::user();
-            $data = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User');
+            $data = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User', 'ProductSources');
             
             return Datatables::eloquent($data)
                 ->addIndexColumn()
@@ -71,7 +72,7 @@ class AjaxDataResearchesController extends Controller
     {
         if ($request->ajax()) {
             $auth = Auth::user();
-            $data = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 1)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User');
+            $data = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 1)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User', 'ProductSources');
             
             return Datatables::eloquent($data)
                 ->addIndexColumn()
@@ -114,7 +115,7 @@ class AjaxDataResearchesController extends Controller
     {
         if ($request->ajax()) {
             $auth = Auth::user();
-            $data = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 2)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User');
+            $data = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 2)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User', 'ProductSources');
             
             return Datatables::eloquent($data)
                 ->addIndexColumn()
@@ -157,7 +158,7 @@ class AjaxDataResearchesController extends Controller
     {
         if ($request->ajax()) {
             $auth = Auth::user();
-            $data = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 3)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User');
+            $data = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 3)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User', 'ProductSources');
             
             return Datatables::eloquent($data)
                 ->addIndexColumn()
@@ -200,7 +201,7 @@ class AjaxDataResearchesController extends Controller
     {
         if ($request->ajax()) {
             $auth = Auth::user();
-            $data = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 4)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User');
+            $data = ResearchJobs::where('product_category_id', $auth->product_category_id)->where('job_status_id', 4)->where('is_blacklist', 'No')->with('Country', 'JobsStatus', 'AuditorResearchJobs.User', 'User', 'ProductSources');
             
             return Datatables::eloquent($data)
                 ->addIndexColumn()
@@ -244,7 +245,7 @@ class AjaxDataResearchesController extends Controller
         if ($request->ajax()) {
             $auth = Auth::user();
 
-            $data = ResearchJobs::where('user_id', $auth->id)->with('Country', 'JobsStatus')->select('research_jobs.*');
+            $data = ResearchJobs::where('user_id', $auth->id)->with('Country', 'JobsStatus', 'ProductSources')->select('research_jobs.*');
             
             return Datatables::eloquent($data)
                 ->addIndexColumn()

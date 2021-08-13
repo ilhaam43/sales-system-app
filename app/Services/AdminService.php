@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\ProductCategory;
+use App\Models\ProductSources;
 use App\Models\Photos;
 use App\Models\ResearchJobs;
 use App\Models\InquiryJobs;
@@ -342,6 +343,40 @@ class AdminService
         }
 
         return redirect()->route('admin.inquiries.index')->with('success', 'Inquiries data updated successfully');
+    }
+
+    //sources logic
+    public function addSources($request)
+    {
+        try {
+            $addData = ProductSources::create($request->all());
+        } catch(\Throwable $th) {
+            return back()->withError('Product sources failed to add because product sources cannot be duplicated');
+        }
+        
+        return redirect()->route('admin.sources')->with('success', 'Product sources added successfully');
+    }
+
+    public function updateSources($request, $id)
+    {
+        try{
+            $updateSources = ProductSources::find($id)->update($request->all());
+        }catch(\Throwable $th) {
+            return back()->withError('Product sources failed to update because product sources cannot be duplicated');
+        }
+
+        return redirect()->route('admin.sources')->with('success', 'Product sources updated successfully');
+    }
+
+    public function deleteSources($id)
+    {
+        try{
+            $productSources = ProductSources::where('id',$id)->delete();
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Product sources data failed to delete",]);
+        }
+        
+        return response()->json(['success' => true, 'message' => "Product sources data deleted successfully",]);
     }
 
     //general settings logic
