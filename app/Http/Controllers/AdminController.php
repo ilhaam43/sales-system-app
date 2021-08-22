@@ -299,6 +299,8 @@ class AdminController extends Controller
             'company_email'         => 'required|email',
             'company_phone'         => 'required',
             'company_product_url'   => 'required',
+            'is_form'               => 'required',
+            'is_blacklist'          => 'required'
         ]);
 
         return $this->service->updateResearches($request, $id);
@@ -555,16 +557,32 @@ class AdminController extends Controller
 
     public function showDetailReports($id)
     {
-        $listInquiry = InquiryJobs::where('id', $id)->first();
+        $listCountries = Countries::all();
+        $jobsStatus = JobsStatus::all();
         $listResearchJobs = ResearchJobs::where('id', $id)->with('Country', 'JobsStatus')->get();
-
         $researchJobsLists = json_decode($listResearchJobs, true);
 
         foreach($researchJobsLists as $researchList){
             $researchJobsLists = $researchList;
         }
 
-        return view('admin/researches/updateResearches', compact('researchJobsLists', 'listCountries'))->with('i');
+        return view('admin/reports/updateReports', compact('researchJobsLists', 'listCountries', 'jobsStatus'))->with('i');
+    }
+
+    public function updateReports(Request $request, $id)
+    {
+        $request->validate([
+            'country_id'            => 'required',
+            'company_name'          => 'required',
+            'company_website'       => 'required',
+            'company_email'         => 'required|email',
+            'company_phone'         => 'required',
+            'company_product_url'   => 'required',
+            'is_form'               => 'required',
+            'is_blacklist'          => 'required'
+        ]);
+
+        return $this->service->updateReports($request, $id);
     }
 
     //blacklist function
