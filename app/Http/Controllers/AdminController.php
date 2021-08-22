@@ -279,6 +279,7 @@ class AdminController extends Controller
     public function showDetailResearches($id)
     {   
         $listCountries = Countries::all();
+        $jobsStatus = JobsStatus::all();
         $listResearchJobs = ResearchJobs::where('id', $id)->with('Country', 'JobsStatus')->get();
         $researchJobsLists = json_decode($listResearchJobs, true);
 
@@ -286,7 +287,7 @@ class AdminController extends Controller
             $researchJobsLists = $researchList;
         }
 
-        return view('admin/researches/updateResearches', compact('researchJobsLists', 'listCountries'))->with('i');
+        return view('admin/researches/updateResearches', compact('researchJobsLists', 'listCountries', 'jobsStatus'))->with('i');
     }
 
     public function updateResearches(Request $request, $id)
@@ -550,6 +551,20 @@ class AdminController extends Controller
         $inquiryJobsLists = json_decode($listInquiryJobs, true);
 
         return view('/admin/reports/index', compact('inquiryJobsLists'))->with('i');
+    }
+
+    public function showDetailReports($id)
+    {
+        $listInquiry = InquiryJobs::where('id', $id)->first();
+        $listResearchJobs = ResearchJobs::where('id', $id)->with('Country', 'JobsStatus')->get();
+
+        $researchJobsLists = json_decode($listResearchJobs, true);
+
+        foreach($researchJobsLists as $researchList){
+            $researchJobsLists = $researchList;
+        }
+
+        return view('admin/researches/updateResearches', compact('researchJobsLists', 'listCountries'))->with('i');
     }
 
     //blacklist function

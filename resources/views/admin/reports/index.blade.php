@@ -41,21 +41,6 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach ($inquiryJobsLists as $inquiries)
-                <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $inquiries['research_jobs']['company_name'] }}</td>
-                <td>{{ $inquiries['user']['name'] ?? "" }}</td>
-                <td>{{ $inquiries['report_message'] ?? "" }}</td>
-                <td>
-                    <a class="btn btn-primary btn-sm" href="#">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="#">Delete</a>
-                  </form>
-                </td>
-              </tr>
-            </tbody>
-            @endforeach
           </table>
         </div>
       </div>
@@ -70,4 +55,6 @@
     
 @endsection
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@include('admin.javascript.reports.showAllReports')
 </html>

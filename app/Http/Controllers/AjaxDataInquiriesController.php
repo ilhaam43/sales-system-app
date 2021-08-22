@@ -388,4 +388,46 @@ class AjaxDataInquiriesController extends Controller
         }
     }
 
+    public function showReportsData(Request $request)
+    {
+        if ($request->ajax()) {
+            $user = Auth::user();
+
+            $researchJobsId = [];
+
+            $listResearchJobs = ResearchJobs::where('product_category_id', $user->product_category_id)->with('Country', 'JobsStatus')->get();
+            
+            if(count($listResearchJobs) == 0)
+            {
+                $inquiryJobsLists = $listResearchJobs;
+                return view('/admin/reports/index', compact('inquiryJobsLists'))->with('i');
+            }
+            
+            $researchJobsLists = json_decode($listResearchJobs, true);
+
+            foreach($researchJobsLists as $researchLists){
+                array_push($researchJobsId, $researchLists['id']);
+            }
+
+            if(count($researchJobsId) == 0){
+                $researchJobsId = 0;
+            }
+
+            $data = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('is_form', 'No')->with('ResearchJobs', 'JobsStatus','User')->select('inquiry_jobs.*');
+
+            return Datatables::eloquent($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($data){
+                        $datas = json_decode($data, true);
+                        $routeEdit = route('admin.reports.update',$datas['research_jobs']['id']);
+                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a>';
+                        return $actionBtn;
+                    })
+                    ->rawColumns(['action'])->setRowId(function ($data) {
+                        return $data->id;
+                    })
+                    ->make(true);
+            }
+    }
+
 }

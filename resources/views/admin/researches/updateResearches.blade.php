@@ -64,6 +64,31 @@
             </div>
         </div>
 
+        <div class="row">
+        <div class="form-group col-md-4">
+        <label>Status :</label>
+                    <select type="text" class="form-control" name="job_status_id">
+                        @foreach($jobsStatus as $jobsStatuses) 
+                            <option value="{{$jobsStatuses->id}}" {{ ( $jobsStatuses->id == $researchJobsLists['jobs_status']['id']) ? 'selected' : '' }}>{{$jobsStatuses->status}}</option>
+                        @endforeach
+                    </select>
+            </div>
+        <div class="form-group col-md-4">
+        <label>Is Form :</label>
+                    <select type="text" class="form-control" name="is_form">
+                            <option value="Yes" {{ ( 'Yes' == $researchJobsLists['is_form']) ? 'selected' : '' }}>Yes</option>
+                            <option value="No" {{ ( 'No' == $researchJobsLists['is_form']) ? 'selected' : '' }}>No</option>
+                    </select>
+            </div>
+            <div class="form-group col-md-4">
+            <label>Is Blacklist :</label>
+                    <select type="text" class="form-control" name="is_blacklist">
+                            <option value="Yes" {{ ( 'Yes' == $researchJobsLists['is_blacklist']) ? 'selected' : '' }}>Yes</option>
+                            <option value="No" {{ ( 'No' == $researchJobsLists['is_blacklist']) ? 'selected' : '' }}>No</option>
+                    </select>
+            </div>
+        </div>
+
         </br>
         <a href="{{url('admin/researches')}}" class="btn btn-danger">Cancel</a>
         <button type="submit" class="btn btn-primary">Submit</button>

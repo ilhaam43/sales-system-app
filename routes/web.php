@@ -169,6 +169,12 @@ Route::group(['middleware' => ['auth']], function () {
         //inquiries route
         Route::group(['prefix' => 'reports'], function () {
             Route::get('/', [AdminController::class, 'showAllReports'])->name('admin.reports.index');
+            Route::get('/{id}', [AdminController::class, 'showDetailReports'])->name('admin.reports.detail');
+            Route::put('/{id}', [AdminController::class, 'updateReports'])->name('admin.reports.update');
+
+            Route::group(['prefix' => 'data'], function () {
+                Route::get('/all/', [AjaxDataInquiriesController::class, 'showReportsData'])->name('admin.reports.data.all');
+            });
         });
 
         Route::group(['prefix' => 'blacklist'], function () {
