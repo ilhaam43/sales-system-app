@@ -585,6 +585,10 @@ class AdminController extends Controller
         return $this->service->updateReports($request, $id);
     }
 
+    public function deleteReports($id){
+        return $this->service->deleteReports($id);
+    }
+
     //blacklist function
     public function showAllBlacklist()
     {

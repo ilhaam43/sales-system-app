@@ -420,7 +420,9 @@ class AjaxDataInquiriesController extends Controller
                     ->addColumn('action', function($data){
                         $datas = json_decode($data, true);
                         $routeEdit = route('admin.reports.update',$datas['research_jobs']['id']);
-                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a>';
+                        $routeDelete = route('admin.reports.destroy',$datas['id']);
+
+                        $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a> <button class="btn btn-danger btn-sm remove-user" data-id="'.$datas['id'].'" data-action="'.$routeDelete.'" onclick="deleteConfirmation('.$datas['id'].')"> Delete</button>';
                         return $actionBtn;
                     })
                     ->rawColumns(['action'])->setRowId(function ($data) {

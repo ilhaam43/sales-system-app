@@ -470,5 +470,16 @@ class AdminService
         return redirect()->route('admin.reports.index')->with('success', 'Company data updated successfully');
     }
 
+    public function deleteReports($id)
+    {
+        try{
+            $deleteReports = InquiryJobs::where('id',$id)->delete();
+        }catch(\Throwable $th){
+            return response()->json(['success' => false, 'message' => "Reports data failed to delete",]);
+        }
+        
+        return response()->json(['success' => true, 'message' => "Reports data deleted successfully",]);
+    }
+
 }
 ?>
