@@ -7,6 +7,11 @@
             ajax: "{{route('admin.reports.data.all')}}",
             "lengthMenu": [ 10, 20, 30, 50 ],
             columns: [
+                { data: 'checkbox', 
+                    name: 'checkbox', 
+                    orderable: false, 
+                    searchable: false 
+                },
 
                 { data:'id', name: 'id', render: function (data, type, row, meta) 
                     {

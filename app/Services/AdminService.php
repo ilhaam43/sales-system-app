@@ -481,5 +481,19 @@ class AdminService
         return response()->json(['success' => true, 'message' => "Reports data deleted successfully",]);
     }
 
+    public function deleteMultipleReports($request)
+    {
+        try{
+            foreach($request['id'] as $id){
+                $deleteMultipleReports = InquiryJobs::where('id', $id)->where('is_form', "No")->delete();
+            }
+        }catch(\Throwable $th){
+            return $th;
+            return response()->json(['success' => false, 'message' => "Reports data failed to remove",]);
+        }
+
+        return response()->json(['success' => true, 'message' => "Reports data success to remove",]);
+    }
+
 }
 ?>

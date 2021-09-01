@@ -30,10 +30,16 @@
         <h6 class="m-0 font-weight-bold text-primary">All Reports List</h6>
       </div>
       <div class="card-body">
+      <button type="button" class="btn btn-primary btn-sm" id="selectAll" class="main"><i class="fa fa-check-circle"></i> Select All</button>
+      <button type="button" class="btn btn-info btn-sm" id="openAll" class="main"><i class="fa fa-eye"></i> Open All</button>
+      <button type="button" class="btn btn-danger btn-sm" style="float: right; margin-right:10px;" id="remove" class="main" onclick="removeConfirmation()"><i class="fa fa-times"></i> Remove All</button>
+      </br>
+      </br>
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>No</th>
                     <th>Company</th>
                     <th>User</th>
@@ -55,7 +61,6 @@
     
 @endsection
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="{{ asset('assets/admin/js/ajax/deleteReports.js') }}"></script>
+@include('admin.javascript.openAllReports')
 @include('admin.javascript.reports.showAllReports')
 </html>

@@ -552,7 +552,7 @@ class AdminController extends Controller
         $listInquiryJobs = InquiryJobs::whereIn('research_jobs_id', $researchJobsId)->where('is_form', 'No')->with('ResearchJobs', 'JobsStatus','User')->get();
         $inquiryJobsLists = json_decode($listInquiryJobs, true);
 
-        return view('/admin/reports/index', compact('inquiryJobsLists'))->with('i');
+        return view('/admin/reports/index', compact('inquiryJobsLists', 'researchJobsLists'))->with('i');
     }
 
     public function showDetailReports($id)
@@ -587,6 +587,15 @@ class AdminController extends Controller
 
     public function deleteReports($id){
         return $this->service->deleteReports($id);
+    }
+
+    public function deleteMultipleReports(Request $request)
+    {
+        $request->validate([
+            'id'   => 'required',
+        ]);
+
+        return $this->service->deleteMultipleReports($request);
     }
 
     //blacklist function

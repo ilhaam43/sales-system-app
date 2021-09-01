@@ -424,8 +424,12 @@ class AjaxDataInquiriesController extends Controller
 
                         $actionBtn = '<a href="'.$routeEdit.'" class="edit btn btn-primary btn-sm" target="_blank">Edit</a> <button class="btn btn-danger btn-sm remove-user" data-id="'.$datas['id'].'" data-action="'.$routeDelete.'" onclick="deleteConfirmation('.$datas['id'].')"> Delete</button>';
                         return $actionBtn;
+                    })->addColumn('checkbox', function($data){
+                        $datas = json_decode($data, true);
+                        $checkbox = '<input type="checkbox" name="id_inquiries[]" id="'.$data->id.'" value="'.$datas['research_jobs']['id'].'">';
+                        return $checkbox;
                     })
-                    ->rawColumns(['action'])->setRowId(function ($data) {
+                    ->rawColumns(['action', 'checkbox'])->setRowId(function ($data) {
                         return $data->id;
                     })
                     ->make(true);

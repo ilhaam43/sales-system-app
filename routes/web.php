@@ -170,6 +170,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => 'reports'], function () {
             Route::get('/', [AdminController::class, 'showAllReports'])->name('admin.reports.index');
             Route::get('/{id}', [AdminController::class, 'showDetailReports'])->name('admin.reports.detail');
+            Route::post('/multiremove', [AdminController::class, 'deleteMultipleReports'])->name('admin.reports.multiremove');
             Route::put('/{id}', [AdminController::class, 'updateReports'])->name('admin.reports.update');
             Route::delete('/{id}', [AdminController::class, 'deleteReports'])->name('admin.reports.destroy');
 
